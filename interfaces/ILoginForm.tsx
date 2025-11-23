@@ -1,0 +1,3 @@
+interface ILoginForm {
+  email: string;
+}
