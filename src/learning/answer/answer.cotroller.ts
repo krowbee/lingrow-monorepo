@@ -5,7 +5,7 @@ import { AnswerLogicService } from './answer.logic.service';
 export class AnswerController {
   constructor(private answerLogicService: AnswerLogicService) {}
 
-  @Post('/:taskId/:answerId')
+  @Post('/:taskId/:answerId/check')
   async checkAnswer(
     @Param('answerId') answerId: number,
     @Param('taskId') taskId: number,
