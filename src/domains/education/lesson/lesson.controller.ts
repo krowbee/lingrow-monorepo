@@ -1,10 +1,10 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { LessonLogicService } from './lesson.logic.service';
+import { LessonService } from './lesson.service';
 import { ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 @ApiTags('Lesson API')
 @Controller('lessons')
 export class LessonController {
-  constructor(private lessonLogicService: LessonLogicService) {}
+  constructor(private lessonService: LessonService) {}
 
   @ApiOperation({
     summary: 'Get lesson by slug',
@@ -14,7 +14,7 @@ export class LessonController {
   @Get('/:lessonSlug')
   async getLessonWithTasks(@Param('lessonSlug') lessonSlug: string) {
     const lesson =
-      await this.lessonLogicService.getLessonWithTasksBySlug(lessonSlug);
+      await this.lessonService.getLessonWithTasksBySlug(lessonSlug);
     return { lesson };
   }
 }

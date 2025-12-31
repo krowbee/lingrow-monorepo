@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { toDto } from 'src/lib/transform';
-import { LessonService } from '../lesson/lesson.service';
+import { LessonService } from '../lesson/lesson.service2';
 import { CourseDto } from './course.dto';
 import { LessonDto } from '../lesson/lesson.dto';
 

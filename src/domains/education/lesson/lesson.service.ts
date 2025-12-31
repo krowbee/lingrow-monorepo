@@ -1,4 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
+import { toDto } from 'src/lib/transform';
+import { LessonDto } from './lesson.dto';
 import PrismaService from 'src/lib/prisma/prisma.service';
 import { Lesson, Prisma } from '@prisma/client';
 
@@ -6,13 +8,13 @@ import { Lesson, Prisma } from '@prisma/client';
 export class LessonService {
   constructor(private prisma: PrismaService) {}
 
-  async getLesson(
-    lessonWhereUniqueInput: Prisma.LessonWhereUniqueInput,
-  ): Promise<Lesson | null> {
-    return this.prisma.lesson.findUnique({
-      where: lessonWhereUniqueInput,
+  async getLessonWithTasksBySlug(lessonSlug: string): Promise<LessonDto> {
+    const lesson = await this.prisma.lesson.findUnique({
+      where: { slug: lessonSlug },
       include: { tasks: { include: { answers: true } } },
     });
+    if (!lesson) new ForbiddenException("Incorrect lesson's slug");
+    return toDto(LessonDto, lesson);
   }
 
   async getLessons(
@@ -22,27 +24,5 @@ export class LessonService {
       where: lessonWhereInput || undefined,
       orderBy: { order: 'asc' },
     });
-  }
-
-  async createLesson(
-    lessonCreateInput: Prisma.LessonCreateInput,
-  ): Promise<Lesson> {
-    return this.prisma.lesson.create({ data: lessonCreateInput });
-  }
-
-  async updateLesson(
-    lessonWhereUniqueInput: Prisma.LessonWhereUniqueInput,
-    lessonUpdateInput: Prisma.LessonUpdateInput,
-  ): Promise<Lesson> {
-    return this.prisma.lesson.update({
-      where: lessonWhereUniqueInput,
-      data: lessonUpdateInput,
-    });
-  }
-
-  async deleteLesson(
-    lessonWhereUniqueInput: Prisma.LessonWhereUniqueInput,
-  ): Promise<Lesson> {
-    return this.prisma.lesson.delete({ where: lessonWhereUniqueInput });
   }
 }
