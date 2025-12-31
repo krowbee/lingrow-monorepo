@@ -1,46 +1,29 @@
-import { Injectable } from '@nestjs/common';
-import { Course, Prisma } from '@prisma/client';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { toDto } from 'src/lib/transform';
+import { LessonService } from '../lesson/lesson.service';
+import { CourseDto } from './course.dto';
+import { LessonDto } from '../lesson/lesson.dto';
 import PrismaService from 'src/lib/prisma/prisma.service';
 
 @Injectable()
 export class CourseService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private lessonService: LessonService,
+  ) {}
 
-  async getCourse(
-    courseWhereUniqueInput: Prisma.CourseWhereUniqueInput,
-  ): Promise<Course | null> {
-    return this.prisma.course.findUnique({
-      where: courseWhereUniqueInput,
+  async getCoursesList(): Promise<CourseDto[]> {
+    const courses = await this.prisma.course.findMany();
+    return courses.map((course) => {
+      return toDto(CourseDto, course);
     });
   }
 
-  async getCourses(
-    courseWhereInput?: Prisma.CourseWhereInput,
-  ): Promise<Course[]> {
-    return this.prisma.course.findMany({
-      where: courseWhereInput || undefined,
+  async getLessonsByCourseSlug(courseSlug: string): Promise<LessonDto[]> {
+    const lessons = await this.lessonService.getLessons({
+      course: { slug: courseSlug },
     });
-  }
-
-  async createCourse(
-    courseCreateInput: Prisma.CourseCreateInput,
-  ): Promise<Course> {
-    return this.prisma.course.create({ data: courseCreateInput });
-  }
-
-  async updateCourse(
-    courseWhereUniqueInput: Prisma.CourseWhereUniqueInput,
-    courseUpdateInput: Prisma.CourseUpdateInput,
-  ): Promise<Course> {
-    return this.prisma.course.update({
-      where: courseWhereUniqueInput,
-      data: courseUpdateInput,
-    });
-  }
-
-  async deleteCourse(
-    courseWhereUniqueInput: Prisma.CourseWhereUniqueInput,
-  ): Promise<Course> {
-    return this.prisma.course.delete({ where: courseWhereUniqueInput });
+    if (!lessons.length) throw new NotFoundException("Incorrect course's slug");
+    return lessons.map((lesson) => toDto(LessonDto, lesson));
   }
 }

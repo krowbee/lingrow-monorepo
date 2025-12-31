@@ -1,10 +1,10 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { CourseLogicService } from './course.logic.service';
+import { CourseService } from './course.service';
 import { ApiOperation, ApiParam } from '@nestjs/swagger';
 
 @Controller('course')
 export class CourseController {
-  constructor(private courseLogicService: CourseLogicService) {}
+  constructor(private courseService: CourseService) {}
 
   @ApiOperation({
     summary: 'Get list of courses',
@@ -12,7 +12,7 @@ export class CourseController {
   })
   @Get('/')
   async getCoursesList() {
-    const courses = await this.courseLogicService.getCoursesList();
+    const courses = await this.courseService.getCoursesList();
     return { courses };
   }
 
@@ -23,7 +23,7 @@ export class CourseController {
   @ApiParam({ name: 'courseSlug', type: String, description: "Course's slug" })
   @Get('/:courseSlug/lessons')
   async getLesson(@Param('courseSlug') slug: string) {
-    const lessons = await this.courseLogicService.getLessonsByCourseSlug(slug);
+    const lessons = await this.courseService.getLessonsByCourseSlug(slug);
     return { lessons };
   }
 }
