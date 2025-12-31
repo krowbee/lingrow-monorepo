@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CourseService } from './course.service';
-import { plainToInstance } from 'class-transformer';
+import { toDto } from 'src/lib/transform';
 import { LessonService } from '../lesson/lesson.service';
 import { CourseDto } from './course.dto';
 import { LessonDto } from '../lesson/lesson.dto';
@@ -15,9 +15,7 @@ export class CourseLogicService {
   async getCoursesList(): Promise<CourseDto[]> {
     const courses = await this.courseService.getCourses();
     return courses.map((course) => {
-      return plainToInstance(CourseDto, course, {
-        excludeExtraneousValues: true,
-      });
+      return toDto(CourseDto, course);
     });
   }
 
@@ -26,8 +24,6 @@ export class CourseLogicService {
       course: { slug: courseSlug },
     });
     if (!lessons.length) throw new NotFoundException("Incorrect course's slug");
-    return lessons.map((lesson) =>
-      plainToInstance(LessonDto, lesson, { excludeExtraneousValues: true }),
-    );
+    return lessons.map((lesson) => toDto(LessonDto, lesson));
   }
 }
