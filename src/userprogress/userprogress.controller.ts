@@ -3,6 +3,7 @@ import { CurrentUser } from 'src/domains/auth/decorators/current-user.decorator'
 import { UserDto } from 'src/domains/auth/types/AuthDto';
 import { UserProgressService } from './userprogress.service';
 import { ApiOperation, ApiParam } from '@nestjs/swagger';
+import { AuthOnly } from 'src/domains/auth/decorators/auth.decorators';
 
 @Controller('progress')
 export class UserProgressController {
@@ -13,6 +14,7 @@ export class UserProgressController {
     description: 'Returns list of lessons progress',
   })
   @ApiParam({ name: 'courseSlug', type: String, description: "Course's slug" })
+  @AuthOnly()
   @Get('/course/:courseSlug')
   async getUserCourseProgress(
     @Param('courseSlug') courseSlug: string,
