@@ -25,6 +25,16 @@ export class TaskProgress {
   isCorrect: boolean;
 }
 
+export type GetCourseProgressData = {
+  userId: number;
+  courseSlug: string;
+};
+
+export type GetLessonProgressData = {
+  userId: number;
+  lessonId: number;
+};
+
 export type CreateProgressData = {
   userId: number;
   taskId: number;

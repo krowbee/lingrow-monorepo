@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import PrismaService from 'src/lib/prisma/prisma.service';
 import {
   DeleteLessonProgressData,
+  GetCourseProgressData,
+  GetLessonProgressData,
   TaskProgress,
   UpdateProgressData,
   UserProgressWithAnswer,
@@ -25,11 +27,15 @@ export class UserProgressService {
   }
 
   async getCourseProgress(
-    userId: number,
-    courseSlug: string,
+    getCourseProgressData: GetCourseProgressData,
   ): Promise<LessonProgress[]> {
     const progressByLessons = await this.prisma.userProgress.findMany({
-      where: { userId, task: { lesson: { course: { slug: courseSlug } } } },
+      where: {
+        userId: getCourseProgressData.userId,
+        task: {
+          lesson: { course: { slug: getCourseProgressData.courseSlug } },
+        },
+      },
       include: { task: { select: { id: true, lessonId: true } } },
     });
     const progressCountByLesson: Record<number, number> = {};
@@ -49,11 +55,13 @@ export class UserProgressService {
   }
 
   async getLessonProgress(
-    lessonId: number,
-    userId: number,
+    getLessonProgressData: GetLessonProgressData,
   ): Promise<TaskProgress[]> {
     const progress = await this.prisma.userProgress.findMany({
-      where: { userId, task: { lessonId } },
+      where: {
+        userId: getLessonProgressData.userId,
+        task: { lessonId: getLessonProgressData.lessonId },
+      },
       include: { answer: true },
     });
 
