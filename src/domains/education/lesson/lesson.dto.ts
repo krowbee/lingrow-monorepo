@@ -16,6 +16,24 @@ export enum EnglishLevels {
   B2 = 'B2',
 }
 
+export class PublicLessonDto {
+  @Expose()
+  @IsNumber()
+  id: number;
+
+  @Expose()
+  @IsNumber()
+  name: string;
+
+  @Expose()
+  @IsString()
+  slug: string;
+
+  @Expose()
+  @IsNumber()
+  order: number;
+}
+
 export class LessonDto {
   @Expose()
   @IsNumber()

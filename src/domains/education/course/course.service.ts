@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { toDto } from 'src/lib/transform';
 import { LessonService } from '../lesson/lesson.service';
 import { CourseDto } from './course.dto';
-import { LessonDto } from '../lesson/lesson.dto';
+import { PublicLessonDto } from '../lesson/lesson.dto';
 import PrismaService from 'src/lib/prisma/prisma.service';
 
 @Injectable()
@@ -19,11 +19,11 @@ export class CourseService {
     });
   }
 
-  async getLessonsByCourseSlug(courseSlug: string): Promise<LessonDto[]> {
+  async getLessonsByCourseSlug(courseSlug: string): Promise<PublicLessonDto[]> {
     const lessons = await this.lessonService.getLessons({
       course: { slug: courseSlug },
     });
     if (!lessons.length) throw new NotFoundException("Incorrect course's slug");
-    return lessons.map((lesson) => toDto(LessonDto, lesson));
+    return lessons.map((lesson) => toDto(PublicLessonDto, lesson));
   }
 }
