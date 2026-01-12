@@ -2,10 +2,10 @@ import { Answer, UserProgress } from '@prisma/client';
 import { Expose } from 'class-transformer';
 import { IsBoolean, IsNumber } from 'class-validator';
 
-export type LessonProgress = {
+export class LessonProgress {
   lessonId: number;
   isCompleted: boolean;
-};
+}
 
 export class TaskProgress {
   @Expose()
@@ -25,21 +25,21 @@ export class TaskProgress {
   isCorrect: boolean;
 }
 
-export type GetCourseProgressData = {
+export class GetCourseProgressData {
   userId: number;
   courseSlug: string;
-};
+}
 
-export type GetLessonProgressData = {
+export class GetLessonProgressData {
   userId: number;
   lessonSlug: string;
-};
+}
 
-export type CreateProgressData = {
+export class CreateProgressData {
   userId: number;
   taskId: number;
   answerId: number;
-};
+}
 
 export class CreateProgressDto {
   taskId: number;
@@ -48,13 +48,13 @@ export class CreateProgressDto {
 
 export type UserProgressWithAnswer = UserProgress & { answer: Answer };
 
-export type UpdateProgressData = {
+export class UpdateProgressData {
   userId: number;
   taskId: number;
   answerId: number;
-};
+}
 
-export type DeleteLessonProgressData = {
+export class DeleteLessonProgressData {
   userId: number;
   lessonId: number;
-};
+}
