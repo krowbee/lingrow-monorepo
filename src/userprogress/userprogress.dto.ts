@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Answer, UserProgress } from '@prisma/client';
 import { Expose } from 'class-transformer';
 import { IsBoolean, IsNumber } from 'class-validator';
@@ -8,18 +9,22 @@ export class LessonProgress {
 }
 
 export class TaskProgress {
+  @ApiProperty({ example: '1', type: Number })
   @Expose()
   @IsNumber()
   id: number;
 
+  @ApiProperty({ example: '1', type: Number })
   @Expose()
   @IsNumber()
   taskId: number;
 
+  @ApiProperty({ example: '1', type: Number })
   @Expose()
   @IsNumber()
   answerId: number;
 
+  @ApiProperty({ example: true, type: Boolean })
   @Expose()
   @IsBoolean()
   isCorrect: boolean;
@@ -42,8 +47,11 @@ export class CreateProgressData {
 }
 
 export class CreateProgressDto {
+  @ApiProperty({ example: '1', type: Number })
   @IsNumber()
   taskId: number;
+
+  @ApiProperty({ example: '1', type: Number })
   @IsNumber()
   answerId: number;
 }
@@ -51,6 +59,7 @@ export class CreateProgressDto {
 export type UserProgressWithAnswer = UserProgress & { answer: Answer };
 
 export class UpdateProgressDto {
+  @ApiProperty({ example: '1', type: Number })
   @IsNumber()
   answerId: number;
 }
