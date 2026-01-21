@@ -4,8 +4,10 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import { ValidationPipe } from '@nestjs/common/pipes';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({ credentials: true });
   /* API MAP with Swagger */
   const config = new DocumentBuilder()
     .setTitle('Lingrow')
@@ -14,7 +16,6 @@ async function bootstrap() {
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
-
   app.use(cookieParser());
   app.use(morgan('dev'));
   app.useGlobalPipes(
@@ -24,7 +25,7 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
-  await app.listen(process.env.PORT ?? 3000);
-  console.log(`Server works on: 127.0.0.1:3000`);
+  await app.listen(process.env.PORT ?? 3003);
+  console.log(`Server works on: 127.0.0.1:3003`);
 }
 bootstrap();
