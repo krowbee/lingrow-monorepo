@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm, Controller } from "react-hook-form";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utills";
 import { Button } from "@/components/ui/button";
 
 import {
