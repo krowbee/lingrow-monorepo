@@ -1,6 +1,6 @@
-import { LoginForm } from "@/components/login-form";
-import { LogoutForm } from "@/components/logout-form";
-import { SignupForm } from "@/components/signup-form";
+import { LoginForm } from "@/app/(features)/auth/[form]/components/login-form";
+import { LogoutForm } from "@/app/(features)/auth/[form]/components/logout-form";
+import { SignupForm } from "@/app/(features)/auth/[form]/components/signup-form";
 import { notFound } from "next/navigation";
 
 export default async function AuthPage({
@@ -14,7 +14,7 @@ export default async function AuthPage({
     case "login":
       content = <LoginForm />;
       break;
-    case "register":
+    case "signup":
       content = <SignupForm />;
       break;
     case "logout":

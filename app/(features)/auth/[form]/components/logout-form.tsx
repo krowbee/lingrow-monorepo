@@ -1,6 +1,10 @@
 "use client";
-import { Button } from "./ui/button";
-import { Card, CardDescription, CardTitle } from "./ui/card";
+import { Button } from "../../../../../components/ui/button";
+import {
+  Card,
+  CardDescription,
+  CardTitle,
+} from "../../../../../components/ui/card";
 
 export function LogoutForm() {
   return (

@@ -20,8 +20,12 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginFormData, LoginSchema } from "./schemas/authSchemas";
-import { ErrorMessage } from "./ui/error-message";
+import {
+  LoginFormData,
+  LoginSchema,
+} from "../../../../../components/schemas/authSchemas";
+import { ErrorMessage } from "../../../../../components/ui/error-message";
+import { AUTH_URLS } from "@/urls/auth";
 export function LoginForm({
   className,
   ...props
@@ -133,7 +137,7 @@ export function LoginForm({
                 <FieldDescription className="text-center">
                   Немає облікового запису?{" "}
                   <Link
-                    href="/signup"
+                    href={AUTH_URLS.signup}
                     className="!text-white hover:!text-purple-300 transition-colors duration-200 font-accent"
                   >
                     Зареєструватись

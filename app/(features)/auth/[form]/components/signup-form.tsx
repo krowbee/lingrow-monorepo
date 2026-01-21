@@ -18,8 +18,12 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
-import { RegisterFormData, RegisterSchema } from "./schemas/authSchemas";
-import { ErrorMessage } from "./ui/error-message";
+import {
+  RegisterFormData,
+  RegisterSchema,
+} from "../../../../../components/schemas/authSchemas";
+import { ErrorMessage } from "../../../../../components/ui/error-message";
+import { AUTH_URLS } from "@/urls/auth";
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const {
@@ -184,7 +188,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 <FieldDescription className="px-6 text-center font-body">
                   Вже є обліковий запис?{" "}
                   <Link
-                    href="/login"
+                    href={AUTH_URLS.login}
                     className="!text-white hover:!text-purple-300 transition-colors duration-200 font-accent"
                   >
                     Вхід
