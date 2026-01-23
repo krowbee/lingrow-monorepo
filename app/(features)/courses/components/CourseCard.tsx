@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export function CourseCard() {
   return (
-    <Card className="relative mx-auto w-full max-w-sm pt-0 overflow-hidden bg-neutral-800 border-none">
+    <Card className="relative w-full h-min max-w-sm pt-0 overflow-hidden bg-neutral-800 border-none">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
       <Image
         src="https://avatar.vercel.sh/shadcn1"
@@ -20,14 +20,16 @@ export function CourseCard() {
         height={400}
       />
       <CardHeader>
-        <CardTitle>Design systems meetup</CardTitle>
-        <CardDescription>
-          A practical talk on component APIs, accessibility, and shipping
-          faster.
+        <CardTitle className="font-accent">English A1 Level</CardTitle>
+        <CardDescription className="font-body">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime,
+          reiciendis ea, voluptas laboriosam minima exercitationem sint id sunt
+          autem ducimus necessitatibus ab quos doloremque culpa repudiandae eius
+          iure obcaecati dolores.
         </CardDescription>
       </CardHeader>
-      <CardFooter>
-        <Button className="w-full">View Event</Button>
+      <CardFooter className="justify-center">
+        <Button className="w-full max-w-[50%]">Вчитись</Button>
       </CardFooter>
     </Card>
   );

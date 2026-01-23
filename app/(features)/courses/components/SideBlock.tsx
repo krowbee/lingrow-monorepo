@@ -2,31 +2,30 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
   SidebarHeader,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { ProfileBlock } from "./ProfileBlock";
-import { CoursesAndLevelsSide } from "./CoursesAndLevelsSide";
+import { CoursesSide } from "./CoursesSide";
 
 export function SideBlock() {
   return (
-    <SidebarProvider>
+    <SidebarProvider className="w-min">
       <Sidebar className="py-4">
         <SidebarHeader className="p-0">
           <div className="w-full text-center text-xl font-heading font-bold">
-            Доступні курси
+            Швидкий доступ
           </div>
         </SidebarHeader>
         <SidebarContent>
-          <CoursesAndLevelsSide />
+          <CoursesSide />
         </SidebarContent>
         <SidebarFooter>
           <ProfileBlock />
         </SidebarFooter>
       </Sidebar>
-      <SidebarTrigger className="w-15 h-10" />
+      <SidebarTrigger className="w-6 h-3 md:hidden fixed top-1/2" />
     </SidebarProvider>
   );
 }
