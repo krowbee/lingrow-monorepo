@@ -1,9 +1,14 @@
 import {
   Sidebar,
+  SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarHeader,
   SidebarProvider,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { ProfileBlock } from "./ProfileBlock";
+import { CoursesAndLevelsSide } from "./CoursesAndLevelsSide";
 
 export function SideBlock() {
   return (
@@ -14,17 +19,14 @@ export function SideBlock() {
             Доступні курси
           </div>
         </SidebarHeader>
-        <SidebarGroup className="p-0 gap-2">
-          <div className="w-full flex flex-col shadow-sm py-2 px-4 hover:cursor-pointer">
-            <h3 className="text-md font-body">English learning A1</h3>
-            <p>0/127</p>
-          </div>
-          <div className="w-full flex flex-col shadow-sm py-2 px-4 hover:cursor-pointer">
-            <h3 className="text-md font-body">English learning A1</h3>
-            <p>0/127</p>
-          </div>
-        </SidebarGroup>
+        <SidebarContent>
+          <CoursesAndLevelsSide />
+        </SidebarContent>
+        <SidebarFooter>
+          <ProfileBlock />
+        </SidebarFooter>
       </Sidebar>
+      <SidebarTrigger className="w-15 h-10" />
     </SidebarProvider>
   );
 }
