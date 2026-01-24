@@ -17,7 +17,6 @@ export function CoursesSide({ courses }: { courses: Course[] }) {
             className="w-full flex flex-col px-4 border-1   hover:cursor-pointer"
           >
             <h3 className="text-md font-body">{course.name}</h3>
-            <p>0/127</p>
           </div>
         ))}
       </div>
