@@ -16,7 +16,9 @@ export function CoursesSide({ courses }: { courses: Course[] }) {
             key={course.id}
             className="w-full flex flex-col px-4 border-1   hover:cursor-pointer"
           >
-            <h3 className="text-md font-body">{course.name}</h3>
+            <Link href={`${COURSES_URL.courses_page}/${course.slug}`}>
+              <h3 className="text-md font-body">{course.name}</h3>
+            </Link>
           </div>
         ))}
       </div>
