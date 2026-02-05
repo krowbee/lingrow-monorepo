@@ -5,7 +5,7 @@ import { Lesson, LessonWithProgress } from "@/types/course/course";
 import { useEffect, useState } from "react";
 import { LessonCard } from "./LessonCard";
 
-export function LessonBlock({
+export function LessonsContainer({
   initialLessons,
   courseSlug,
 }: {

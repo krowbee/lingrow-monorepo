@@ -1,7 +1,7 @@
 import { ApiResult } from "@/types/api/api-result.type";
 import { API_URL } from "../constants";
 import { fetchToApi } from "../fetchWithRefresh";
-import { LessonProgress } from "@/types/course/course";
+import { LessonProgress, LessonWithTasks } from "@/types/course/course";
 
 export async function getLessonProgress(
   courseSlug: string,
@@ -12,4 +12,17 @@ export async function getLessonProgress(
     return { ok: false, error: data.message };
   }
   return { ok: true, data };
+}
+
+export async function getLessonWithProgress(
+  lessonSlug: string,
+): Promise<ApiResult<LessonWithTasks>> {
+  const res = await fetchToApi(API_URL + `/lessons/${lessonSlug}`, {
+    cache: "no-store",
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    return { ok: false, error: data.message };
+  }
+  return { ok: true, data: data.lesson };
 }
