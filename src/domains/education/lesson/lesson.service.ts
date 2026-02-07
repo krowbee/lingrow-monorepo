@@ -18,7 +18,7 @@ export class LessonService {
         tasks: {
           include: {
             answers: true,
-            progress: { where: { userId }, select: { id: true } },
+            progress: { where: { userId }, select: { answerId: true } },
           },
         },
       },
@@ -28,7 +28,7 @@ export class LessonService {
       ...lesson,
       tasks: lesson.tasks.map((task) => ({
         ...task,
-        isCompleted: task.progress.length > 0,
+        choosedAnswer: task.progress?.[0]?.answerId ?? null,
       })),
     };
     return toDto(LessonDto, lessonWithProgress);
