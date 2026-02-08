@@ -88,6 +88,7 @@ export class AuthController {
   ) {
     const { accessToken, refreshToken } =
       await this.authService.refreshTokens(reqRefreshToken);
+    console.log(reqRefreshToken);
     this.setCookies({ accessToken, refreshToken }, res);
     return { message: 'Refreshed succesfully' };
   }
