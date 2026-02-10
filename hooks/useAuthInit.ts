@@ -16,7 +16,7 @@ export function useAuthInit() {
       if (result.ok) {
         const user = result.data;
         login(user);
-        setIsLoading(true);
+        setIsLoading(false);
       } else {
         logout();
         setIsLoading(false);
