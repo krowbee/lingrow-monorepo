@@ -27,7 +27,7 @@ const matchPrefix = (path: string, prefixes: string[]) => {
 };
 
 export async function proxy(req: NextRequest) {
-  const isAuth = req.cookies.has("accessToken");
+  const isAuth = req.cookies.has("refreshToken");
 
   const page = req.nextUrl.pathname;
   const rule = rules.find((rule) => matchPrefix(page, rule.match));

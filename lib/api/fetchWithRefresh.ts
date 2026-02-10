@@ -32,7 +32,10 @@ export async function fetchToApi(url: string, options: RequestInit = {}) {
     try {
       if (!isRefreshing) {
         isRefreshing = true;
-        refreshPromise = refreshTokens().finally(() => (isRefreshing = false));
+        refreshPromise = refreshTokens().finally(() => {
+          isRefreshing = false;
+          refreshPromise = null;
+        });
       }
       const refreshResult = await refreshPromise;
       if (!refreshResult?.success) return res;
