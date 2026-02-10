@@ -1,5 +1,5 @@
 "use client";
-import { Editor, EditorContent } from "@tiptap/react";
+import { Editor, EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
 import { TextStyleKit } from "@tiptap/extension-text-style";
@@ -12,14 +12,16 @@ export const Tiptap = ({
   content?: string;
 }) => {
   const extensions = [StarterKit, TextStyleKit];
-  const editor = new Editor({
+  const editor = useEditor({
     extensions: extensions,
     content:
       content ||
       `<h1>Hi guys! it's my first english lesson! I really wanna teach you something interesting!</h1>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur temporibus dignissimos mollitia necessitatibus quis laborum laboriosam! Qui, fugiat dignissimos delectus aliquid voluptate a earum iure nobis illum nulla corporis consequatur.</p>`,
     editable: editable,
+    immediatelyRender: false,
   });
+  if (!editor) return;
   return (
     <div
       className={`w-full gap-4 flex-col flex ${!editable && "cursor-default"}`}
