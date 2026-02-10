@@ -104,7 +104,7 @@ export class AuthController {
   @HttpCode(200)
   async getMe(@CurrentUser() payload: TokenPayload) {
     const actualUser = await this.authService.getMe(payload);
-    return actualUser;
+    return { user: actualUser };
   }
 
   @ApiOperation({
