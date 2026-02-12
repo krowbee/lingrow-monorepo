@@ -11,17 +11,22 @@ export function useAuthGuard() {
   const isLoading = useAuthStore((state) => state.isLoading);
   const router = useRouter();
   const pathname = usePathname();
-
+  const user = useAuthStore((state) => state.user);
   useEffect(() => {
     if (isLoading) return;
     const rule = rules.find((rule) => matchPrefix(pathname, rule.match));
+
     if (!rule) return;
-    if (!isAuth && rule.authOnly) {
-      router.push(AUTH_URLS.login);
-    }
+
     if (isAuth && rule.guestOnly) {
       router.push(COURSES_URL.courses_page);
     }
-    return;
-  });
+    if (!isAuth && rule.authOnly) {
+      router.push(AUTH_URLS.login);
+    }
+    if (isAuth && user && !rule.role?.includes(user.role)) {
+      router.push("/");
+      return;
+    }
+  }, [user, pathname, router, isAuth, isLoading]);
 }

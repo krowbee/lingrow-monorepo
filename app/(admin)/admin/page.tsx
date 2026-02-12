@@ -1,1 +1,1 @@
-export async function AdminPage() {}
+export default async function AdminPage() {}
