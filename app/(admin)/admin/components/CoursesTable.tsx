@@ -43,15 +43,13 @@ export function CoursesTable() {
           <p>error</p>
         ) : (
           courses.map((course) => (
-            <>
-              <div
-                key={course.id}
-                className="w-full px-2  cursor-pointer  py-1  bg-muted hover:bg-muted/50"
-                onClick={() => chooseCourse(course)}
-              >
-                {course.name}
-              </div>
-            </>
+            <div
+              key={course.id}
+              className="w-full px-2  cursor-pointer  py-1  bg-muted hover:bg-muted/50"
+              onClick={() => chooseCourse(course)}
+            >
+              {course.name}
+            </div>
           ))
         )}
       </CardContent>
