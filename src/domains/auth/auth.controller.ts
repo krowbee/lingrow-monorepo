@@ -1,4 +1,12 @@
-import { Body, Controller, Get, HttpCode, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  Res,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { LoginDto, RegisterDto } from './types/AuthDto';
 import { AuthService } from './auth.service';
 import type { Response } from 'express';
@@ -88,11 +96,19 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
     @RefreshToken() reqRefreshToken: string,
   ) {
-    const { accessToken, refreshToken } =
-      await this.authService.refreshTokens(reqRefreshToken);
-    console.log(reqRefreshToken);
-    this.setCookies({ accessToken, refreshToken }, res);
-    return { message: 'Refreshed succesfully' };
+    try {
+      const { accessToken, refreshToken } =
+        await this.authService.refreshTokens(reqRefreshToken);
+      console.log(reqRefreshToken);
+      this.setCookies({ accessToken, refreshToken }, res);
+      return { message: 'Refreshed succesfully' };
+    } catch (err) {
+      if (err instanceof UnauthorizedException) {
+        res.clearCookie('refreshToken', refreshCookieOptions);
+        res.clearCookie('accessToken', accessCookieOptions);
+      }
+      throw err;
+    }
   }
 
   @ApiOperation({
