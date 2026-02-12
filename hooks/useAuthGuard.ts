@@ -19,13 +19,15 @@ export function useAuthGuard() {
     if (!rule) return;
 
     if (isAuth && rule.guestOnly) {
-      router.push(COURSES_URL.courses_page);
+      router.replace(COURSES_URL.courses_page);
+      return;
     }
     if (!isAuth && rule.authOnly) {
-      router.push(AUTH_URLS.login);
+      router.replace(AUTH_URLS.login);
+      return;
     }
     if (isAuth && user && !rule.role?.includes(user.role)) {
-      router.push("/");
+      router.replace("/");
       return;
     }
   }, [user, pathname, router, isAuth, isLoading]);
