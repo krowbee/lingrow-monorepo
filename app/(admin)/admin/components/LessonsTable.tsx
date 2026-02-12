@@ -1,5 +1,10 @@
 "use client";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
 import { getLessonsList } from "@/lib/api/requests/courses.client.requests";
 import { useAdminStore } from "@/store/AdminStore";
@@ -35,10 +40,10 @@ export function LessonsTable() {
   }, [currentCourse]);
 
   return (
-    <Card className="w-max  rounded-none h-64 py-2">
+    <Card className="w-max  rounded-none h-72 py-2">
       <CardHeader className="font-heading text-center">Уроки</CardHeader>
 
-      <CardContent className="w-full flex flex-col items-center px-1 gap-1 overflow-y-auto hide-scrollbar">
+      <CardContent className="w-full flex flex-1 flex-col items-center px-1 gap-1 overflow-y-auto hide-scrollbar">
         {!currentCourse ? (
           <p className="p-2">Оберіть курс</p>
         ) : loading ? (
@@ -61,6 +66,11 @@ export function LessonsTable() {
           ))
         )}
       </CardContent>
+      <CardFooter className="flex w-full justify-center">
+        <button className="font-accent flex  cursor-pointer text-secondary hover:text-primary transition-colours duration-300 rounded-full border hover:border-primary px-2">
+          +
+        </button>
+      </CardFooter>
     </Card>
   );
 }

@@ -1,6 +1,12 @@
 "use client";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { getCoursesList } from "@/lib/api/requests/courses.client.requests";
 import { Course } from "@/types/course/course";
 import { useEffect, useState } from "react";
@@ -33,10 +39,10 @@ export function CoursesTable() {
   }, []);
 
   return (
-    <Card className="w-max  rounded-none h-64 py-2">
+    <Card className="w-max  flex flex-col rounded-none h-72 py-2">
       <CardHeader className="font-heading text-center">Курси</CardHeader>
 
-      <CardContent className="w-full flex flex-col items-center justify-center p-0 gap-1 overflow-y-auto hide-scrollbar">
+      <CardContent className="w-full flex-1 flex flex-col items-center p-0 gap-1 overflow-y-auto hide-scrollbar">
         {loading ? (
           <Spinner />
         ) : error ? (
@@ -53,6 +59,11 @@ export function CoursesTable() {
           ))
         )}
       </CardContent>
+      <CardFooter className="flex w-full justify-center">
+        <button className="font-accent flex text-xl cursor-pointer text-secondary hover:text-primary transition-colours duration-300 rounded-full border hover:border-primary px-2">
+          +
+        </button>
+      </CardFooter>
     </Card>
   );
 }
