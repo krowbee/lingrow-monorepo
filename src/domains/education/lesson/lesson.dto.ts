@@ -3,6 +3,7 @@ import { TaskDto } from '../task/task.dto';
 import {
   IsArray,
   IsEnum,
+  IsJSON,
   IsNumber,
   IsOptional,
   IsString,
@@ -44,8 +45,8 @@ export class LessonDto {
   name: string;
 
   @Expose()
-  @IsString()
-  theory: string;
+  @IsJSON()
+  theory: JSON;
 
   @Expose()
   @IsString()
