@@ -89,7 +89,7 @@ model Lesson{
   theory Json
   slug String @unique
   englishLevel EnglishLevels
-  course Course @relation(fields: [courseId], references: [id])
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
   courseId Int
   tasks Task[]
   order Int
@@ -103,7 +103,7 @@ model Task{
   question String
   soundUrl String?
   answers Answer[]
-  lesson Lesson @relation(fields: [lessonId], references: [id])
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
   lessonId Int
   order Int
   progress UserProgress[]
@@ -116,7 +116,7 @@ model Answer{
   id Int @id @default(autoincrement())
   text String
   isCorrect Boolean
-  task Task @relation(fields: [taskId], references: [id])
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId Int
   UserProgress UserProgress[]
   createdAt DateTime @default(now())
@@ -125,11 +125,11 @@ model Answer{
 
 model UserProgress{
   id Int @default(autoincrement())
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
-  task Task @relation(fields: [taskId], references: [id])
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId Int
-  answer Answer @relation(fields: [answerId], references: [id])
+  answer Answer @relation(fields: [answerId], references: [id], onDelete: Cascade)
   answerId Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
