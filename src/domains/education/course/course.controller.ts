@@ -37,6 +37,7 @@ export class CourseController {
     description: 'Return course object',
   })
   @ApiBody({ type: CreateCourseDto })
+  @AdminOnly()
   @Post('/')
   async createCourse(@Body() data: CreateCourseDto) {
     const course = await this.courseService.createCourse(data);
