@@ -11,52 +11,46 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { OmitType, PartialType } from '@nestjs/swagger';
+import { ApiProperty, OmitType, PartialType, PickType } from '@nestjs/swagger';
 import { EnglishLevels } from '@prisma/client';
 
-export class PublicLessonDto {
-  @Expose()
-  @IsNumber()
-  id: number;
-
-  @Expose()
-  @IsString()
-  name: string;
-
-  @Expose()
-  @IsString()
-  slug: string;
-
-  @Expose()
-  @IsNumber()
-  order: number;
-}
-
 export class LessonDto {
+  @ApiProperty()
   @Expose()
   @IsNumber()
   id: number;
 
+  @ApiProperty()
   @Expose()
+  @IsNotEmpty()
   @IsString()
   name: string;
 
+  @ApiProperty()
   @Expose()
   @IsObject()
+  @IsOptional()
   theory: any;
 
+  @ApiProperty()
   @Expose()
   @IsString()
+  @IsNotEmpty()
   slug: string;
 
+  @ApiProperty()
   @Expose()
   @IsEnum(EnglishLevels)
+  @IsNotEmpty()
   englishLevel: EnglishLevels;
 
+  @ApiProperty()
   @Expose()
   @IsNumber()
+  @IsNotEmpty()
   courseId: number;
 
+  @ApiProperty()
   @Expose()
   @IsOptional()
   @IsArray()
@@ -64,36 +58,28 @@ export class LessonDto {
   @Type(() => TaskDto)
   tasks?: TaskDto[];
 
+  @ApiProperty()
   @Expose()
   @IsNumber()
-  order: number;
-}
-
-export class CreateLessonDto {
-  @IsString()
-  @IsNotEmpty()
-  name: string;
-
-  @IsObject()
-  @IsOptional()
-  theory: any;
-
-  @IsString()
-  @IsNotEmpty()
-  slug: string;
-
-  @IsEnum(EnglishLevels)
-  @IsNotEmpty()
-  englishLevel: EnglishLevels;
-
-  @IsNumber()
-  @IsNotEmpty()
-  courseId: number;
-
-  @IsNumber()
   @IsNotEmpty()
   order: number;
 }
+
+export class PublicLessonDto extends PickType(LessonDto, [
+  'id',
+  'name',
+  'slug',
+  'order',
+]) {}
+
+export class CreateLessonDto extends PickType(LessonDto, [
+  'name',
+  'theory',
+  'slug',
+  'englishLevel',
+  'courseId',
+  'order',
+]) {}
 
 export class UpdateLessonDto extends PartialType(
   OmitType(CreateLessonDto, ['courseId']),
