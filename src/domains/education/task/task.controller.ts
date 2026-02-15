@@ -15,6 +15,7 @@ import {
   ApiParam,
 } from '@nestjs/swagger';
 import { CreateTaskDto, TaskDto, UpdateTaskDto } from './task.dto';
+import { AdminOnly } from 'src/domains/auth/decorators/auth.decorators';
 
 @Controller('task')
 export class TaskController {
@@ -23,6 +24,7 @@ export class TaskController {
   @ApiOperation({ summary: 'Create task with answers' })
   @ApiBody({ type: CreateTaskDto })
   @ApiOkResponse({ type: TaskDto })
+  @AdminOnly()
   @Post('/')
   async createTask(@Body() data: CreateTaskDto) {
     const task = await this.taskService.saveTask(data);
@@ -33,6 +35,7 @@ export class TaskController {
   @ApiBody({ type: UpdateTaskDto })
   @ApiOkResponse({ type: TaskDto })
   @ApiParam({ name: 'taskId', type: Number })
+  @AdminOnly()
   @Patch('/:taskId')
   async updateTask(
     @Param('taskId', ParseIntPipe) taskId: number,
@@ -45,6 +48,7 @@ export class TaskController {
   @ApiOperation({ summary: 'Delete task' })
   @ApiParam({ name: 'taskId', type: Number })
   @ApiOkResponse({ type: TaskDto })
+  @AdminOnly()
   @Delete('/:taskId')
   async deleteTask(@Param('taskId', ParseIntPipe) taskId: number) {
     const task = await this.taskService.deleteTask(taskId);
