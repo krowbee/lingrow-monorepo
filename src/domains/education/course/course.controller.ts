@@ -9,9 +9,15 @@ import {
   Post,
 } from '@nestjs/common';
 import { CourseService } from './course.service';
-import { ApiBody, ApiOperation, ApiParam } from '@nestjs/swagger';
-import { CreateCourseDto, UpdateCourseDto } from './course.dto';
+import {
+  ApiBody,
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+} from '@nestjs/swagger';
+import { CourseDto, CreateCourseDto, UpdateCourseDto } from './course.dto';
 import { AdminOnly } from 'src/domains/auth/decorators/auth.decorators';
+import { PublicLessonDto } from '../lesson/lesson.dto';
 
 @Controller('course')
 export class CourseController {
@@ -21,6 +27,7 @@ export class CourseController {
     summary: 'Get list of courses',
     description: 'Returns list of courses',
   })
+  @ApiOkResponse({ type: [CourseDto] })
   @Get('/')
   async getCoursesList() {
     const courses = await this.courseService.getCoursesList();
@@ -31,6 +38,7 @@ export class CourseController {
     summary: 'Get lessons by course slug (AuthOnly)',
     description: 'Returns list of lessons of particular course',
   })
+  @ApiOkResponse({ type: [PublicLessonDto] })
   @ApiParam({ name: 'courseSlug', type: String, description: "Course's slug" })
   @Get('/:courseSlug/lessons')
   async getLesson(@Param('courseSlug') slug: string) {
@@ -42,6 +50,7 @@ export class CourseController {
     summary: 'Create course (AdminOnly)',
     description: 'Return course object',
   })
+  @ApiOkResponse({ type: CourseDto })
   @ApiBody({ type: CreateCourseDto })
   @AdminOnly()
   @Post('/')
@@ -54,6 +63,7 @@ export class CourseController {
     summary: 'Update course (AdminOnly)',
     description: 'Return course object',
   })
+  @ApiOkResponse({ type: CourseDto })
   @ApiParam({ type: Number, name: 'courseId' })
   @ApiBody({ type: UpdateCourseDto })
   @AdminOnly()
@@ -71,6 +81,7 @@ export class CourseController {
     description: 'Return the deleted course object',
   })
   @ApiParam({ type: Number, name: 'courseId' })
+  @ApiOkResponse({ type: CourseDto })
   @AdminOnly()
   @Delete('/:courseId')
   async deleteCourse(@Param('courseId', ParseIntPipe) courseId: number) {
