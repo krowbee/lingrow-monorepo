@@ -8,8 +8,13 @@ import {
   Post,
 } from '@nestjs/common';
 import { TaskService } from './task.service';
-import { ApiBody, ApiOperation, ApiParam } from '@nestjs/swagger';
-import { CreateTaskDto, UpdateTaskDto } from './task.dto';
+import {
+  ApiBody,
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+} from '@nestjs/swagger';
+import { CreateTaskDto, TaskDto, UpdateTaskDto } from './task.dto';
 
 @Controller('task')
 export class TaskController {
@@ -17,6 +22,7 @@ export class TaskController {
 
   @ApiOperation({ summary: 'Create task with answers' })
   @ApiBody({ type: CreateTaskDto })
+  @ApiOkResponse({ type: TaskDto })
   @Post('/')
   async createTask(@Body() data: CreateTaskDto) {
     const task = await this.taskService.saveTask(data);
@@ -25,6 +31,7 @@ export class TaskController {
 
   @ApiOperation({ summary: 'Update task with answers' })
   @ApiBody({ type: UpdateTaskDto })
+  @ApiOkResponse({ type: TaskDto })
   @ApiParam({ name: 'taskId', type: Number })
   @Patch('/:taskId')
   async updateTask(
@@ -37,6 +44,7 @@ export class TaskController {
 
   @ApiOperation({ summary: 'Delete task' })
   @ApiParam({ name: 'taskId', type: Number })
+  @ApiOkResponse({ type: TaskDto })
   @Delete('/:taskId')
   async deleteTask(@Param('taskId', ParseIntPipe) taskId: number) {
     const task = await this.taskService.deleteTask(taskId);
