@@ -38,6 +38,7 @@ export class TaskDto {
   order: number;
 
   @Expose()
+  @IsOptional()
   @IsNumber()
   choosedAnswer: number;
 }
