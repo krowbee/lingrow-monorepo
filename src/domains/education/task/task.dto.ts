@@ -7,36 +7,43 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { PartialType, PickType } from '@nestjs/swagger';
+import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
 
 export class TaskDto {
+  @ApiProperty()
   @Expose()
   @IsNumber()
   id: number;
 
+  @ApiProperty()
   @Expose()
   @IsString()
   question: string;
 
+  @ApiProperty()
   @Expose()
   @IsOptional()
   @IsString()
   soundUrl?: string;
   /* validate nested dto */
+  @ApiProperty()
   @Expose()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => AnswerDto)
   answers: AnswerDto[];
 
+  @ApiProperty()
   @Expose()
   @IsNumber()
   lessonId: number;
 
+  @ApiProperty()
   @Expose()
   @IsNumber()
   order: number;
 
+  @ApiProperty()
   @Expose()
   @IsOptional()
   @IsNumber()
