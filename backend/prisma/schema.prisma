@@ -1,0 +1,157 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model User{
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(40)
+  email String @unique
+  password String
+  sessions Session[]
+  subscription UserSubscription? // FREE by default
+  progress UserProgress[]
+  role roles @default(user)
+}
+
+enum roles {
+  user
+  admin
+}
+
+model Session{
+  id Int @id @default(autoincrement())
+  jti String @unique
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+  hashedRefreshToken String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expireAt DateTime 
+}
+// COURSE LOGIC
+
+model Plan{
+  id Int @id @default(autoincrement())
+  name String
+  planSlug String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userSubscriptions UserSubscription[]
+  courses Course[]
+  price Int?
+}
+
+model UserSubscription{
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int @unique
+  plan Plan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  planId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expireAt DateTime?
+}
+
+
+model Course{
+  id Int @id @default(autoincrement())
+  name String
+  slug String @unique
+  description String? 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  allowedPlans Plan[]
+  lessons Lesson[]
+}
+
+enum EnglishLevels {
+  A1
+  A2
+  B1
+  B2
+}
+
+model Lesson{
+  id Int @id @default(autoincrement())
+  name String
+  theory Json
+  slug String @unique
+  englishLevel EnglishLevels
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId Int
+  tasks Task[]
+  order Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([courseId, englishLevel, order])
+}
+
+model Task{
+  id Int @id @default(autoincrement())
+  question String
+  soundUrl String?
+  answers Answer[]
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lessonId Int
+  order Int
+  progress UserProgress[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([order, lessonId])
+  }
+
+model Answer{
+  id Int @id @default(autoincrement())
+  text String
+  isCorrect Boolean
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId Int
+  UserProgress UserProgress[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserProgress{
+  id Int @default(autoincrement())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId Int
+  answer Answer @relation(fields: [answerId], references: [id], onDelete: Cascade)
+  answerId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([taskId, userId])
+}
+
+model Topic{
+  id Int @id @default(autoincrement())
+  name String @unique
+  words Word[]
+}
+
+model Word{
+  id Int @id @default(autoincrement())
+  text String @unique
+  translation String
+  example String
+  level EnglishLevels
+  partOfSpeech String?
+  soundUrl String?
+  topic Topic @relation(fields: [topicId], references: [id])
+  topicId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
