@@ -33,7 +33,7 @@ enum roles {
 model Session{
   id Int @id @default(autoincrement())
   jti String @unique
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
   hashedRefreshToken String
   createdAt DateTime @default(now())
@@ -55,9 +55,9 @@ model Plan{
 
 model UserSubscription{
   id Int @id @default(autoincrement())
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int @unique
-  plan Plan @relation(fields: [planId], references: [id])
+  plan Plan @relation(fields: [planId], references: [id], onDelete: Cascade)
   planId Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
