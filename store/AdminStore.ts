@@ -1,12 +1,19 @@
-import { Course } from "@/types/course/course";
+import { Course, Lesson } from "@/types/course/course";
 import { create } from "zustand";
 
 interface AdminStore {
+  coursesList: Course[];
   currentCourse: Course | null;
-  chooseCourse: (currentCourse: Course) => void;
-}
+  choosedCourseLessons: Lesson[];
+  isLoading: boolean;
+  error: string | null;
 
-export const useAdminStore = create<AdminStore>((set) => ({
-  currentCourse: null,
-  chooseCourse: (currentCourse: Course) => set({ currentCourse }),
-}));
+  // Екшени
+  setCoursesList: (courses: Course[]) => void;
+  chooseCourse: (course: Course) => void;
+
+  // Асинхронні запити
+  fetchCourses: () => Promise<void>;
+  fetchLessons: (slug: string) => Promise<void>;
+  createNewLesson: (lessonData: Partial<Lesson>) => Promise<void>;
+}

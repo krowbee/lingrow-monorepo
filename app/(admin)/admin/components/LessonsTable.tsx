@@ -8,7 +8,6 @@ import {
 import { Spinner } from "@/components/ui/spinner";
 import { getLessonsList } from "@/lib/api/requests/courses.client.requests";
 import { useAdminStore } from "@/store/AdminStore";
-import { Lesson } from "@/types/course/course";
 import { ADMIN_URL } from "@/urls/admin";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -16,9 +15,14 @@ import { useEffect, useState } from "react";
 export function LessonsTable() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [lessons, setLessons] = useState<Lesson[]>([]);
 
   const currentCourse = useAdminStore((state) => state.currentCourse);
+  const choosedCourseLessons = useAdminStore(
+    (state) => state.choosedCourseLessons,
+  );
+  const chooseCourseLessons = useAdminStore(
+    (state) => state.chooseCourseLessons,
+  );
   useEffect(() => {
     if (!currentCourse) return;
     const getData = async () => {
@@ -29,7 +33,8 @@ export function LessonsTable() {
           setError(result.error);
           return;
         }
-        setLessons(result.data);
+
+        chooseCourseLessons(result.data);
       } catch {
         setError("Виникла невідома помилка");
       } finally {
@@ -37,7 +42,7 @@ export function LessonsTable() {
       }
     };
     getData();
-  }, [currentCourse]);
+  }, [currentCourse, chooseCourseLessons]);
 
   return (
     <Card className="w-max  rounded-none h-72 py-2">
@@ -51,7 +56,7 @@ export function LessonsTable() {
         ) : error ? (
           <p>error</p>
         ) : (
-          lessons.map((lesson) => (
+          choosedCourseLessons.map((lesson) => (
             <Link
               href={`${ADMIN_URL.adminPage}/${currentCourse.slug}/${lesson.slug}`}
               key={lesson.id}
