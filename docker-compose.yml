@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: lingrow-db
+    restart: always
+    environment:
+      - POSTGRES_USER=skore
+      - POSTGRES_PASSWORD=skore
+      - POSTGRES_DB=lingrowdb
+    ports:
+      - '5433:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  backend:
+    build: .
+    volumes:
+      - .:/app
+      - /app/node_modules
+    container_name: lingrow_app
+    ports:
+      - '3003:3003'
+    environment:
+      - DATABASE_URL=postgresql://skore:skore@db:5432/lingrowdb?schema=public
+    depends_on:
+      - db
+volumes:
+  pgdata:
