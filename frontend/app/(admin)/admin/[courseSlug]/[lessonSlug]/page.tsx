@@ -6,5 +6,5 @@ export default async function EditLessonPage({
   params: { courseSlug: string; lessonSlug: string };
 }) {
   const { lessonSlug } = await params;
-  return <EditLessonContentBlock lessonSlug={lessonSlug} />;
+  return; //<EditLessonContentBlock lessonSlug={lessonSlug} />;
 }
