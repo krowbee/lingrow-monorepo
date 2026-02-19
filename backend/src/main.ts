@@ -26,7 +26,7 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
-  await app.listen(process.env.PORT ?? 3003);
+  await app.listen(process.env.PORT ?? 3003, '0.0.0.0');
   console.log(`Server works on: 127.0.0.1:3003`);
 }
 bootstrap();

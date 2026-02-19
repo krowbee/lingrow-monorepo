@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: lingrow_db
+    restart: always
+    env_file:
+      - ./backend/.env
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  backend:
+    build: ./backend/
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    container_name: lingrow_backend
+    env_file:
+      - ./backend/.env
+    ports:
+      - "3003:3003"
+    depends_on:
+      - db
+    command: sh -c "npx prisma generate && npx prisma migrate deploy && npx prisma db seed && npm run start:dev"
+  frontend:
+    build: ./frontend/
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    container_name: lingrow_frontend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:3003
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    command: sh -c "npm run dev"
+volumes:
+  pgdata:
