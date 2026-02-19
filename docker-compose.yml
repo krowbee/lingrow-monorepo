@@ -14,6 +14,7 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+
     container_name: lingrow_backend
     env_file:
       - ./backend/.env
