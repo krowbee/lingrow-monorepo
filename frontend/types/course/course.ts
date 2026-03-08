@@ -30,14 +30,17 @@ export type LessonWithTasks = {
   order: number;
 };
 
-export type TaskWithAnswers = {
+export type TaskWithAnswers = Task & {
+  choosedAnswer: number | null;
+};
+
+export type Task = {
   id: number;
   question: string;
   soundUrl?: string;
   answers: Answer[];
   lessonId: number;
   order: number;
-  choosedAnswer: number | null;
 };
 
 export type Answer = {
