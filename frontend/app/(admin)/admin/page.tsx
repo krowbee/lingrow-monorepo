@@ -1,11 +1,9 @@
-import { CoursesTable } from "./components/CoursesTable";
-import { LessonsTable } from "./components/LessonsTable";
+import { TableContainer } from "./components/TableContainer";
 
 export default async function AdminPage() {
-  return; /*(
+  return (
     <div className="w-full h-full flex">
-      <CoursesTable></CoursesTable>
-      <LessonsTable></LessonsTable>
-    </div> 
-  ); */
+      <TableContainer />
+    </div>
+  );
 }
