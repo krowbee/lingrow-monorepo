@@ -86,16 +86,15 @@ enum EnglishLevels {
 model Lesson{
   id Int @id @default(autoincrement())
   name String
-  theory Json
+  theory Json?
   slug String @unique
-  englishLevel EnglishLevels
   course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
   courseId Int
   tasks Task[]
   order Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  @@unique([courseId, englishLevel, order])
+  @@unique([courseId, order])
 }
 
 model Task{

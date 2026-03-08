@@ -69,7 +69,6 @@ async function main() {
             },
           ],
         },
-        englishLevel: EnglishLevels.A1, // Використовуємо Enum з Prisma
         courseId: course.id,
         order: i,
       },
