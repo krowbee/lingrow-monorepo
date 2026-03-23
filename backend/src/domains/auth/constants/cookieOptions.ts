@@ -1,7 +1,7 @@
 export const refreshCookieOptions = {
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
-  sameSite: 'strict' as const,
+  sameSite: process.env.NODE_ENV === 'production' ? 'lax' : ('strict' as const),
   maxAge: 7 * 24 * 60 * 60 * 1000,
   path: '/',
 };
@@ -9,7 +9,7 @@ export const refreshCookieOptions = {
 export const accessCookieOptions = {
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
-  sameSite: 'strict' as const,
+  sameSite: process.env.NODE_ENV === 'production' ? 'lax' : ('strict' as const),
   maxAge: 10 * 60 * 1000,
   path: '/',
 };
