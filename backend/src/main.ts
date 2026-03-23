@@ -8,7 +8,10 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors({ credentials: true, origin: ['http://localhost:3000'] });
+  app.enableCors({
+    credentials: true,
+    origin: process.env.CLIENT_URL ?? 'http://localhost:3000',
+  });
   /* API MAP with Swagger */
   const config = new DocumentBuilder()
     .setTitle('Lingrow')
