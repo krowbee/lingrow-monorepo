@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
+
 import { PrismaClient, EnglishLevels } from '@prisma/client';
 import { Pool } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
@@ -10,6 +8,69 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 const cryptoService = new CryptoService();
+
+const generateTheory = (lessonNumber: number) => ({
+  type: 'doc',
+  content: [
+    {
+      type: 'heading',
+      attrs: { level: 2 },
+      content: [{ type: 'text', text: `Lesson ${lessonNumber}: Verb "to be"` }],
+    },
+    {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          text: `The verb "to be" is one of the most important verbs in English because it is used to describe identity, state, and general facts. It helps us say who we are, what something is, or where something is. In the present tense, the verb has three forms: "am", "is", and "are". We use "am" with "I", "is" with "he", "she", and "it", and "are" with "you", "we", and "they". For example, we say "I am a student", "She is happy", and "They are at home". The verb "to be" is also used to describe professions, feelings, and conditions. For example, "He is a doctor" or "I am tired". To make a negative sentence, we simply add "not" after the verb, like "I am not ready" or "She is not here". In spoken English, we often use short forms like "isn't" or "aren't". To make questions, we change the order of the words. For example, instead of "She is happy", we say "Is she happy?". This verb is used very often, so it is important to remember its forms and practice using it in sentences.`,
+        },
+      ],
+    },
+  ],
+});
+
+const generateTasks = (lessonNumber: number) => [
+  {
+    question: `Lesson ${lessonNumber}: I ___ a student.`,
+    answers: [
+      { text: 'am', isCorrect: true },
+      { text: 'is', isCorrect: false },
+      { text: 'are', isCorrect: false },
+    ],
+  },
+  {
+    question: `Lesson ${lessonNumber}: She ___ my sister.`,
+    answers: [
+      { text: 'is', isCorrect: true },
+      { text: 'am', isCorrect: false },
+      { text: 'are', isCorrect: false },
+    ],
+  },
+  {
+    question: `Lesson ${lessonNumber}: They ___ at home.`,
+    answers: [
+      { text: 'are', isCorrect: true },
+      { text: 'is', isCorrect: false },
+      { text: 'am', isCorrect: false },
+    ],
+  },
+  {
+    question: `Lesson ${lessonNumber}: ___ he your friend?`,
+    answers: [
+      { text: 'Is', isCorrect: true },
+      { text: 'Are', isCorrect: false },
+      { text: 'Am', isCorrect: false },
+    ],
+  },
+  {
+    question: `Lesson ${lessonNumber}: We ___ not ready.`,
+    answers: [
+      { text: 'are', isCorrect: true },
+      { text: 'is', isCorrect: false },
+      { text: 'am', isCorrect: false },
+    ],
+  },
+];
 
 async function main() {
   console.log('🌱 Seeding database...');
@@ -50,55 +111,30 @@ async function main() {
       data: {
         name: `Lesson ${i}`,
         slug: `lesson-${i}`,
-        theory: {
-          type: 'doc',
-          content: [
-            {
-              type: 'heading',
-              attrs: { level: 2 },
-              content: [{ type: 'text', text: `Welcome to Lesson ${i}` }],
-            },
-            {
-              type: 'paragraph',
-              content: [
-                {
-                  type: 'text',
-                  text: `This is the starting theory for lesson ${i}. Edit it in admin panel.`,
-                },
-              ],
-            },
-          ],
-        },
+        theory: generateTheory(i),
         courseId: course.id,
         order: i,
       },
     });
-    createdLessons.push(lesson);
-    console.log(`   📚 Created lesson ${i}: ${lesson.name}`);
-  }
 
-  // 4. Створюємо таски та відповіді
-  for (const lesson of createdLessons) {
-    for (let i = 1; i <= 3; i++) {
-      // Зменшив до 3 для швидкості
-      const task = await prisma.task.create({
+    const tasks = generateTasks(i);
+
+    for (let j = 0; j < tasks.length; j++) {
+      const t = tasks[j];
+
+      await prisma.task.create({
         data: {
-          question: `Task ${i} for ${lesson.name}: What is the correct translation?`,
+          question: t.question,
           lessonId: lesson.id,
-          order: i,
-          // Створюємо відповіді одразу всередині таски (Nested Write)
-          // Це швидше і надійніше, ніж окремий createMany
+          order: j + 1,
           answers: {
-            create: [
-              { text: `Correct answer for task ${i}`, isCorrect: true },
-              { text: `Wrong option A`, isCorrect: false },
-              { text: `Wrong option B`, isCorrect: false },
-            ],
+            create: t.answers,
           },
         },
       });
-      console.log(`      ✅ Task ${i} with answers created`);
     }
+
+    console.log(`✅ Lesson ${i} created with real content`);
   }
 
   console.log('🚀 Seeding completed successfully!');
