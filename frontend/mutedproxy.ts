@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { matchPrefix, rules } from "./urlRules";
 
-export async function proxy(req: NextRequest) {
+export async function mutedproxy(req: NextRequest) {
   const isAuth = req.cookies.has("refreshToken");
 
   const page = req.nextUrl.pathname;
