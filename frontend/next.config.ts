@@ -4,9 +4,6 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["avatar.vercel.sh"],
   },
-};
-
-module.exports = {
   async rewrites() {
     return [
       {
