@@ -1,7 +1,2 @@
-const isClient = typeof window !== "undefined";
-export const API_URL =
-  process.env.NODE_ENV === "production"
-    ? "/api"
-    : isClient
-      ? "http://localhost:3003"
-      : process.env.NEXT_PUBLIC_API_URL;
+const isServer = typeof window === "undefined";
+export const API_URL = isServer ? process.env.NEXT_PUBLIC_API_URL : "/api";
