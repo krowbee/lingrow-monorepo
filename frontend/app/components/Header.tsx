@@ -26,7 +26,7 @@ export function Header() {
             <li>
               <Link
                 href="#about"
-                className="transition duration-200 hover:text-white/80"
+                className="transition duration-200 hover:text-white/80!"
               >
                 Про нас
               </Link>
@@ -34,7 +34,7 @@ export function Header() {
             <li>
               <Link
                 href="#prices"
-                className="transition duration-200 hover:text-white/80"
+                className="transition duration-200 hover:text-white/80!"
               >
                 Ціни
               </Link>
@@ -42,7 +42,7 @@ export function Header() {
             <li>
               <Link
                 href="#contact"
-                className="transition duration-200 hover:text-white/80"
+                className="transition duration-200 hover:text-white/80!"
               >
                 Зв&#39;язатись
               </Link>

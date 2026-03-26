@@ -161,7 +161,7 @@ a:visited {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-purple-500);
+  background-color: var(--color-fuchsia-500);
 }
 
 .hide-scrollbar {

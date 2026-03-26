@@ -35,11 +35,11 @@ export const AboutSection = () => {
   };
 
   return (
-    <section className="about w-full flex flex-col items-center justify-center gap-10 pb-10 shadow-md">
-      <h1 className="text-5xl flex text-white font-heading w-full h-20 justify-center items-center shadow-md font-heading">
+    <section className="bg-black/20 border border-white/5 about w-full flex flex-col items-center justify-center gap-10 pb-10 shadow-md">
+      <h1 className="text-5xl flex text-white font-heading w-full pt-24 pb-4 justify-center items-center font-heading">
         Про нас
       </h1>
-      <div className="w-full justify-items-center grid md:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-10 max-w-[1400px]">
+      <div className="w-full justify-items-center grid md:grid-cols-2 lg:grid-cols-3 gap-y-20 max-w-[1400px]">
         {Object.values(cardContent).map((card, index) => (
           <InfoCard
             key={index}
