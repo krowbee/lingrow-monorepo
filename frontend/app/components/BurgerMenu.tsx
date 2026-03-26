@@ -30,26 +30,26 @@ export const BurgerMenu = (): JSX.Element => {
     <div className="lg:hidden">
       <div className="relative">
         {isMenuOpen && (
-          <div className="fixed inset-x-0 top-[73px] bottom-0 z-[100] bg-black/15 backdrop-blur-sm">
-            <nav className="flex flex-col items-center gap-4 pt-10 font-heading text-3xl text-white">
+          <div className="fixed inset-x-0 top-[73px] bottom-0 z-[100] bg-black">
+            <nav className="flex flex-col items-center gap-4 pt-10 font-heading text-2xl text-white/85">
               <Link
                 href="#about"
                 onClick={() => changeMenuState(!isMenuOpen)}
-                className="block py-4 transition hover:text-primary"
+                className="block transition hover:text-white!"
               >
                 Про нас
               </Link>
               <Link
                 href="#prices"
                 onClick={() => changeMenuState(!isMenuOpen)}
-                className="block py-4 transition hover:text-primary"
+                className="block transition hover:text-white!"
               >
                 Ціни
               </Link>
               <Link
                 href="#contact"
                 onClick={() => changeMenuState(!isMenuOpen)}
-                className="block py-4 transition hover:text-primary"
+                className="block transition hover:text-white!"
               >
                 Зв&#39;язатись
               </Link>

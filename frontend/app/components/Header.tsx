@@ -1,9 +1,14 @@
+"use client";
 import Link from "next/link";
 import { OpenMenuButton } from "./OpenMenuButton";
+import { useMenuStore } from "@/store/MenuStore";
 
 export function Header() {
+  const isMenuOpen = useMenuStore((state) => state.isOpen);
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-black/15 text-white backdrop-blur-sm">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b border-white/5 ${isMenuOpen ? "bg-black" : "bg-black/15"} backdrop-blur-sm text-white`}
+    >
       <div className="flex h-[73px] items-center justify-between px-8 text-white">
         <Link href="/" className="relative z-[80]">
           <h1 className="font-heading text-3xl">
