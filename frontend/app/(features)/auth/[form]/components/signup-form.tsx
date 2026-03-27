@@ -58,7 +58,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   return (
     <Card
       {...props}
-      className="rounded-none md:rounded-xl border-none bg-neutral-800 h-full md:h-min justify-center"
+      className="rounded-none md:rounded-xl border-white/5 h-full md:h-min justify-center"
     >
       <CardHeader>
         <CardTitle className="text-white font-heading">
@@ -87,7 +87,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                     type="text"
                     placeholder="Валентин Дмитренко"
                     required
-                    className="text-white border-purple-500"
+                    className="text-white border-purple-500/15"
                     {...field}
                   />
                 )}
@@ -108,7 +108,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 control={control}
                 render={({ field }) => (
                   <Input
-                    className="text-white border-purple-500"
+                    className="text-white border-purple-500/15"
                     id="email"
                     type="email"
                     placeholder="m@example.com"
@@ -137,7 +137,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                     id="password"
                     type="password"
                     required
-                    className="text-white border-purple-500"
+                    className="text-white border-purple-500/15"
                     {...field}
                   />
                 )}

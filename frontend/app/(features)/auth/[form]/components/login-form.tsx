@@ -64,7 +64,7 @@ export function LoginForm({
       className={cn("flex flex-col gap-6 h-full justify-center", className)}
       {...props}
     >
-      <Card className="rounded-none md:rounded-xl border-none bg-neutral-800 h-full md:h-min justify-center">
+      <Card className="flex flex-col rounded-none md:rounded-xl border-white/5 h-full md:h-min justify-center">
         <CardHeader>
           <CardTitle className="text-white font-heading">
             Вхід в обліковий запис
@@ -97,7 +97,7 @@ export function LoginForm({
                       type="email"
                       placeholder="m@example.com"
                       required
-                      className="text-white font-body border-purple-500"
+                      className="text-white font-body border-purple-500/15"
                       {...field}
                     />
                   )}
@@ -126,7 +126,7 @@ export function LoginForm({
                       id="password"
                       type="password"
                       required
-                      className="text-white font-body border-purple-500"
+                      className="text-white font-body border-purple-500/15"
                       {...field}
                     />
                   )}

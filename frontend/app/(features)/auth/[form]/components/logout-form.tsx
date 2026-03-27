@@ -26,7 +26,7 @@ export function LogoutForm() {
 
   return (
     <div className="flex items-center w-full h-full justify-center">
-      <Card className="rounded-xl max-w-[390px] h-min border-none bg-neutral-800 justify-center px-6">
+      <Card className="rounded-xl max-w-[390px] h-min border-white/5 justify-center px-6">
         <CardTitle className="text-white font-heading">
           Вийти з облікового запису
         </CardTitle>

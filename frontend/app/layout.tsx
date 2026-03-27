@@ -7,7 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-neutral-900">
+      <body className="bg-black/95">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
