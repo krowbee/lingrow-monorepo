@@ -14,8 +14,8 @@ export function SideBlock({ courses }: { courses: Course[] }) {
   return (
     <SidebarProvider className="w-min">
       <Sidebar>
-        <SidebarHeader className="p-0">
-          <div className="w-full px-2 text-center text-xl font-heading font-bold">
+        <SidebarHeader className="p-0 mb-4">
+          <div className="w-full p-2 text-center text-xl font-heading font-bold">
             Швидкий доступ
           </div>
         </SidebarHeader>
