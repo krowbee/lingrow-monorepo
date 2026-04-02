@@ -9,7 +9,7 @@ export default async function CoursesLayout({
 }) {
   const result = (await getStaticCoursesList()) || [];
   return (
-    <main className="w-full h-full flex flex-row">
+    <main className="w-full h-full flex flex-row bg-neutral-900">
       <SideBlock courses={result.ok ? result.data : []}></SideBlock>
       {children}
     </main>

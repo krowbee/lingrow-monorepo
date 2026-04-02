@@ -1,25 +1,45 @@
+"use client";
 import { SidebarGroup } from "@/components/ui/sidebar";
 import { Course } from "@/types/course/course";
 import { COURSES_URL } from "@/urls/courses";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function CoursesSide({ courses }: { courses: Course[] }) {
+  const pathname = usePathname();
+  const slug = pathname.split("/").filter(Boolean).pop();
+  const isCoursesPage = "/" + slug === COURSES_URL.courses_page;
+
   return (
-    <SidebarGroup className="p-0 gap-2 pt-2 border-t-1 border-b-1">
-      <h3 className="font-accent text-lg text-center">
-        <Link href={COURSES_URL.courses_page}>Курси</Link>
-      </h3>
+    <SidebarGroup className="p-0 gap-2 p-2">
+      <Link href={COURSES_URL.courses_page} className="flex flex-row w-full">
+        <div
+          className={`flex flex-row gap-2 p-2 cursor-pointer ${isCoursesPage ? "bg-zinc-800" : "hover:bg-zinc-800 border border-white/3"} rounded-lg w-full`}
+        >
+          <div
+            className={`bg-purple-500 w-1 h-full ${isCoursesPage ? "opacity-100" : "opacity-0"}`}
+          ></div>
+          <h3 className="font-body text-md w-full">Курси</h3>
+        </div>
+      </Link>
 
       <div className="courses-side-container flex flex-col max-h-[110px] overflow-y-auto hide-scrollbar gap-2">
         {courses.map((course) => (
-          <div
+          <Link
+            href={`${COURSES_URL.courses_page}/${course.slug}`}
             key={course.id}
-            className="w-full flex flex-col px-4 border-1   hover:cursor-pointer"
+            className="flex flex-row"
           >
-            <Link href={`${COURSES_URL.courses_page}/${course.slug}`}>
-              <h3 className="text-md font-body">{course.name}</h3>
-            </Link>
-          </div>
+            <div
+              className={`flex flex-row gap-2 p-2 ${slug === course.slug ? "bg-zinc-800" : "hover:bg-zinc-800 border border-white/3"} rounded-lg w-full  hover:cursor-pointer`}
+            >
+              <div
+                className={`bg-purple-500 w-1 h-full ${slug === course.slug ? "opacity-100" : "opacity-0"}`}
+              ></div>
+
+              <h3 className="text-md font-accent">{course.name}</h3>
+            </div>
+          </Link>
         ))}
       </div>
     </SidebarGroup>
