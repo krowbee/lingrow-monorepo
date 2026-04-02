@@ -35,7 +35,7 @@ export function LessonsContainer({
   }, []);
 
   return (
-    <div className="lessons-container h-min flex flex-wrap w-full gap-4 justify-start py-4">
+    <div className="lessons-container h-min flex flex-wrap justify-center lg:justify-start w-full gap-4 py-4">
       {updatedLessons.map((lesson: LessonWithProgress) => (
         <LessonCard key={lesson.id} lesson={lesson} courseSlug={courseSlug} />
       ))}
