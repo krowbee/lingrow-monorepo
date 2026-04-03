@@ -8,7 +8,7 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 const cryptoService = new CryptoService();
 
-const generateTheory = (lessonNumber: number, courseName: string) => ({
+const generateTheory = () => ({
   type: 'doc',
   content: [
     {
@@ -17,7 +17,7 @@ const generateTheory = (lessonNumber: number, courseName: string) => ({
       content: [
         {
           type: 'text',
-          text: `${courseName} — Lesson ${lessonNumber}: Verb "to be"`,
+          text: `Verb "to be"`,
         },
       ],
     },
@@ -33,9 +33,9 @@ const generateTheory = (lessonNumber: number, courseName: string) => ({
   ],
 });
 
-const generateTasks = (lessonNumber: number, courseName: string) => [
+const generateTasks = () => [
   {
-    question: `${courseName} — Lesson ${lessonNumber}: I ___ a student.`,
+    question: `I ___ a student.`,
     answers: [
       { text: 'am', isCorrect: true },
       { text: 'is', isCorrect: false },
@@ -43,7 +43,7 @@ const generateTasks = (lessonNumber: number, courseName: string) => [
     ],
   },
   {
-    question: `${courseName} — Lesson ${lessonNumber}: She ___ my sister.`,
+    question: `She ___ my sister.`,
     answers: [
       { text: 'is', isCorrect: true },
       { text: 'am', isCorrect: false },
@@ -51,7 +51,7 @@ const generateTasks = (lessonNumber: number, courseName: string) => [
     ],
   },
   {
-    question: `${courseName} — Lesson ${lessonNumber}: They ___ at home.`,
+    question: `They ___ at home.`,
     answers: [
       { text: 'are', isCorrect: true },
       { text: 'is', isCorrect: false },
@@ -59,7 +59,7 @@ const generateTasks = (lessonNumber: number, courseName: string) => [
     ],
   },
   {
-    question: `${courseName} — Lesson ${lessonNumber}: ___ he your friend?`,
+    question: `___ he your friend?`,
     answers: [
       { text: 'Is', isCorrect: true },
       { text: 'Are', isCorrect: false },
@@ -67,7 +67,7 @@ const generateTasks = (lessonNumber: number, courseName: string) => [
     ],
   },
   {
-    question: `${courseName} — Lesson ${lessonNumber}: We ___ not ready.`,
+    question: `We ___ not ready.`,
     answers: [
       { text: 'are', isCorrect: true },
       { text: 'is', isCorrect: false },
@@ -131,13 +131,13 @@ async function main() {
         data: {
           name: `Lesson ${i}`,
           slug: `${course.slug}-lesson-${i}`,
-          theory: generateTheory(i, course.name),
+          theory: generateTheory(),
           courseId: course.id,
           order: i,
         },
       });
 
-      const tasks = generateTasks(i, course.name);
+      const tasks = generateTasks();
 
       for (let j = 0; j < tasks.length; j++) {
         const t = tasks[j];

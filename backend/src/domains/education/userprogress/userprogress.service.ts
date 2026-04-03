@@ -34,25 +34,59 @@ export class UserProgressService {
       where: {
         userId: getCourseProgressData.userId,
         task: {
-          lesson: { course: { slug: getCourseProgressData.courseSlug } },
+          lesson: {
+            course: { slug: getCourseProgressData.courseSlug },
+          },
         },
       },
-      include: { task: { select: { id: true, lessonId: true } } },
+      select: {
+        task: {
+          select: {
+            id: true,
+            lessonId: true,
+          },
+        },
+      },
     });
-    const progressCountByLesson: Record<number, number> = {};
+
+    const answeredTaskIdsByLesson: Record<number, Set<number>> = {};
+
     for (const up of progressByLessons) {
-      const lessonId = up.task.lessonId;
-      progressCountByLesson[lessonId] =
-        (progressCountByLesson[lessonId] || 0) + 1;
+      const { lessonId, id: taskId } = up.task;
+
+      if (!answeredTaskIdsByLesson[lessonId]) {
+        answeredTaskIdsByLesson[lessonId] = new Set<number>();
+      }
+
+      answeredTaskIdsByLesson[lessonId].add(taskId);
     }
 
-    const lessonsCompleted: LessonProgress[] = Object.entries(
-      progressCountByLesson,
-    ).map(([lessonId, count]) => ({
-      lessonId: Number(lessonId),
-      isCompleted: count === 10,
+    const lessonIds = Object.keys(answeredTaskIdsByLesson).map(Number);
+
+    const lessons = await this.prisma.lesson.findMany({
+      where: {
+        id: { in: lessonIds },
+      },
+      select: {
+        id: true,
+        _count: {
+          select: {
+            tasks: true,
+          },
+        },
+      },
+    });
+
+    const tasksCountByLesson: Record<number, number> = {};
+    for (const lesson of lessons) {
+      tasksCountByLesson[lesson.id] = lesson._count.tasks;
+    }
+
+    return lessonIds.map((lessonId) => ({
+      lessonId,
+      isCompleted:
+        answeredTaskIdsByLesson[lessonId].size === tasksCountByLesson[lessonId],
     }));
-    return lessonsCompleted;
   }
 
   async getLessonProgress(

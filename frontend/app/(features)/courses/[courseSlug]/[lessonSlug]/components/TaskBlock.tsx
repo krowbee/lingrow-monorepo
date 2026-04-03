@@ -51,16 +51,16 @@ export function TaskBlock({ task }: { task: TaskWithAnswers }) {
   return (
     <Card className="w-full px-8 py-4">
       <CardHeader>
-        <h2 className="text-lg">
+        <h2 className="text-lg md:text-2xl font-accent">
           {task.order}. {task.question}
         </h2>
       </CardHeader>
       <CardDescription>
-        <div className="px-8 flex flex-col gap-2">
+        <div className="px-8 flex flex-col gap-4">
           {task.answers.length !== 0 &&
             task.answers.map((answer) => (
               <div
-                className={`flex items-center gap-3 p-2 bg-base-300 border rounded-lg border-base-400 ${
+                className={`flex items-center gap-4 bg-base-300 border rounded-lg ${
                   submittedAnswer?.answerId === answer.id
                     ? submittedAnswer.isCorrect
                       ? "border-green-600"
@@ -69,17 +69,21 @@ export function TaskBlock({ task }: { task: TaskWithAnswers }) {
                 }`}
                 key={answer.id}
               >
-                <input
-                  type="radio"
-                  className={`cursor-pointer transition-colors ${submittedAnswer?.answerId === answer.id ? (submittedAnswer.isCorrect ? "accent-green-500" : "accent-red-500") : "accent-primary"}`}
-                  value={`${answer.id}`}
-                  id={`${answer.id}`}
-                  checked={task.choosedAnswer === answer.id}
-                  onChange={() => handleAnswerChange(answer.id)}
-                />
-                <Label htmlFor={`${answer.id}`} className="">
-                  {answer.text}
-                </Label>
+                <label
+                  htmlFor={`${answer.id}`}
+                  className="flex flex-row gap-4 p-4 w-full h-full items-center cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    className={`cursor-pointer h-5 w-5 transition-colors ${submittedAnswer?.answerId === answer.id ? (submittedAnswer.isCorrect ? "accent-green-500" : "accent-red-500") : "accent-primary"}`}
+                    value={`${answer.id}`}
+                    id={`${answer.id}`}
+                    checked={task.choosedAnswer === answer.id}
+                    onChange={() => handleAnswerChange(answer.id)}
+                  />
+
+                  <span className="text-lg">{answer.text}</span>
+                </label>
               </div>
             ))}
         </div>

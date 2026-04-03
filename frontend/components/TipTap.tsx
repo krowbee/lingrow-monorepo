@@ -34,7 +34,7 @@ export const Tiptap = ({
       {editable && <MenuBar editor={editor}></MenuBar>}
       <EditorContent
         editor={editor}
-        className="text-white rounded-xl p-4 focus:outline-none font-body
+        className="text-white rounded-xl focus:outline-none font-body
     max-w-none leading-7 text-neutral-900 dark:text-neutral-100 min-h-35
 
     [&_p]:m-0

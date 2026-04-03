@@ -48,18 +48,20 @@ export function LessonBlock({
     );
 
   return (
-    <div className="lesson-container w-full flex flex-col justify-center gap-4 p-4">
+    <div className="lesson-container w-full h-full flex flex-col justify-between gap-4 p-4 items-between">
       {step === "theory" && (
         <TheoryBlock lessonName={lesson.name} theory={lesson.theory} />
       )}
       {step === "task" && (
         <TaskBlock task={lesson.tasks[taskIndex]}></TaskBlock>
       )}
-      <LessonNavigation
-        tasks={lesson.tasks}
-        finishLesson={finishLesson}
-        backToLessons={backToLessons}
-      />
+      <div className="footer">
+        <LessonNavigation
+          tasks={lesson.tasks}
+          finishLesson={finishLesson}
+          backToLessons={backToLessons}
+        />
+      </div>
     </div>
   );
 }

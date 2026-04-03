@@ -1,6 +1,7 @@
 import { TaskWithAnswers } from "@/types/course/course";
 import { Button } from "@/components/ui/button";
 import { useLessonStore } from "@/store/LessonStore";
+import { BookOpen, MoveLeft, MoveRight } from "lucide-react";
 
 export function LessonNavigation({
   tasks,
@@ -51,10 +52,10 @@ export function LessonNavigation({
     }
   };
   return (
-    <div className="w-full flex px-8 justify-center gap-2">
+    <div className="flex flex-row w-full px-6 lg:px-8 justify-self-center gap-2 border p-4 max-w-max rounded-xl">
       {step === "task" ? (
         <Button onClick={() => changeTask("prev")} className="cursor-pointer">
-          Назад
+          <MoveLeft />
         </Button>
       ) : (
         <Button className="cursor-pointer" onClick={() => backToLessons()}>
@@ -62,17 +63,17 @@ export function LessonNavigation({
         </Button>
       )}
 
-      <div className="flex flex-row flex-wrap gap-2 justify-center">
+      <div className="flex flex-row flex-wrap justify-center gap-y-4 gap-x-2">
         <Button
-          className={`bg-accent ${step === "theory" && "bg-primary"}  cursor-pointer`}
+          className={`bg-purple-500/50 hover:bg-purple-500 w-auto ${step === "theory" && "bg-purple-500 border-3 border-white/50"}  cursor-pointer`}
           onClick={() => chooseTheory()}
         >
-          Теорія
+          <BookOpen />
         </Button>
         {tasks.map((task) => (
           <Button
             key={task.id}
-            className={`cursor-pointer bg-accent ${task.order - 1 === taskIndex && step === "task" && "bg-primary"} ${task.choosedAnswer && "bg-green-400"}`}
+            className={`cursor-pointer bg-purple-500/50 hover:bg-purple-500 ${task.order - 1 === taskIndex && step === "task" && "bg-purple-500 border-3 border-white/50 -translate-y-1"} ${task.choosedAnswer && "bg-fuchsia-600/70"}`}
             onClick={() => chooseTask(task.order)}
           >
             {task.order}
@@ -80,8 +81,11 @@ export function LessonNavigation({
         ))}
       </div>
       {taskIndex + 1 !== tasks.length ? (
-        <Button onClick={() => changeTask("next")} className="cursor-pointer">
-          Далі
+        <Button
+          onClick={() => changeTask("next")}
+          className="cursor-pointer bg-purple-700"
+        >
+          <MoveRight />
         </Button>
       ) : (
         <Button className="cursor-pointer" onClick={() => finishLesson()}>

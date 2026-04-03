@@ -12,11 +12,11 @@ export function TheoryBlock({
 }) {
   return (
     <Card className="w-full px-8 py-4">
-      <CardHeader>
-        <h1 className="font-heading text-2xl text-center">{lessonName}</h1>
+      <CardHeader className="p-0">
+        <h1 className="font-heading text-3xl text-start">{lessonName}</h1>
+        <hr className="bg-primary"></hr>
       </CardHeader>
-      <hr className="bg-primary"></hr>
-      <CardDescription>
+      <CardDescription className="p-0">
         <Tiptap editable={false} content={theory} />
       </CardDescription>
     </Card>
