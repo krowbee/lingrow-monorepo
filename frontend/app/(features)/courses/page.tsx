@@ -7,11 +7,10 @@ export default async function CoursesPage() {
     <>
       {result.ok && result.data ? (
         <>
-          <section className="w-full min-h-screen p-8">
-            <h1 className="text-3xl font-heading text-center text-white">
-              Доступні курси
+          <section className="w-full flex flex-col min-h-screen p-8 gap-4">
+            <h1 className="text-3xl font-bold font-heading text-white">
+              Доступні <span className="text-purple-400/75">курси</span>
             </h1>
-
             <div className="cards-container flex flex-wrap w-full gap-6 justify-center py-4">
               {result.data.map((course) => (
                 <CourseCard key={course.id} course={course} />

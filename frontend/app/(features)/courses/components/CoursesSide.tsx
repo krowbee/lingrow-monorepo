@@ -14,16 +14,16 @@ export function CoursesSide({ courses }: { courses: Course[] }) {
     <SidebarGroup className="p-0 gap-2 p-2">
       <Link href={COURSES_URL.courses_page} className="flex flex-row w-full">
         <div
-          className={`flex flex-row gap-2 p-2 cursor-pointer ${isCoursesPage ? "bg-zinc-800" : "hover:bg-zinc-800 border border-white/8"} rounded-lg w-full`}
+          className={`flex flex-row gap-2 p-2 cursor-pointer ${isCoursesPage ? "bg-zinc-800" : "hover:bg-zinc-800 border border-purple-400/20"} rounded-lg w-full`}
         >
           <div
-            className={`bg-purple-500 w-1 h-full ${isCoursesPage ? "opacity-100" : "opacity-0"}`}
+            className={`bg-purple-400 w-1 h-full ${isCoursesPage ? "opacity-100" : "opacity-0"}`}
           ></div>
           <h3 className="font-body text-md w-full">Курси</h3>
         </div>
       </Link>
 
-      <div className="courses-side-container flex flex-col max-h-[110px] overflow-y-auto hide-scrollbar gap-2">
+      <div className="courses-side-container flex flex-col gap-2">
         {courses.map((course) => (
           <Link
             href={`${COURSES_URL.courses_page}/${course.slug}`}
@@ -31,10 +31,10 @@ export function CoursesSide({ courses }: { courses: Course[] }) {
             className="flex flex-row"
           >
             <div
-              className={`flex flex-row gap-2 p-2 ${slug === course.slug || pathname.includes(course.slug) ? "bg-zinc-800" : "hover:bg-zinc-800 border border-white/8"} rounded-lg w-full  hover:cursor-pointer`}
+              className={`flex flex-row gap-2 p-2 ${slug === course.slug || pathname.includes(course.slug) ? "bg-zinc-800" : "hover:bg-zinc-800 border border-purple-400/20"} rounded-lg w-full  hover:cursor-pointer`}
             >
               <div
-                className={`bg-purple-500 w-1 h-full ${slug === course.slug || pathname.includes(course.slug) ? "opacity-100" : "opacity-0"}`}
+                className={`bg-purple-400 w-1 h-full ${slug === course.slug || pathname.includes(course.slug) ? "opacity-100" : "opacity-0"}`}
               ></div>
 
               <h3 className="text-md font-accent">{course.name}</h3>
