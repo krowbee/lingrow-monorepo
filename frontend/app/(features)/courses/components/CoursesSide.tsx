@@ -14,7 +14,7 @@ export function CoursesSide({ courses }: { courses: Course[] }) {
     <SidebarGroup className="p-0 gap-2 p-2">
       <Link href={COURSES_URL.courses_page} className="flex flex-row w-full">
         <div
-          className={`flex flex-row gap-2 p-2 cursor-pointer ${isCoursesPage ? "bg-zinc-800" : "hover:bg-zinc-800 border border-white/3"} rounded-lg w-full`}
+          className={`flex flex-row gap-2 p-2 cursor-pointer ${isCoursesPage ? "bg-zinc-800" : "hover:bg-zinc-800 border border-white/8"} rounded-lg w-full`}
         >
           <div
             className={`bg-purple-500 w-1 h-full ${isCoursesPage ? "opacity-100" : "opacity-0"}`}
@@ -31,10 +31,10 @@ export function CoursesSide({ courses }: { courses: Course[] }) {
             className="flex flex-row"
           >
             <div
-              className={`flex flex-row gap-2 p-2 ${slug === course.slug ? "bg-zinc-800" : "hover:bg-zinc-800 border border-white/3"} rounded-lg w-full  hover:cursor-pointer`}
+              className={`flex flex-row gap-2 p-2 ${slug === course.slug || pathname.includes(course.slug) ? "bg-zinc-800" : "hover:bg-zinc-800 border border-white/8"} rounded-lg w-full  hover:cursor-pointer`}
             >
               <div
-                className={`bg-purple-500 w-1 h-full ${slug === course.slug ? "opacity-100" : "opacity-0"}`}
+                className={`bg-purple-500 w-1 h-full ${slug === course.slug || pathname.includes(course.slug) ? "opacity-100" : "opacity-0"}`}
               ></div>
 
               <h3 className="text-md font-accent">{course.name}</h3>
