@@ -1,5 +1,6 @@
 import { getStaticLessonsList } from "@/lib/api/requests/courses.requests";
 import { LessonsContainer } from "./components/LessonContainer";
+import { ProgressWithLabel } from "@/components/ProgressWithLabel";
 
 export default async function CourseLessonsPage({
   params,
@@ -11,9 +12,10 @@ export default async function CourseLessonsPage({
   const lessons = result.ok ? result.data : [];
   return (
     <>
-      <section className="w-full flex-col p-8">
-        <h1 className="font-heading text-2xl font-bold text-center">
-          Доступні уроки
+      <section className="w-full flex flex-col p-8 gap-2">
+        <h1 className="text-3xl font-bold font-heading text-white cursor-default">
+          Доступні{" "}
+          <span className="text-purple-400/75 cursor-default">уроки</span>
         </h1>
         <LessonsContainer initialLessons={lessons} courseSlug={courseSlug} />
       </section>

@@ -14,7 +14,7 @@ import { Brain } from "lucide-react";
 
 export function CourseCard({ course }: { course: Course }) {
   return (
-    <Card className="relative w-full min-h-max max-w-sm pt-0 overflow-hidden bg-sidebar hover:-translate-1 transition ease-out border-none shadow-2xl shadow-purple-700/20">
+    <Card className="relative w-full min-h-max max-w-sm pt-0 overflow-hidden bg-sidebar hover:-translate-1 transition ease-out border-none shadow-2xl shadow-purple-700/20 hover:shadow-xl hover:shadow-fuchsia-500/50">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
       <Image
         src="/course_card.png"

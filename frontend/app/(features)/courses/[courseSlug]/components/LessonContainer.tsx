@@ -4,6 +4,7 @@ import { getLessonProgress } from "@/lib/api/requests/courses.client.requests";
 import { Lesson, LessonWithProgress } from "@/types/course/course";
 import { useEffect, useState } from "react";
 import { LessonCard } from "./LessonCard";
+import { ProgressBar } from "./ProgressBar";
 
 export function LessonsContainer({
   initialLessons,
@@ -35,10 +36,13 @@ export function LessonsContainer({
   }, []);
 
   return (
-    <div className="lessons-container h-min flex flex-wrap justify-center lg:justify-start w-full gap-4 py-4">
-      {updatedLessons.map((lesson: LessonWithProgress) => (
-        <LessonCard key={lesson.id} lesson={lesson} courseSlug={courseSlug} />
-      ))}
-    </div>
+    <>
+      <ProgressBar lessons={updatedLessons} />
+      <div className="lessons-container flex flex-wrap w-full gap-4 flex-row items-center justify-center xl:justify-start">
+        {updatedLessons.map((lesson: LessonWithProgress) => (
+          <LessonCard key={lesson.id} lesson={lesson} courseSlug={courseSlug} />
+        ))}
+      </div>
+    </>
   );
 }
