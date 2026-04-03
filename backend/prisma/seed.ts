@@ -1,21 +1,25 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-import { PrismaClient, EnglishLevels } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { Pool } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { CryptoService } from '../src/domains/auth/crypto.service';
+
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 const cryptoService = new CryptoService();
 
-const generateTheory = (lessonNumber: number) => ({
+const generateTheory = (lessonNumber: number, courseName: string) => ({
   type: 'doc',
   content: [
     {
       type: 'heading',
       attrs: { level: 2 },
-      content: [{ type: 'text', text: `Lesson ${lessonNumber}: Verb "to be"` }],
+      content: [
+        {
+          type: 'text',
+          text: `${courseName} — Lesson ${lessonNumber}: Verb "to be"`,
+        },
+      ],
     },
     {
       type: 'paragraph',
@@ -29,9 +33,9 @@ const generateTheory = (lessonNumber: number) => ({
   ],
 });
 
-const generateTasks = (lessonNumber: number) => [
+const generateTasks = (lessonNumber: number, courseName: string) => [
   {
-    question: `Lesson ${lessonNumber}: I ___ a student.`,
+    question: `${courseName} — Lesson ${lessonNumber}: I ___ a student.`,
     answers: [
       { text: 'am', isCorrect: true },
       { text: 'is', isCorrect: false },
@@ -39,7 +43,7 @@ const generateTasks = (lessonNumber: number) => [
     ],
   },
   {
-    question: `Lesson ${lessonNumber}: She ___ my sister.`,
+    question: `${courseName} — Lesson ${lessonNumber}: She ___ my sister.`,
     answers: [
       { text: 'is', isCorrect: true },
       { text: 'am', isCorrect: false },
@@ -47,7 +51,7 @@ const generateTasks = (lessonNumber: number) => [
     ],
   },
   {
-    question: `Lesson ${lessonNumber}: They ___ at home.`,
+    question: `${courseName} — Lesson ${lessonNumber}: They ___ at home.`,
     answers: [
       { text: 'are', isCorrect: true },
       { text: 'is', isCorrect: false },
@@ -55,7 +59,7 @@ const generateTasks = (lessonNumber: number) => [
     ],
   },
   {
-    question: `Lesson ${lessonNumber}: ___ he your friend?`,
+    question: `${courseName} — Lesson ${lessonNumber}: ___ he your friend?`,
     answers: [
       { text: 'Is', isCorrect: true },
       { text: 'Are', isCorrect: false },
@@ -63,7 +67,7 @@ const generateTasks = (lessonNumber: number) => [
     ],
   },
   {
-    question: `Lesson ${lessonNumber}: We ___ not ready.`,
+    question: `${courseName} — Lesson ${lessonNumber}: We ___ not ready.`,
     answers: [
       { text: 'are', isCorrect: true },
       { text: 'is', isCorrect: false },
@@ -72,11 +76,28 @@ const generateTasks = (lessonNumber: number) => [
   },
 ];
 
+const coursesData = [
+  {
+    name: 'English Rocket Start',
+    slug: 'english-rocket-start',
+    description: 'Launch your English from zero to confidence',
+  },
+  {
+    name: 'Grammar Ninja Bootcamp',
+    slug: 'grammar-ninja-bootcamp',
+    description: 'A fun and practical course to master basic English grammar',
+  },
+  {
+    name: 'Speak Easy Adventure',
+    slug: 'speak-easy-adventure',
+    description: 'An engaging beginner course for everyday English speaking',
+  },
+];
+
 async function main() {
   console.log('🌱 Seeding database...');
 
-  // 1. Очищуємо базу перед сідом (щоб не було дублів при перезапуску)
-  // Важливо: видаляємо в зворотному порядку через зв'язки (Foreign Keys)
+  // Очистка базы
   await prisma.answer.deleteMany();
   await prisma.task.deleteMany();
   await prisma.lesson.deleteMany();
@@ -91,50 +112,50 @@ async function main() {
       role: 'admin',
     },
   });
+
   console.log(`✅ Created user ${user.name} (ID: ${user.id})`);
-  // 2. Створюємо курс
-  const course = await prisma.course.create({
-    data: {
-      name: 'English starter pack',
-      slug: 'english-starter-pack',
-      description: 'A basic introductory English course for beginners',
-    },
-  });
-  console.log(`✅ Created course: ${course.name} (ID: ${course.id})`);
 
-  // 3. Створюємо уроки
-  // Явно вказуємо тип масиву, щоб уникнути помилки 'never'
-  const createdLessons: any = [];
-
-  for (let i = 1; i <= 10; i++) {
-    const lesson = await prisma.lesson.create({
+  for (const courseData of coursesData) {
+    const course = await prisma.course.create({
       data: {
-        name: `Lesson ${i}`,
-        slug: `lesson-${i}`,
-        theory: generateTheory(i),
-        courseId: course.id,
-        order: i,
+        name: courseData.name,
+        slug: courseData.slug,
+        description: courseData.description,
       },
     });
 
-    const tasks = generateTasks(i);
+    console.log(`✅ Created course: ${course.name} (ID: ${course.id})`);
 
-    for (let j = 0; j < tasks.length; j++) {
-      const t = tasks[j];
-
-      await prisma.task.create({
+    for (let i = 1; i <= 10; i++) {
+      const lesson = await prisma.lesson.create({
         data: {
-          question: t.question,
-          lessonId: lesson.id,
-          order: j + 1,
-          answers: {
-            create: t.answers,
-          },
+          name: `Lesson ${i}`,
+          slug: `${course.slug}-lesson-${i}`,
+          theory: generateTheory(i, course.name),
+          courseId: course.id,
+          order: i,
         },
       });
-    }
 
-    console.log(`✅ Lesson ${i} created with real content`);
+      const tasks = generateTasks(i, course.name);
+
+      for (let j = 0; j < tasks.length; j++) {
+        const t = tasks[j];
+
+        await prisma.task.create({
+          data: {
+            question: t.question,
+            lessonId: lesson.id,
+            order: j + 1,
+            answers: {
+              create: t.answers,
+            },
+          },
+        });
+      }
+
+      console.log(`✅ ${course.name} — Lesson ${i} created`);
+    }
   }
 
   console.log('🚀 Seeding completed successfully!');
