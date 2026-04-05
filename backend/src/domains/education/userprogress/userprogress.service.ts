@@ -51,8 +51,8 @@ export class UserProgressService {
 
     const answeredTaskIdsByLesson: Record<number, Set<number>> = {};
 
-    for (const up of progressByLessons) {
-      const { lessonId, id: taskId } = up.task;
+    for (const progress of progressByLessons) {
+      const { lessonId, id: taskId } = progress.task;
 
       if (!answeredTaskIdsByLesson[lessonId]) {
         answeredTaskIdsByLesson[lessonId] = new Set<number>();
