@@ -22,7 +22,7 @@ export const InfoCard = ({
         >
           {cardTitle}
         </CardTitle>
-        <CardDescription className="text-lg text-neutral-400 max-w-auto font-body leading-[1.8]">
+        <CardDescription className="text-lg text-neutral-400 max-w-auto font-body leading-[1.8] group-hover:text-white transition duration-600">
           {cardDescription}
         </CardDescription>
       </CardHeader>
