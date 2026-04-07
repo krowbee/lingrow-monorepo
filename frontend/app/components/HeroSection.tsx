@@ -1,29 +1,109 @@
-import { JSX } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { AUTH_URLS } from "@/urls/auth";
-
+"use client";
+import { JSX, useEffect, useRef } from "react";
+import { useMotionValue, useSpring } from "motion/react";
+import { HeroBackground } from "./hero/HeroBackground";
+import { HeroGlow } from "./hero/HeroGlow";
+import { HeroCards } from "./hero/HeroCards";
+import { HeroIllustration } from "./hero/HeroIllustration";
+import { HeroParticle } from "./hero/HeroParticle";
+import { HeroContent } from "./hero/HeroContent";
 export const HeroSection = (): JSX.Element => {
+  const heroRef = useRef<HTMLElement | null>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const scrollProgress = useMotionValue(0);
+
+  const smoothMouseX = useSpring(mouseX, {
+    stiffness: 60,
+    damping: 20,
+    mass: 0.6,
+  });
+
+  const smoothMouseY = useSpring(mouseX, {
+    stiffness: 60,
+    damping: 20,
+    mass: 0.6,
+  });
+
+  const smoothScroll = useSpring(scrollProgress, {
+    stiffness: 50,
+    damping: 20,
+    mass: 0.8,
+  });
+
+  useEffect(() => {
+    const hero = heroRef.current;
+
+    if (!hero) return;
+
+    const handleMouseMove = (event: MouseEvent) => {
+      const rect = hero.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      const normalizedX = (event.clientX - centerX) / (rect.width / 2);
+      const normalizedY = (event.clientY - centerY) / (rect.height / 2);
+
+      const clampedX = Math.max(-1, Math.min(1, normalizedX));
+      const clampedY = Math.max(-1, Math.min(1, normalizedY));
+
+      mouseX.set(clampedX);
+      mouseY.set(clampedY);
+    };
+
+    const handleScroll = () => {
+      const rect = hero.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      const progress = 1 - rect.bottom / (rect.height + viewportHeight);
+      const clampedProgress = Math.max(-1, Math.min(1, progress));
+
+      scrollProgress.set(clampedProgress);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    handleScroll();
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [mouseX, mouseY, scrollProgress]);
+
   return (
-    <div className="hero relative min-h-screen w-full overflow-x-hidden bg-[url(/lingrow-hero-small.png)] bg-cover bg-center bg-no-repeat before:absolute before:inset-0 before:z-0 before:h-full before:w-full before:bg-black/95 lg:bg-[url(/lingrow-logo.png)]">
-      <div className="relative z-10 flex h-screen w-full cursor-default flex-col items-center justify-center gap-2 animate-fadeIn px-6 pt-[73px]">
-        <h1 className="text-center font-heading text-3xl font-semibold tracking-wide lg:text-6xl">
-          Мова відкриває світ
-        </h1>
+    <section className="relative w-full h-screen overflow-hidden" ref={heroRef}>
+      <HeroBackground
+        smoothMouseX={smoothMouseX}
+        smoothScroll={smoothScroll}
+        smoothMouseY={smoothMouseY}
+      />
+      <HeroGlow
+        smoothMouseX={smoothMouseX}
+        smoothScroll={smoothScroll}
+        smoothMouseY={smoothMouseY}
+      />
+      <HeroCards
+        smoothMouseX={smoothMouseX}
+        smoothScroll={smoothScroll}
+        smoothMouseY={smoothMouseY}
+      />
 
-        <p className="text-center font-body text-lg">
-          Почни сьогодні — майбутнє говорить англійською.
-        </p>
+      <HeroIllustration
+        smoothMouseX={smoothMouseX}
+        smoothScroll={smoothScroll}
+        smoothMouseY={smoothMouseY}
+      />
+      <HeroParticle
+        smoothMouseX={smoothMouseX}
+        smoothScroll={smoothScroll}
+        smoothMouseY={smoothMouseY}
+      />
 
-        <Link href={AUTH_URLS.signup} className="flex justify-center">
-          <Button
-            variant="default"
-            className="mt-10 w-[250px] cursor-pointer bg-gradient-to-r from-fuchsia-600 to-purple-600 px-4 py-6 text-center font-heading text-3xl font-extralight text-white shadow-[0_10px_30px_rgba(0,0,0,0.35),0_0_18px_rgba(217,70,239,0.12)] transition duration-300 ease-in hover:bg-gradient-to-r hover:from-fuchsia-500 hover:to-purple-500 md:px-20"
-          >
-            Приєднатись
-          </Button>
-        </Link>
-      </div>
-    </div>
+      <HeroContent
+        smoothMouseX={smoothMouseX}
+        smoothScroll={smoothScroll}
+        smoothMouseY={smoothMouseY}
+      />
+    </section>
   );
 };
