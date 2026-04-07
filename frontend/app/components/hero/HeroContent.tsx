@@ -1,4 +1,6 @@
+import { AUTH_URLS } from "@/urls/auth";
 import { motion, MotionValue, useTransform } from "motion/react";
+import Link from "next/link";
 
 export function HeroContent({
   smoothMouseX,
@@ -31,25 +33,27 @@ export function HeroContent({
         </p>
 
         <div className="hero-actions mt-10 flex flex-wrap gap-4">
-          <motion.button
-            style={{
-              backgroundImage:
-                "linear-gradient(60deg, #6b21a8, #d946ef, #6b21a8)",
-              backgroundSize: "200% 100%",
-              backgroundPosition: "0% 50%",
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            animate={{
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-            }}
-            className="hero-button hero-button-primary min-w-xs rounded-2xl bg-fuchsia-500 px-8 py-4 text-base font-medium text-white shadow-[0_0_40px_rgba(217,70,239,0.45)] transition-transform duration-300 hover:scale-[1.03]"
-          >
-            Приєднатись
-          </motion.button>
+          <Link href={AUTH_URLS.signup} className="cursor-pointer">
+            <motion.button
+              style={{
+                backgroundImage:
+                  "linear-gradient(60deg, #6b21a8, #d946ef, #6b21a8)",
+                backgroundSize: "200% 100%",
+                backgroundPosition: "0% 50%",
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              animate={{
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+              }}
+              className="cursor-pointer hero-button hero-button-primary min-w-xs rounded-2xl bg-fuchsia-500 px-8 py-4 text-base font-medium text-white shadow-[0_0_40px_rgba(217,70,239,0.45)] transition-transform duration-300 hover:scale-[1.03]"
+            >
+              Приєднатись
+            </motion.button>
+          </Link>
         </div>
       </div>
     </motion.div>
