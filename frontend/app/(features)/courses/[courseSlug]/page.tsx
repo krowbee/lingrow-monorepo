@@ -1,6 +1,5 @@
 import { getStaticLessonsList } from "@/lib/api/requests/courses.requests";
 import { LessonsContainer } from "./components/LessonContainer";
-import { ProgressWithLabel } from "@/components/ProgressWithLabel";
 
 export default async function CourseLessonsPage({
   params,

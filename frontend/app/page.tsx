@@ -5,6 +5,11 @@ import { JoinSection } from "./components/JoinSection";
 import { Header } from "./components/Header";
 import { BurgerMenu } from "./components/BurgerMenu";
 
+export const metadata = {
+  title: "Lingrow",
+  description: "Lingrow english learning platform",
+};
+
 export default function Home(): JSX.Element {
   return (
     <main className="relative w-full flex flex-col justify-center items-center">

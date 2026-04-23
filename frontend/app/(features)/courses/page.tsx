@@ -1,6 +1,11 @@
 import { getStaticCoursesList } from "@/lib/api/requests/courses.requests";
 import { CourseCard } from "./components/CourseCard";
 
+export const metadata = {
+  title: "Курси",
+  description: "Courses page",
+};
+
 export default async function CoursesPage() {
   const result = (await getStaticCoursesList()) || [];
   return (
