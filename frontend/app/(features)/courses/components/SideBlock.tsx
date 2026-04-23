@@ -12,8 +12,8 @@ import { Course } from "@/types/course/course";
 
 export function SideBlock({ courses }: { courses: Course[] }) {
   return (
-    <SidebarProvider className="w-min text-white">
-      <Sidebar>
+    <SidebarProvider className="w-min">
+      <Sidebar className="text-white">
         <SidebarHeader className="p-0 mb-4">
           <div className="w-full p-2 text-center text-xl font-heading font-bold">
             Швидкий доступ
