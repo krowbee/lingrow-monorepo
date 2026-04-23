@@ -12,7 +12,7 @@ import { Course } from "@/types/course/course";
 
 export function SideBlock({ courses }: { courses: Course[] }) {
   return (
-    <SidebarProvider className="w-min">
+    <SidebarProvider className="w-min text-white">
       <Sidebar>
         <SidebarHeader className="p-0 mb-4">
           <div className="w-full p-2 text-center text-xl font-heading font-bold">
