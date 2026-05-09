@@ -18,7 +18,7 @@ export function HeroBackground({
       style={{ x: bgX, y: bgY }}
       className="background overflow-hiden absolute inset-0 z-0 scale-x-105 transition-transform will-change-transform"
     >
-      <picture className="block w-full h-full">
+      <picture className="block h-full w-full">
         <source
           srcSet="/hero_desktop.webp"
           media="(min-width:768px)"

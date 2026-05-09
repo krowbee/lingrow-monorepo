@@ -19,9 +19,9 @@ export function HeroGlow({
       style={{ x: glowX, y: glowY }}
       className="glow pointer-events-none absolute inset-0 z-10 will-change-transform"
     >
-      <div className="hero-glow-orb hero-glow-orb-left absolute top-[80px] left-[-80px] h-[420px] w-[420px] rounded-full bg-fuchsia-500/25 blur-3xl" />
-      <div className="hero-glow-orb hero-glow-orb-right absolute top-[180px] right-[-40px] h-[360px] w-[360px] rounded-full bg-violet-500/20 blur-3xl" />
-      <div className="hero-glow-orb hero-glow-orb-bottom absolute bottom-[-120px] left-[30%] h-[320px] w-[320px] rounded-full bg-pink-500/15 blur-3xl" />
+      <div className="hero-glow-orb hero-glow-orb-left absolute top-20 -left-20 h-[420px] w-[420px] rounded-full bg-fuchsia-500/25 blur-3xl" />
+      <div className="hero-glow-orb hero-glow-orb-right absolute top-[180px] -right-10 h-[360px] w-[360px] rounded-full bg-violet-500/20 blur-3xl" />
+      <div className="hero-glow-orb hero-glow-orb-bottom absolute bottom-[-120px] left-[30%] h-80 w-[320px] rounded-full bg-pink-500/15 blur-3xl" />
     </motion.div>
   );
 }

@@ -29,7 +29,7 @@ export function FeatureShowcase() {
   ];
   return (
     <section className="flex h-screen w-full flex-row bg-linear-to-b from-purple-950/30 via-slate-950 to-slate-900 px-4 py-4 md:px-16 md:py-24">
-      <article className="flex flex-col items-start justify-center gap-4 md:items-start w-full">
+      <article className="flex w-full flex-col items-start justify-center gap-4 md:items-start">
         <div className="flex flex-row items-center gap-2 rounded-full border border-purple-500/30 px-6 py-2 text-purple-500">
           <Sparkles />
           <p className="fong-accent">Smart learning</p>
@@ -47,7 +47,7 @@ export function FeatureShowcase() {
             програми
           </p>
         </div>
-        <div className="flex flex-row flex-wrap gap-x-10 gap-y-6">
+        <div className="flex w-full flex-row flex-wrap gap-x-10 gap-y-6">
           {cards.map((card, index) => (
             <IconWithText
               key={index}
@@ -57,10 +57,10 @@ export function FeatureShowcase() {
             />
           ))}
         </div>
-        <div className="flex flex-row flex-wrap justify-center md:justify-start items-center gap-4 max-w-full">
+        <div className="flex max-w-full flex-row flex-wrap items-center justify-center gap-4 md:justify-start">
           <button className="font-accent group flex h-15 w-2xs cursor-pointer items-center justify-center gap-2 rounded-xl bg-purple-500 text-lg">
             Почати безкоштовно{" "}
-            <ArrowUp className="transition-colors rotate-90 text-transparent duration-300 group-hover:animate-bounce group-hover:text-white" />
+            <ArrowUp className="rotate-90 text-transparent transition-colors duration-300 group-hover:animate-bounce group-hover:text-white" />
           </button>
           <Link href="" className="group flex flex-row items-center gap-2">
             <span className="font-accent text-lg text-gray-500 group-hover:text-white">

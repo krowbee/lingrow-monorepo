@@ -12,7 +12,7 @@ export function IconWithText({
 }) {
   const Icon = icon;
   return (
-    <div className="flex w-sm sm:w-3xs flex-row gap-2">
+    <div className="flex w-sm flex-row gap-2 sm:w-3xs">
       <div className="flex h-min items-center justify-center rounded-xl bg-purple-500/20 p-2">
         <Icon />
       </div>
