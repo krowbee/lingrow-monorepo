@@ -51,16 +51,16 @@ export function TaskBlock({ task }: { task: TaskWithAnswers }) {
   return (
     <Card className="w-full px-8 py-4">
       <CardHeader>
-        <h2 className="text-lg md:text-2xl font-accent">
+        <h2 className="font-accent text-lg md:text-2xl">
           {task.order}. {task.question}
         </h2>
       </CardHeader>
       <CardDescription>
-        <div className="px-8 flex flex-col gap-4">
+        <div className="flex flex-col gap-4 px-8">
           {task.answers.length !== 0 &&
             task.answers.map((answer) => (
               <div
-                className={`flex items-center gap-4 bg-base-300 border rounded-lg ${
+                className={`bg-base-300 flex items-center gap-4 rounded-lg border ${
                   submittedAnswer?.answerId === answer.id
                     ? submittedAnswer.isCorrect
                       ? "border-green-600"
@@ -71,11 +71,11 @@ export function TaskBlock({ task }: { task: TaskWithAnswers }) {
               >
                 <label
                   htmlFor={`${answer.id}`}
-                  className="flex flex-row gap-4 p-4 w-full h-full items-center cursor-pointer"
+                  className="flex h-full w-full cursor-pointer flex-row items-center gap-4 p-4"
                 >
                   <input
                     type="radio"
-                    className={`cursor-pointer h-5 w-5 transition-colors ${submittedAnswer?.answerId === answer.id ? (submittedAnswer.isCorrect ? "accent-green-500" : "accent-red-500") : "accent-primary"}`}
+                    className={`h-5 w-5 cursor-pointer transition-colors ${submittedAnswer?.answerId === answer.id ? (submittedAnswer.isCorrect ? "accent-green-500" : "accent-red-500") : "accent-primary"}`}
                     value={`${answer.id}`}
                     id={`${answer.id}`}
                     checked={task.choosedAnswer === answer.id}

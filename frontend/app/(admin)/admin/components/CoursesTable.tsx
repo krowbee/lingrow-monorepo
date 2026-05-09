@@ -47,10 +47,10 @@ export function CoursesTable({
 
   return (
     <>
-      <Card className="w-max  flex flex-col rounded-none h-72 py-2 min-w-40">
+      <Card className="flex h-72 w-max min-w-40 flex-col rounded-none py-2">
         <CardHeader className="font-heading text-center">Курси</CardHeader>
 
-        <CardContent className="w-full flex-1 flex flex-col items-center px-1 gap-1 overflow-y-auto hide-scrollbar">
+        <CardContent className="hide-scrollbar flex w-full flex-1 flex-col items-center gap-1 overflow-y-auto px-1">
           {loading ? (
             <Spinner />
           ) : error ? (
@@ -59,7 +59,7 @@ export function CoursesTable({
             courses.map((course) => (
               <div
                 key={course.id}
-                className="truncate w-[160px] flex px-2  cursor-pointer  py-1  bg-muted hover:bg-muted/50"
+                className="bg-muted hover:bg-muted/50 flex w-[160px] cursor-pointer truncate px-2 py-1"
                 onClick={() => setChoosedCourse(course)}
               >
                 {course.name}

@@ -17,7 +17,7 @@ export const MenuBar = ({ editor }: { editor: Editor }) => {
 
   return (
     <div className="control-group w-full">
-      <div className="button-group flex flex-wrap gap-2 justify-center">
+      <div className="button-group flex flex-wrap justify-center gap-2">
         <ToolTip content={"Жирний текст"}>
           <button
             aria-label="Жирний текст"

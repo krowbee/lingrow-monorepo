@@ -14,8 +14,8 @@ export function SideBlock({ courses }: { courses: Course[] }) {
   return (
     <SidebarProvider className="w-min">
       <Sidebar className="text-white">
-        <SidebarHeader className="p-0 mb-4">
-          <div className="w-full p-2 text-center text-xl font-heading font-bold">
+        <SidebarHeader className="mb-4 p-0">
+          <div className="font-heading w-full p-2 text-center text-xl font-bold">
             Швидкий доступ
           </div>
         </SidebarHeader>
@@ -26,7 +26,7 @@ export function SideBlock({ courses }: { courses: Course[] }) {
           <ProfileBlock />
         </SidebarFooter>
       </Sidebar>
-      <SidebarTrigger className="w-6 h-3 md:hidden fixed top-1/2" />
+      <SidebarTrigger className="fixed top-1/2 h-3 w-6 md:hidden" />
     </SidebarProvider>
   );
 }

@@ -58,10 +58,10 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   return (
     <Card
       {...props}
-      className="rounded-none md:rounded-xl border-white/5 h-full md:h-min justify-center"
+      className="h-full justify-center rounded-none border-white/5 md:h-min md:rounded-xl"
     >
       <CardHeader>
-        <CardTitle className="text-white font-heading">
+        <CardTitle className="font-heading text-white">
           Створити обліковий запис
         </CardTitle>
         <CardDescription className="font-body">
@@ -72,8 +72,8 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
           <FieldGroup>
             <Field>
-              <div className="flex flex-row justify-between w-full">
-                <FieldLabel htmlFor="name" className="text-white font-heading">
+              <div className="flex w-full flex-row justify-between">
+                <FieldLabel htmlFor="name" className="font-heading text-white">
                   Повне ім&#39;я
                 </FieldLabel>
                 {errors.name && <ErrorMessage message={errors.name.message} />}
@@ -87,15 +87,15 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                     type="text"
                     placeholder="Валентин Дмитренко"
                     required
-                    className="text-white border-purple-500/15"
+                    className="border-purple-500/15 text-white"
                     {...field}
                   />
                 )}
               />
             </Field>
             <Field>
-              <div className="flex flex-row justify-between w-full">
-                <FieldLabel htmlFor="email" className="text-white font-heading">
+              <div className="flex w-full flex-row justify-between">
+                <FieldLabel htmlFor="email" className="font-heading text-white">
                   Email
                 </FieldLabel>
                 {errors.email && (
@@ -108,7 +108,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 control={control}
                 render={({ field }) => (
                   <Input
-                    className="text-white border-purple-500/15"
+                    className="border-purple-500/15 text-white"
                     id="email"
                     type="email"
                     placeholder="m@example.com"
@@ -125,7 +125,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             <Field>
               <FieldLabel
                 htmlFor="password"
-                className="text-white font-heading"
+                className="font-heading text-white"
               >
                 Пароль
               </FieldLabel>
@@ -137,7 +137,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                     id="password"
                     type="password"
                     required
-                    className="text-white border-purple-500/15"
+                    className="border-purple-500/15 text-white"
                     {...field}
                   />
                 )}
@@ -160,15 +160,15 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 <Button
                   variant="outline"
                   type="button"
-                  className="text-white bg-neutral-900 cursor-pointer"
+                  className="cursor-pointer bg-neutral-900 text-white"
                 >
                   Зареєструватись з Google
                 </Button>
-                <FieldDescription className="px-6 text-center font-body">
+                <FieldDescription className="font-body px-6 text-center">
                   Вже є обліковий запис?{" "}
                   <Link
                     href={AUTH_URLS.login}
-                    className="!text-white hover:!text-purple-300 transition-colors duration-200 font-accent"
+                    className="font-accent !text-white transition-colors duration-200 hover:!text-purple-300"
                   >
                     Вхід
                   </Link>

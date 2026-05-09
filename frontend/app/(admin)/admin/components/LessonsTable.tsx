@@ -53,10 +53,10 @@ export function LessonsTable({
 
   return (
     <>
-      <Card className="w-max  rounded-none h-72 py-2 min-w-30">
+      <Card className="h-72 w-max min-w-30 rounded-none py-2">
         <CardHeader className="font-heading text-center">Уроки</CardHeader>
 
-        <CardContent className="w-full flex flex-1 flex-col items-center px-1 gap-1 overflow-y-auto hide-scrollbar">
+        <CardContent className="hide-scrollbar flex w-full flex-1 flex-col items-center gap-1 overflow-y-auto px-1">
           {!choosedCourse ? (
             <p className="p-2">Оберіть курс</p>
           ) : isLoading ? (
@@ -70,8 +70,8 @@ export function LessonsTable({
                 key={lesson.id}
                 className="w-full text-center"
               >
-                <div className="w-full px-4  flex items-center justify-center cursor-pointer  py-1  bg-muted hover:bg-muted/50">
-                  <span className="font-accent truncate w-[160px]">
+                <div className="bg-muted hover:bg-muted/50 flex w-full cursor-pointer items-center justify-center px-4 py-1">
+                  <span className="font-accent w-[160px] truncate">
                     {lesson.name}
                   </span>
                 </div>

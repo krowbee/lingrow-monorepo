@@ -7,7 +7,7 @@ import { LessonsTable } from "./LessonsTable";
 export function TableContainer() {
   const [choosedCourse, setChoosedCourse] = useState<Course | null>(null);
   return (
-    <div className="w-full flex">
+    <div className="flex w-full">
       <CoursesTable setChoosedCourse={setChoosedCourse} />
       <LessonsTable choosedCourse={choosedCourse} />
     </div>

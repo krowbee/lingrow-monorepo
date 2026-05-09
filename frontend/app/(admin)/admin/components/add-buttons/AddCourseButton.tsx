@@ -7,7 +7,7 @@ export function AddCourseButton() {
   };
   return (
     <button
-      className="font-accent flex cursor-pointer text-secondary hover:text-primary transition-colours duration-300 rounded-full border hover:border-primary px-2"
+      className="font-accent text-secondary hover:text-primary transition-colours hover:border-primary flex cursor-pointer rounded-full border px-2 duration-300"
       onClick={() => openAddCourseForm()}
     >
       +

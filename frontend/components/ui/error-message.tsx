@@ -9,7 +9,7 @@ export const ErrorMessage = ({
 }: ErrorMessageProps) => {
   return (
     <p
-      className={cn("text-red-500 font-body text-center text-sm", className)}
+      className={cn("font-body text-center text-sm text-red-500", className)}
       {...props}
     >
       {message}

@@ -13,7 +13,7 @@ export function TheoryBlock({
   return (
     <Card className="w-full px-8 py-4">
       <CardHeader className="p-0">
-        <h1 className="font-heading text-3xl text-start">{lessonName}</h1>
+        <h1 className="font-heading text-start text-3xl">{lessonName}</h1>
         <hr className="bg-primary"></hr>
       </CardHeader>
       <CardDescription className="p-0">

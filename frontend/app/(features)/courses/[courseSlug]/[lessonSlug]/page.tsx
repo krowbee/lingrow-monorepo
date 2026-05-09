@@ -7,7 +7,7 @@ export default async function LessonPage({
 }) {
   const { lessonSlug, courseSlug } = await params;
   return (
-    <section className="flex flex-col items-center w-full">
+    <section className="flex w-full flex-col items-center">
       <LessonBlock lessonSlug={lessonSlug} courseSlug={courseSlug} />
     </section>
   );

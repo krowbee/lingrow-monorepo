@@ -13,9 +13,9 @@ export function LessonCard({
   lesson: LessonWithProgress;
 }) {
   return (
-    <Card className="h-50 pt-8 pb-4 w-70 flex flex-col justify-between hover:-translate-y-1 hover:border-purple-500/40 hover:shadow-md hover:shadow-fuchsia-500 transition duration-300 cursor-default">
+    <Card className="flex h-50 w-70 cursor-default flex-col justify-between pt-8 pb-4 transition duration-300 hover:-translate-y-1 hover:border-purple-500/40 hover:shadow-md hover:shadow-fuchsia-500">
       <CardHeader className="w-full">
-        <CardTitle className="font-heading font-bold text-2xl flex flex-row gap-2">
+        <CardTitle className="font-heading flex flex-row gap-2 text-2xl font-bold">
           {!lesson.isCompleted ? (
             <span className="text-purple-500">
               <BookOpen />
@@ -30,7 +30,7 @@ export function LessonCard({
       </CardHeader>
       <CardFooter className="w-full justify-end">
         <Link href={`${COURSES_URL.courses_page}/${courseSlug}/${lesson.slug}`}>
-          <Button className="bg-gradient-to-r cursor-pointer w-40 from-fuchsia-500 to-purple-500 w-">
+          <Button className="w- w-40 cursor-pointer bg-gradient-to-r from-fuchsia-500 to-purple-500">
             {lesson.isCompleted ? (
               <>
                 <span>

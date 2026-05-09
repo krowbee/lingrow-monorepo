@@ -14,7 +14,7 @@ import { Brain } from "lucide-react";
 
 export function CourseCard({ course }: { course: Course }) {
   return (
-    <Card className="relative w-full min-h-max max-w-sm pt-0 overflow-hidden bg-sidebar hover:-translate-1 transition ease-out border-none shadow-2xl shadow-purple-700/20 hover:shadow-xl hover:shadow-fuchsia-500/50">
+    <Card className="bg-sidebar relative min-h-max w-full max-w-sm overflow-hidden border-none pt-0 shadow-2xl shadow-purple-700/20 transition ease-out hover:-translate-1 hover:shadow-xl hover:shadow-fuchsia-500/50">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
       <Image
         src="/course_card.png"
@@ -29,9 +29,9 @@ export function CourseCard({ course }: { course: Course }) {
           {course.description}
         </CardDescription>
       </CardHeader>
-      <CardFooter className="flex items-end mt-auto">
+      <CardFooter className="mt-auto flex items-end">
         <Link
-          className="cursor-pointer w-[40%]"
+          className="w-[40%] cursor-pointer"
           href={`${COURSES_URL.courses_page}/${course.slug}`}
         >
           <Button className="w-full cursor-pointer bg-gradient-to-b from-purple-500 to-fuchsia-500">

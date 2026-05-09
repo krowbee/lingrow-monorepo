@@ -38,7 +38,7 @@ export function LessonsContainer({
   return (
     <>
       <ProgressBar lessons={updatedLessons} />
-      <div className="lessons-container flex flex-wrap w-full gap-4 flex-row items-center justify-center xl:justify-start">
+      <div className="lessons-container flex w-full flex-row flex-wrap items-center justify-center gap-4 xl:justify-start">
         {updatedLessons.map((lesson: LessonWithProgress) => (
           <LessonCard key={lesson.id} lesson={lesson} courseSlug={courseSlug} />
         ))}

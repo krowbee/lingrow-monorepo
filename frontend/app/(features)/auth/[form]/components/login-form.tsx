@@ -61,12 +61,12 @@ export function LoginForm({
 
   return (
     <div
-      className={cn("flex flex-col gap-6 h-full justify-center", className)}
+      className={cn("flex h-full flex-col justify-center gap-6", className)}
       {...props}
     >
-      <Card className="flex flex-col rounded-none md:rounded-xl border-white/5 h-full md:h-min justify-center">
+      <Card className="flex h-full flex-col justify-center rounded-none border-white/5 md:h-min md:rounded-xl">
         <CardHeader>
-          <CardTitle className="text-white font-heading">
+          <CardTitle className="font-heading text-white">
             Вхід в обліковий запис
           </CardTitle>
           <CardDescription className="font-body">
@@ -77,10 +77,10 @@ export function LoginForm({
           <form noValidate onSubmit={handleSubmit(onSubmit)}>
             <FieldGroup>
               <Field>
-                <div className="flex flex-row justify-between w-full">
+                <div className="flex w-full flex-row justify-between">
                   <FieldLabel
                     htmlFor="email"
-                    className="text-white font-heading"
+                    className="font-heading text-white"
                   >
                     Email
                   </FieldLabel>
@@ -97,7 +97,7 @@ export function LoginForm({
                       type="email"
                       placeholder="m@example.com"
                       required
-                      className="text-white font-body border-purple-500/15"
+                      className="font-body border-purple-500/15 text-white"
                       {...field}
                     />
                   )}
@@ -107,13 +107,13 @@ export function LoginForm({
                 <div className="flex items-center">
                   <FieldLabel
                     htmlFor="password"
-                    className="text-white font-heading"
+                    className="font-heading text-white"
                   >
                     Пароль
                   </FieldLabel>
                   <Link
                     href="#"
-                    className="ml-auto inline-block text-sm !text-white font-accent underline-offset-4 hover:!underline"
+                    className="font-accent ml-auto inline-block text-sm !text-white underline-offset-4 hover:!underline"
                   >
                     Забули пароль?
                   </Link>
@@ -126,7 +126,7 @@ export function LoginForm({
                       id="password"
                       type="password"
                       required
-                      className="text-white font-body border-purple-500/15"
+                      className="font-body border-purple-500/15 text-white"
                       {...field}
                     />
                   )}
@@ -151,7 +151,7 @@ export function LoginForm({
                   Немає облікового запису?{" "}
                   <Link
                     href={AUTH_URLS.signup}
-                    className="!text-white hover:!text-purple-300 transition-colors duration-200 font-accent"
+                    className="font-accent !text-white transition-colors duration-200 hover:!text-purple-300"
                   >
                     Зареєструватись
                   </Link>

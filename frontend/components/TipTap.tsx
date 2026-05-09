@@ -29,30 +29,12 @@ export const Tiptap = ({
   if (!editor) return;
   return (
     <div
-      className={`w-full gap-4 flex-col flex ${!editable && "cursor-default"}`}
+      className={`flex w-full flex-col gap-4 ${!editable && "cursor-default"}`}
     >
       {editable && <MenuBar editor={editor}></MenuBar>}
       <EditorContent
         editor={editor}
-        className="text-white rounded-xl focus:outline-none font-body
-    max-w-none leading-7 text-neutral-900 dark:text-neutral-100 min-h-35
-
-    [&_p]:m-0
-    [&_p]:leading-7
-    
-    [&_h1]:text-lg md:[&_h1]:text-xl [&_h1]:font-heading [&_h1]:font-bold [&_h1]:mt-0 [&_h1]:mb-1
-    [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:mt-0 [&_h2]:mb-2
-    [&_h3]:text-base [&_h3]:font-semibold [&_h3]:mt-0 [&_h3]:mb-2
-
-    [&_ul]:list-disc [&_ul]:pl-6
-    [&_ol]:list-decimal [&_ol]:pl-6
-
-    [&_blockquote]:border-l-4 [&_blockquote]:border-indigo-500
-    [&_blockquote]:pl-4 [&_blockquote]:text-neutral-500
-
-    [&_code]:bg-neutral-800 [&_code]:p-2 [&_code]:rounded
-    [&_hr]:my-2
-  "
+        className="font-body [&_h1]:font-heading min-h-35 max-w-none rounded-xl leading-7 text-neutral-900 text-white focus:outline-none dark:text-neutral-100 [&_blockquote]:border-l-4 [&_blockquote]:border-indigo-500 [&_blockquote]:pl-4 [&_blockquote]:text-neutral-500 [&_code]:rounded [&_code]:bg-neutral-800 [&_code]:p-2 [&_h1]:mt-0 [&_h1]:mb-1 [&_h1]:text-lg [&_h1]:font-bold md:[&_h1]:text-xl [&_h2]:mt-0 [&_h2]:mb-2 [&_h2]:text-lg [&_h2]:font-semibold [&_h3]:mt-0 [&_h3]:mb-2 [&_h3]:text-base [&_h3]:font-semibold [&_hr]:my-2 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:m-0 [&_p]:leading-7 [&_ul]:list-disc [&_ul]:pl-6"
       />
     </div>
   );

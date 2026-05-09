@@ -21,10 +21,10 @@ export function HeroContent({
   return (
     <motion.div
       style={{ x: contentX, y: contentY }}
-      className="hero-content relative mx-auto flex min-h-screen max-w-7xl items-center will-change-transform z-50"
+      className="hero-content relative z-50 mx-auto flex min-h-screen max-w-7xl items-center will-change-transform"
     >
       <div className="hero-content-inner max-w-3xl">
-        <h1 className="hero-title max-w-2xl text-5xl md:text-5xl font-bold text-white">
+        <h1 className="hero-title max-w-2xl text-5xl font-bold text-white md:text-5xl">
           Мова відкриває світ
         </h1>
         <p className="hero-subtitle mt-6 max-w-xl text-lg leading-8 text-white/70">
@@ -49,7 +49,7 @@ export function HeroContent({
               animate={{
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}
-              className="cursor-pointer hero-button hero-button-primary min-w-xs rounded-2xl bg-fuchsia-500 px-8 py-4 text-base font-medium text-white shadow-[0_0_40px_rgba(217,70,239,0.45)] transition-transform duration-300 hover:scale-[1.03]"
+              className="hero-button hero-button-primary min-w-xs cursor-pointer rounded-2xl bg-fuchsia-500 px-8 py-4 text-base font-medium text-white shadow-[0_0_40px_rgba(217,70,239,0.45)] transition-transform duration-300 hover:scale-[1.03]"
             >
               Приєднатись
             </motion.button>

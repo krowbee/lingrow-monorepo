@@ -30,8 +30,8 @@ export const BurgerMenu = (): JSX.Element => {
     <div className="lg:hidden">
       <div className="relative">
         {isMenuOpen && (
-          <div className="fixed inset-x-0 top-[73px] bottom-0 z-[100] bg-black">
-            <nav className="flex flex-col items-center gap-4 pt-10 font-heading text-2xl text-white/85">
+          <div className="fixed inset-x-0 top-[73px] bottom-0 z-100 bg-black">
+            <nav className="font-heading flex flex-col items-center gap-4 pt-10 text-2xl text-white/85">
               <Link
                 href="#about"
                 onClick={() => changeMenuState(!isMenuOpen)}

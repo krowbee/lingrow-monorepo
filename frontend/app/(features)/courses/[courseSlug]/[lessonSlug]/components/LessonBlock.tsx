@@ -42,13 +42,13 @@ export function LessonBlock({
 
   if (!lesson)
     return (
-      <div className="w-full h-full flex justify-center items-center">
+      <div className="flex h-full w-full items-center justify-center">
         <Spinner></Spinner>
       </div>
     );
 
   return (
-    <div className="lesson-container w-full h-full flex flex-col justify-between gap-4 p-4 items-between">
+    <div className="lesson-container items-between flex h-full w-full flex-col justify-between gap-4 p-4">
       {step === "theory" && (
         <TheoryBlock lessonName={lesson.name} theory={lesson.theory} />
       )}

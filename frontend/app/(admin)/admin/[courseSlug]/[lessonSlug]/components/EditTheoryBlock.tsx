@@ -63,7 +63,7 @@ export function TheoryBlock({
       {text && <p>{JSON.stringify(text)}</p>}
       <CardHeader>
         <h1
-          className="font-heading text-2xl text-center"
+          className="font-heading text-center text-2xl"
           ref={nameRef}
           onInput={() => handleNameInput()}
           onKeyDown={(e) => handleKeyDown(e)}

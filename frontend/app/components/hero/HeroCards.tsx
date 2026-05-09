@@ -17,15 +17,15 @@ export function HeroCards({
   return (
     <motion.div
       style={{ x: cardsX, y: cardsY }}
-      className="hero-floating-cards absolute inset-0 pointer-events-none will-change-transform z-20 font-accent"
+      className="hero-floating-cards font-accent pointer-events-none absolute inset-0 z-20 will-change-transform"
     >
-      <div className="absolute left-[30%] top-[12%] rounded-xl border border-white/10 px-10 py-6 font-semibold backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.25)] text-5xl text-white/90 bg-white/5">
+      <div className="absolute top-[12%] left-[30%] rounded-xl border border-white/10 bg-white/5 px-10 py-6 text-5xl font-semibold text-white/90 shadow-[0_10px_40px_rgba(0,0,0,0.25)] backdrop-blur-md">
         Hello
       </div>
-      <div className="absolute hidden md:block right-[15%] top-[30%] rounded-xl border border-white/10 px-8 py-6 font-semibold backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.25)] text-5xl text-white/90 bg-white/5">
+      <div className="absolute top-[30%] right-[15%] hidden rounded-xl border border-white/10 bg-white/5 px-8 py-6 text-5xl font-semibold text-white/90 shadow-[0_10px_40px_rgba(0,0,0,0.25)] backdrop-blur-md md:block">
         Grammar
       </div>
-      <div className="absolute left-[30%] bottom-[12%] rounded-xl border border-white/10 px-6 py-6 font-semibold backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.25)] text-5xl text-white/90 bg-white/5">
+      <div className="absolute bottom-[12%] left-[30%] rounded-xl border border-white/10 bg-white/5 px-6 py-6 text-5xl font-semibold text-white/90 shadow-[0_10px_40px_rgba(0,0,0,0.25)] backdrop-blur-md">
         Practice
       </div>
     </motion.div>

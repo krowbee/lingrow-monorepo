@@ -6,10 +6,10 @@ import { ReactNode } from "react";
 export function FormShell({ children }: { children: ReactNode }) {
   const closeForm = useAdminStore((state) => state.closeForm);
   return (
-    <div className="fixed bg-card/80 z-10 inset-0 w-full h-screen flex justify-center items-center">
+    <div className="bg-card/80 fixed inset-0 z-10 flex h-screen w-full items-center justify-center">
       <Button
         variant={null}
-        className="fixed right-0 top-0 cursor-pointer font-accent text-2xl my-2"
+        className="font-accent fixed top-0 right-0 my-2 cursor-pointer text-2xl"
         onClick={() => closeForm()}
       >
         ✕

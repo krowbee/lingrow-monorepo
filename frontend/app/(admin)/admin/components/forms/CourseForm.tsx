@@ -69,10 +69,10 @@ export function CourseForm({
   };
 
   return (
-    <div className={"flex flex-col gap-6 h-full min-w-[350px] justify-center"}>
-      <Card className="rounded-none md:rounded-xl border-none bg-neutral-800 h-full md:h-min justify-center">
+    <div className={"flex h-full min-w-[350px] flex-col justify-center gap-6"}>
+      <Card className="h-full justify-center rounded-none border-none bg-neutral-800 md:h-min md:rounded-xl">
         <CardHeader>
-          <CardTitle className="text-white font-heading"></CardTitle>
+          <CardTitle className="font-heading text-white"></CardTitle>
           <CardDescription className="font-body">
             Заповніть дані курсу. Slug має бути латиницею, цифрами та дефісами.
           </CardDescription>
@@ -82,10 +82,10 @@ export function CourseForm({
           <form noValidate onSubmit={handleSubmit(onSave)}>
             <FieldGroup>
               <Field>
-                <div className="flex flex-row justify-between w-full items-center gap-3">
+                <div className="flex w-full flex-row items-center justify-between gap-3">
                   <FieldLabel
                     htmlFor="name"
-                    className="text-white font-heading"
+                    className="font-heading text-white"
                   >
                     Назва
                   </FieldLabel>
@@ -103,7 +103,7 @@ export function CourseForm({
                     <Input
                       id="name"
                       placeholder="Напр. Frontend з нуля"
-                      className="text-white font-body border-purple-500 placeholder:text-neutral-400 focus-visible:ring-purple-500/30"
+                      className="font-body border-purple-500 text-white placeholder:text-neutral-400 focus-visible:ring-purple-500/30"
                       {...field}
                     />
                   )}
@@ -115,10 +115,10 @@ export function CourseForm({
               </Field>
 
               <Field>
-                <div className="flex flex-row justify-between w-full items-center gap-3">
+                <div className="flex w-full flex-row items-center justify-between gap-3">
                   <FieldLabel
                     htmlFor="slug"
-                    className="text-white font-heading"
+                    className="font-heading text-white"
                   >
                     Slug
                   </FieldLabel>
@@ -140,7 +140,7 @@ export function CourseForm({
                         autoCapitalize="none"
                         autoCorrect="off"
                         spellCheck={false}
-                        className="text-white font-body border-purple-500 placeholder:text-neutral-400 focus-visible:ring-purple-500/30"
+                        className="font-body border-purple-500 text-white placeholder:text-neutral-400 focus-visible:ring-purple-500/30"
                         {...field}
                       />
                     )}
@@ -154,10 +154,10 @@ export function CourseForm({
                 </FieldDescription>
               </Field>
               <Field>
-                <div className="flex flex-row justify-between w-full items-center gap-3">
+                <div className="flex w-full flex-row items-center justify-between gap-3">
                   <FieldLabel
                     htmlFor="description"
-                    className="text-white font-heading"
+                    className="font-heading text-white"
                   >
                     Опис
                   </FieldLabel>
@@ -176,7 +176,7 @@ export function CourseForm({
                       id="description"
                       placeholder="Коротко опишіть що буде в курсі, для кого він і який результат…"
                       rows={6}
-                      className="text-white font-body border-purple-500 placeholder:text-neutral-400 focus-visible:ring-purple-500/30 resize-none"
+                      className="font-body resize-none border-purple-500 text-white placeholder:text-neutral-400 focus-visible:ring-purple-500/30"
                       {...field}
                     />
                   )}
@@ -208,7 +208,7 @@ export function CourseForm({
                     Скасувати
                   </Button>
 
-                  <FieldDescription className="text-center font-body">
+                  <FieldDescription className="font-body text-center">
                     Після створення ви зможете додати уроки та матеріали.
                   </FieldDescription>
                 </div>

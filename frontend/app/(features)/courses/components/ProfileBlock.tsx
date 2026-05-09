@@ -8,16 +8,16 @@ export function ProfileBlock() {
   const user = useAuthStore((state) => state.user);
 
   return (
-    <div className="w-full text-md font-bold flex flex-row py-2 px-4 gap-3 border border-white/8 rounded-xl">
-      <div className="flex rounded-full text-purple-500 border border-purple-500/25 p-3  text-center justify-center items-center text-lg">
+    <div className="text-md flex w-full flex-row gap-3 rounded-xl border border-white/8 px-4 py-2 font-bold">
+      <div className="flex items-center justify-center rounded-full border border-purple-500/25 p-3 text-center text-lg text-purple-500">
         <User />
       </div>
-      <div className="flex flex-row items-center justify-between w-full">
+      <div className="flex w-full flex-row items-center justify-between">
         <div className="flex flex-col">
           <h3>{user?.name}</h3>
           <p>
             {
-              <b className={`text-purple-400 font-semibold uppercase`}>
+              <b className={`font-semibold text-purple-400 uppercase`}>
                 {user?.role === "admin" ? "ADMIN" : "FREE"}
               </b>
             }
@@ -25,9 +25,9 @@ export function ProfileBlock() {
         </div>
         <Link
           href={AUTH_URLS.logout}
-          className="border border-white/10 group/logout hover:bg-purple-500/10 p-2 rounded-xl cursor-pointer"
+          className="group/logout cursor-pointer rounded-xl border border-white/10 p-2 hover:bg-purple-500/10"
         >
-          <span className="text-white group-hover/logout:text-purple-500 duration-300">
+          <span className="text-white duration-300 group-hover/logout:text-purple-500">
             <LogOut />
           </span>
         </Link>

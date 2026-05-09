@@ -52,7 +52,7 @@ export function LessonNavigation({
     }
   };
   return (
-    <div className="flex flex-row w-full px-6 lg:px-8 justify-self-center gap-2 border p-4 max-w-max rounded-xl">
+    <div className="flex w-full max-w-max flex-row gap-2 justify-self-center rounded-xl border p-4 px-6 lg:px-8">
       {step === "task" ? (
         <Button onClick={() => changeTask("prev")} className="cursor-pointer">
           <MoveLeft />
@@ -63,9 +63,9 @@ export function LessonNavigation({
         </Button>
       )}
 
-      <div className="flex flex-row flex-wrap justify-center gap-y-4 gap-x-2">
+      <div className="flex flex-row flex-wrap justify-center gap-x-2 gap-y-4">
         <Button
-          className={`bg-purple-500/50 hover:bg-purple-500 w-auto ${step === "theory" && "bg-purple-500 border-3 border-white/50"}  cursor-pointer`}
+          className={`w-auto bg-purple-500/50 hover:bg-purple-500 ${step === "theory" && "border-3 border-white/50 bg-purple-500"} cursor-pointer`}
           onClick={() => chooseTheory()}
         >
           <BookOpen />
@@ -73,7 +73,7 @@ export function LessonNavigation({
         {tasks.map((task) => (
           <Button
             key={task.id}
-            className={`cursor-pointer bg-purple-500/50 hover:bg-purple-500 ${task.order - 1 === taskIndex && step === "task" && "bg-purple-500 border-3 border-white/50 -translate-y-1"} ${task.choosedAnswer && "bg-fuchsia-600/70"}`}
+            className={`cursor-pointer bg-purple-500/50 hover:bg-purple-500 ${task.order - 1 === taskIndex && step === "task" && "-translate-y-1 border-3 border-white/50 bg-purple-500"} ${task.choosedAnswer && "bg-fuchsia-600/70"}`}
             onClick={() => chooseTask(task.order)}
           >
             {task.order}

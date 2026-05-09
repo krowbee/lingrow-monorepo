@@ -25,9 +25,9 @@ export function LogoutForm() {
   };
 
   return (
-    <div className="flex items-center w-full h-full justify-center">
-      <Card className="rounded-xl max-w-[390px] h-min border-white/5 justify-center px-6">
-        <CardTitle className="text-white font-heading">
+    <div className="flex h-full w-full items-center justify-center">
+      <Card className="h-min max-w-[390px] justify-center rounded-xl border-white/5 px-6">
+        <CardTitle className="font-heading text-white">
           Вийти з облікового запису
         </CardTitle>
         <CardDescription>
@@ -36,7 +36,7 @@ export function LogoutForm() {
 
         <div className="flex w-full justify-center gap-4">
           <Button
-            className="bg-neutral-700 cursor-pointer"
+            className="cursor-pointer bg-neutral-700"
             onClick={() => onSubmit()}
           >
             Так

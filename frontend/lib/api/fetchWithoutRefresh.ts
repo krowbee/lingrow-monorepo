@@ -1,6 +1,6 @@
 export async function fetchWithoutRefresh(
   url: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
 ) {
   const opts: RequestInit = {
     ...options,

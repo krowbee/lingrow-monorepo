@@ -4,6 +4,7 @@ import { AboutSection } from "./components/AboutSection";
 import { JoinSection } from "./components/JoinSection";
 import { Header } from "./components/Header";
 import { BurgerMenu } from "./components/BurgerMenu";
+import { FeatureShowcase } from "./components/FeatureShowcase";
 
 export const metadata = {
   title: "Lingrow",
@@ -12,10 +13,11 @@ export const metadata = {
 
 export default function Home(): JSX.Element {
   return (
-    <main className="relative w-full flex flex-col justify-center items-center">
+    <main className="relative flex w-full flex-col items-center justify-center">
       <Header />
       <BurgerMenu />
       <HeroSection />
+      <FeatureShowcase />
       <AboutSection />
       <JoinSection />
     </main>

@@ -4,7 +4,6 @@ import { useMotionValue, useSpring } from "motion/react";
 import { HeroBackground } from "./hero/HeroBackground";
 import { HeroGlow } from "./hero/HeroGlow";
 import { HeroCards } from "./hero/HeroCards";
-import { HeroIllustration } from "./hero/HeroIllustration";
 import { HeroParticle } from "./hero/HeroParticle";
 import { HeroContent } from "./hero/HeroContent";
 export const HeroSection = (): JSX.Element => {
@@ -71,7 +70,7 @@ export const HeroSection = (): JSX.Element => {
   }, [mouseX, mouseY, scrollProgress]);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden" ref={heroRef}>
+    <section className="relative h-screen w-full overflow-hidden" ref={heroRef}>
       <HeroBackground
         smoothMouseX={smoothMouseX}
         smoothScroll={smoothScroll}
@@ -88,11 +87,6 @@ export const HeroSection = (): JSX.Element => {
         smoothMouseY={smoothMouseY}
       />
 
-      <HeroIllustration
-        smoothMouseX={smoothMouseX}
-        smoothScroll={smoothScroll}
-        smoothMouseY={smoothMouseY}
-      />
       <HeroParticle
         smoothMouseX={smoothMouseX}
         smoothScroll={smoothScroll}
