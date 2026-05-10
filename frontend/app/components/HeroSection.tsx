@@ -18,7 +18,7 @@ export const HeroSection = (): JSX.Element => {
     mass: 0.6,
   });
 
-  const smoothMouseY = useSpring(mouseX, {
+  const smoothMouseY = useSpring(mouseY, {
     stiffness: 60,
     damping: 20,
     mass: 0.6,
