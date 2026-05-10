@@ -2,15 +2,16 @@
 import { useEffect, useState } from "react";
 
 export function ShowcaseVideo() {
-  const [isDesktop, setIsDesktop] = useState(false);
-
+  const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
-    const mq = window.matchMedia("(min-width:1024px)");
-
-    const update = () => setIsDesktop(mq.matches);
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const isDesktop = width > 1024;
 
   if (!isDesktop) return null;
 
