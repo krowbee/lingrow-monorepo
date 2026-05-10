@@ -71,11 +71,7 @@ export const HeroSection = (): JSX.Element => {
 
   return (
     <section className="relative h-screen w-full overflow-hidden" ref={heroRef}>
-      <HeroBackground
-        smoothMouseX={smoothMouseX}
-        smoothScroll={smoothScroll}
-        smoothMouseY={smoothMouseY}
-      />
+      <HeroBackground />
       <HeroGlow
         smoothMouseX={smoothMouseX}
         smoothScroll={smoothScroll}
