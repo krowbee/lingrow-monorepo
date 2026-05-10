@@ -3,11 +3,11 @@ import {
   AudioLinesIcon,
   BookOpenIcon,
   ChevronRight,
-  Link,
   Sparkles,
   TrendingUpIcon,
 } from "lucide-react";
 import { IconWithText } from "./IconWithText";
+import Link from "next/link";
 
 const cards = [
   {
