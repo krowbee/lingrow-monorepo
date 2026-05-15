@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
-import { Course } from "../../../../types/course/course";
+import { Course } from "../../../../../types/course/course";
 import Link from "next/link";
 import { COURSES_URL } from "@/urls/courses";
 import { Brain } from "lucide-react";
@@ -34,7 +34,7 @@ export function CourseCard({ course }: { course: Course }) {
           className="w-[40%] cursor-pointer"
           href={`${COURSES_URL.courses_page}/${course.slug}`}
         >
-          <Button className="w-full cursor-pointer bg-gradient-to-b from-purple-500 to-fuchsia-500">
+          <Button className="w-full cursor-pointer bg-linear-to-b from-purple-500 to-fuchsia-500">
             <Brain />
             Вчитись
           </Button>
