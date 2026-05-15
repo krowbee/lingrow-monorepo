@@ -63,7 +63,7 @@ export const AboutSection = () => {
       <h1 className="font-heading z-10 flex w-full items-center justify-center p-8 text-5xl">
         Про нас
       </h1>
-      <div className="z-10 grid w-full justify-items-center gap-y-20 md:grid-cols-2 lg:grid-cols-3">
+      <div className="z-10 grid w-full justify-items-center gap-y-20 lg:grid-cols-2 xl:grid-cols-3">
         {Object.values(ABOUT_CARD_CONTENT).map((card, index) => (
           <InfoCard
             key={index}
