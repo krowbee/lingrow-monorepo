@@ -58,7 +58,7 @@ const ABOUT_CARD_CONTENT: Record<number, CardContentItem> = {
 
 export const AboutSection = () => {
   return (
-    <section className="about relative flex w-full flex-col items-center justify-center gap-10 pb-10 shadow-md">
+    <section className="about relative flex w-full flex-col items-center justify-center gap-10 shadow-md">
       <AboutBackground />
       <h1 className="font-heading z-10 flex w-full items-center justify-center p-8 text-5xl">
         Про нас
