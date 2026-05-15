@@ -47,11 +47,11 @@ export const BurgerMenu = (): JSX.Element => {
                 Ціни
               </Link>
               <Link
-                href="#contact"
+                href="#join"
                 onClick={() => changeMenuState(!isMenuOpen)}
                 className="block transition hover:text-white!"
               >
-                Зв&#39;язатись
+                Приєднатись
               </Link>
             </nav>
           </div>
