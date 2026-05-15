@@ -17,7 +17,7 @@ export function PriceCard({ plan }: { plan: PricingPlan }) {
       className={cn(
         "relative flex min-h-125 w-sm cursor-default flex-col overflow-visible rounded-sm border border-purple-500/20 bg-neutral-950/35 pb-6 text-white backdrop-blur-xl md:w-md",
         plan.isPopular &&
-          "-translate-y-6 border-purple-500/70 shadow-[0_0_35px_rgba(168,85,247,0.35)]",
+          "border-purple-500/70 shadow-[0_0_35px_rgba(168,85,247,0.35)] xl:-translate-y-6",
       )}
     >
       {plan.isPopular && (
