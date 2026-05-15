@@ -1,6 +1,6 @@
 export function HeroBackground() {
   return (
-    <picture className="block h-full w-full">
+    <picture className="absolute inset-0 z-0 block h-full w-full">
       <source
         srcSet="/hero_desktop.webp"
         media="(min-width:768px)"
