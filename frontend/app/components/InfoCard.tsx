@@ -13,7 +13,7 @@ export const InfoCard = ({
 }: CardContentItem): React.ReactNode => {
   return (
     <Card
-      className={`group h-125 w-sm cursor-default rounded-sm border border-purple-500/20 bg-neutral-800/10 pb-15 md:w-md`}
+      className={`group h-125 w-sm cursor-default rounded-sm border border-purple-500/20 bg-neutral-800/10 pb-15 backdrop-blur-xl md:w-md`}
     >
       <CardHeader className="flex h-full flex-col gap-8">
         <div className="flex flex-row items-center gap-6">
