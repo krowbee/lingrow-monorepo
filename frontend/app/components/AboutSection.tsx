@@ -1,4 +1,5 @@
 import { InfoCard } from "../components/InfoCard";
+import { AboutBackground } from "./about-us/AboutBackGround";
 
 export const AboutSection = () => {
   const cardContent = {
@@ -35,11 +36,12 @@ export const AboutSection = () => {
   };
 
   return (
-    <section className="about relative flex w-full flex-col items-center justify-center gap-10 border border-white/5 bg-black/20 pb-10 shadow-md">
-      <h1 className="font-heading flex w-full items-center justify-center bg-black/70 p-8 text-5xl text-white">
+    <section className="about relative flex w-full flex-col items-center justify-center gap-10 pb-10 shadow-md">
+      <AboutBackground />
+      <h1 className="font-heading z-10 flex w-full items-center justify-center p-8 text-5xl">
         Про нас
       </h1>
-      <div className="grid w-full max-w-[1400px] justify-items-center gap-y-20 md:grid-cols-2 lg:grid-cols-3">
+      <div className="z-10 grid w-full justify-items-center gap-y-20 md:grid-cols-2 lg:grid-cols-3">
         {Object.values(cardContent).map((card, index) => (
           <InfoCard
             key={index}

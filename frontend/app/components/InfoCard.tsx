@@ -14,7 +14,7 @@ export const InfoCard = ({
 }): React.ReactNode => {
   return (
     <Card
-      className={`group min-h-[260px] w-[375px] max-w-sm cursor-default rounded-sm border border-white/5 bg-neutral-800/10 transition-all duration-600 hover:-translate-y-2 hover:shadow-xl hover:shadow-fuchsia-500`}
+      className={`group h-125 w-sm cursor-default rounded-sm border border-white/5 bg-neutral-800/10 transition-all duration-600 hover:-translate-y-2 hover:shadow-xl hover:shadow-fuchsia-500 md:w-md`}
     >
       <CardHeader className="gap-4">
         <CardTitle
