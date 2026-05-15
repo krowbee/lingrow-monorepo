@@ -1,5 +1,7 @@
 import { ArrowRightIcon, CheckCircle2Icon, SparklesIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { AUTH_URLS } from "@/urls/auth";
 
 const CTA_BENEFITS = [
   "Безкоштовно на старті",
@@ -42,10 +44,12 @@ export function JoinSection() {
           </div>
 
           <div className="relative z-10 mt-10 flex flex-col items-center gap-4">
-            <Button className="group font-accent h-14 w-full max-w-xs rounded-sm bg-purple-500 text-base text-white shadow-[0_0_30px_rgba(168,85,247,0.35)] transition hover:bg-purple-400">
-              Приєднатись
-              <ArrowRightIcon className="ml-2 size-5 transition group-hover:translate-x-1" />
-            </Button>
+            <Link href={AUTH_URLS.signup} className="w-full max-w-xs">
+              <Button className="group font-accent h-14 w-full max-w-xs rounded-sm bg-purple-500 text-base text-white shadow-[0_0_30px_rgba(168,85,247,0.35)] transition hover:bg-purple-400">
+                Приєднатись
+                <ArrowRightIcon className="ml-2 size-5 transition group-hover:translate-x-1" />
+              </Button>
+            </Link>
 
             <p className="font-body text-sm text-neutral-500">
               Безкоштовно на старті. Почни навчання за реальною методикою.
