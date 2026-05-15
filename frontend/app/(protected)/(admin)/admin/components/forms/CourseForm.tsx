@@ -21,8 +21,8 @@ import { ErrorMessage } from "@/components/ui/error-message";
 import { createCourseSchema } from "@/schemas/add-course.schema";
 import { updateCourseSchema } from "@/schemas/update-course.schema";
 import { useAdminStore } from "@/store/AdminStore";
-import { CreateCourseFormData } from "../../../../../schemas/add-course.schema";
-import { UpdateCourseFormData } from "../../../../../schemas/update-course.schema";
+import { CreateCourseFormData } from "@/schemas/add-course.schema";
+import { UpdateCourseFormData } from "@/schemas/update-course.schema";
 import { createCourse } from "@/lib/api/requests/admin/admin.course.requests";
 
 //TODO: Add course update
