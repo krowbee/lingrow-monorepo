@@ -151,6 +151,20 @@ a:visited {
   }
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.marquee-animation {
+  animation: marquee linear 30s infinite;
+  cursor: default;
+}
+
 .animate-fadeIn {
   animation: fadeIn 2s ease-out;
 }

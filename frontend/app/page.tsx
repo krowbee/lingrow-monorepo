@@ -5,6 +5,7 @@ import { JoinSection } from "./components/JoinSection";
 import { Header } from "./components/Header";
 import { BurgerMenu } from "./components/BurgerMenu";
 import { FeatureShowcase } from "./components/FeatureShowcase";
+import { MarqueeSection } from "./components/MarqueeSection";
 
 export const metadata = {
   title: "Lingrow",
@@ -18,6 +19,7 @@ export default function Home(): JSX.Element {
       <BurgerMenu />
       <HeroSection />
       <FeatureShowcase />
+      <MarqueeSection />
       <AboutSection />
       <JoinSection />
     </main>
