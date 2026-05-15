@@ -11,7 +11,7 @@ export function CoursesSide({ courses }: { courses: Course[] }) {
   const isCoursesPage = "/" + slug === COURSES_URL.courses_page;
 
   return (
-    <SidebarGroup className="gap-2 p-0 p-2">
+    <SidebarGroup className="gap-2 p-2">
       <Link href={COURSES_URL.courses_page} className="flex w-full flex-row">
         <div
           className={`flex cursor-pointer flex-row gap-2 p-2 ${isCoursesPage ? "bg-zinc-800" : "border border-purple-400/20 hover:bg-zinc-800"} w-full rounded-lg`}

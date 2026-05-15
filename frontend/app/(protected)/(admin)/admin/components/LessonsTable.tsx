@@ -71,7 +71,7 @@ export function LessonsTable({
                 className="w-full text-center"
               >
                 <div className="bg-muted hover:bg-muted/50 flex w-full cursor-pointer items-center justify-center px-4 py-1">
-                  <span className="font-accent w-[160px] truncate">
+                  <span className="font-accent w-40 truncate">
                     {lesson.name}
                   </span>
                 </div>

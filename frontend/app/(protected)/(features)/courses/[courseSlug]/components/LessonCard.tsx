@@ -30,7 +30,7 @@ export function LessonCard({
       </CardHeader>
       <CardFooter className="w-full justify-end">
         <Link href={`${COURSES_URL.courses_page}/${courseSlug}/${lesson.slug}`}>
-          <Button className="w- w-40 cursor-pointer bg-gradient-to-r from-fuchsia-500 to-purple-500">
+          <Button className="w- w-40 cursor-pointer bg-linear-to-r from-fuchsia-500 to-purple-500">
             {lesson.isCompleted ? (
               <>
                 <span>

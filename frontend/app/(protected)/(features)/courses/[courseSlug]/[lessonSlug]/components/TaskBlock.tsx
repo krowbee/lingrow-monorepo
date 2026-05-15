@@ -1,5 +1,4 @@
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { updateTaskProgress } from "@/lib/api/requests/courses.client.requests";
 import { useLessonStore } from "@/store/LessonStore";
 import { TaskWithAnswers } from "@/types/course/course";

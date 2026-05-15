@@ -59,7 +59,7 @@ export function CoursesTable({
             courses.map((course) => (
               <div
                 key={course.id}
-                className="bg-muted hover:bg-muted/50 flex w-[160px] cursor-pointer truncate px-2 py-1"
+                className="bg-muted hover:bg-muted/50 flex w-40 cursor-pointer truncate px-2 py-1"
                 onClick={() => setChoosedCourse(course)}
               >
                 {course.name}
