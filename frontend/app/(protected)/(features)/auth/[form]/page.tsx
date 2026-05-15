@@ -3,6 +3,10 @@ import { LogoutForm } from "@/app/(protected)/(features)/auth/[form]/components/
 import { SignupForm } from "@/app/(protected)/(features)/auth/[form]/components/signup-form";
 import { notFound } from "next/navigation";
 
+export const metadata = {
+  title: "Lingrow",
+};
+
 export default async function AuthPage({
   params,
 }: {
