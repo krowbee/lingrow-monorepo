@@ -52,10 +52,10 @@ export function Header() {
             </li>
             <li>
               <Link
-                href="#contact"
+                href="#join"
                 className="transition duration-200 hover:text-white/80!"
               >
-                Зв&#39;язатись
+                Приєднатись
               </Link>
             </li>
           </ul>

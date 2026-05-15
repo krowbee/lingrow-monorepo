@@ -4,7 +4,10 @@ import Link from "next/link";
 
 export const JoinSection = () => {
   return (
-    <section className="flex w-full flex-col items-center justify-center gap-8 bg-[radial-gradient(circle_at_center,rgba(217,70,239,0.10),transparent_40%)] pt-16 pb-2 text-center">
+    <section
+      id="join"
+      className="flex w-full flex-col items-center justify-center gap-8 bg-[radial-gradient(circle_at_center,rgba(217,70,239,0.10),transparent_40%)] pt-16 pb-2 text-center"
+    >
       <h1 className="font-heading flex h-20 w-full items-center justify-center text-5xl text-white">
         Приєднуйся!
       </h1>
