@@ -20,8 +20,8 @@ export function MarqueeSection() {
         Все для системного вивчення{" "}
         <span className="text-purple-500">англійської</span>
       </h2>
-      <div className="w-full overflow-x-hidden">
-        <div className="marquee-animation scrollbar-none flex w-max flex-row flex-nowrap gap-8 overflow-x-hidden py-8">
+      <div className="w-full overflow-x-hidden py-8">
+        <div className="marquee-animation scrollbar-none flex w-max flex-row flex-nowrap gap-8">
           {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, index) => (
             <div
               key={index}
