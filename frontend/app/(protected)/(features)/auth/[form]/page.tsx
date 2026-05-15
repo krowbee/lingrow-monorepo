@@ -1,6 +1,6 @@
-import { LoginForm } from "@/app/(features)/auth/[form]/components/login-form";
-import { LogoutForm } from "@/app/(features)/auth/[form]/components/logout-form";
-import { SignupForm } from "@/app/(features)/auth/[form]/components/signup-form";
+import { LoginForm } from "@/app/(protected)/(features)/auth/[form]/components/login-form";
+import { LogoutForm } from "@/app/(protected)/(features)/auth/[form]/components/logout-form";
+import { SignupForm } from "@/app/(protected)/(features)/auth/[form]/components/signup-form";
 import { notFound } from "next/navigation";
 
 export default async function AuthPage({

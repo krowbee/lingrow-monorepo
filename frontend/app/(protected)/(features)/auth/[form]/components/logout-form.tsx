@@ -1,11 +1,7 @@
 "use client";
 import Link from "next/link";
-import { Button } from "../../../../../components/ui/button";
-import {
-  Card,
-  CardDescription,
-  CardTitle,
-} from "../../../../../components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { logoutOnServer } from "@/lib/api/requests/auth.requests";
 import { useAuthStore } from "@/store/AuthStore";
 import { useRouter } from "next/navigation";

@@ -20,14 +20,11 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  LoginFormData,
-  LoginSchema,
-} from "../../../../../components/schemas/authSchemas";
-import { ErrorMessage } from "../../../../../components/ui/error-message";
+import { LoginFormData, LoginSchema } from "@/components/schemas/authSchemas";
+import { ErrorMessage } from "@/components/ui/error-message";
 import { AUTH_URLS } from "@/urls/auth";
 import { loginOnServer } from "@/lib/api/requests/auth.requests";
-import { useAuthStore } from "../../../../../store/AuthStore";
+import { useAuthStore } from "@/store/AuthStore";
 import { useRouter } from "next/navigation";
 export function LoginForm({
   className,
@@ -113,7 +110,7 @@ export function LoginForm({
                   </FieldLabel>
                   <Link
                     href="#"
-                    className="font-accent ml-auto inline-block text-sm !text-white underline-offset-4 hover:!underline"
+                    className="font-accent ml-auto inline-block text-sm text-white! underline-offset-4 hover:underline!"
                   >
                     Забули пароль?
                   </Link>
@@ -151,7 +148,7 @@ export function LoginForm({
                   Немає облікового запису?{" "}
                   <Link
                     href={AUTH_URLS.signup}
-                    className="font-accent !text-white transition-colors duration-200 hover:!text-purple-300"
+                    className="font-accent text-white! transition-colors duration-200 hover:text-purple-300!"
                   >
                     Зареєструватись
                   </Link>

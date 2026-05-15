@@ -21,8 +21,8 @@ import { useForm, Controller } from "react-hook-form";
 import {
   RegisterFormData,
   RegisterSchema,
-} from "../../../../../components/schemas/authSchemas";
-import { ErrorMessage } from "../../../../../components/ui/error-message";
+} from "@/components/schemas/authSchemas";
+import { ErrorMessage } from "@/components/ui/error-message";
 import { AUTH_URLS } from "@/urls/auth";
 import { registerOnServer } from "@/lib/api/requests/auth.requests";
 import { useAuthStore } from "@/store/AuthStore";
@@ -168,7 +168,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                   Вже є обліковий запис?{" "}
                   <Link
                     href={AUTH_URLS.login}
-                    className="font-accent !text-white transition-colors duration-200 hover:!text-purple-300"
+                    className="font-accent text-white! transition-colors duration-200 hover:text-purple-300!"
                   >
                     Вхід
                   </Link>
