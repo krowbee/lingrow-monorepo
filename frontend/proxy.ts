@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { matchPrefix, rules } from "./urlRules";
 
-export async function mutedproxy(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const isAuth = req.cookies.has("refreshToken");
 
   const page = req.nextUrl.pathname;
@@ -11,7 +11,6 @@ export async function mutedproxy(req: NextRequest) {
     return NextResponse.redirect(new URL(rule.redirectTo, req.url));
   }
   if (rule.guestOnly && isAuth) {
-    console.log("guestOnly activated");
     return NextResponse.redirect(new URL(rule.redirectTo, req.url));
   }
   return NextResponse.next();
