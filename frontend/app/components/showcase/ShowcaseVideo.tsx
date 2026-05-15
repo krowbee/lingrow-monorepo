@@ -2,22 +2,25 @@
 import { useEffect, useState } from "react";
 
 export function ShowcaseVideo() {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(0);
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
     };
+
+    handleResize();
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const isDesktop = width > 1024;
+  const isDesktop = width >= 1024;
 
   if (!isDesktop) return null;
 
   return (
-    <div className="relative flex max-w-lg rounded-xl border border-purple-500/25 p-4 overflow-hidden bg-black/25 backdrop-blur-sm">
-      <div className="absolute w-full h-full bg-black/20 backdrop-blur-xs" />
+    <div className="relative flex max-w-lg overflow-hidden rounded-xl border border-purple-500/25 bg-black/25 p-4 backdrop-blur-sm">
+      <div className="absolute h-full w-full bg-black/20 backdrop-blur-xs" />
       <video
         className="h-full w-full rounded-lg object-cover"
         autoPlay={true}
