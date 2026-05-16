@@ -10,7 +10,7 @@ import { CourseDto, CreateCourseDto, UpdateCourseDto } from './course.dto';
 import { PublicLessonDto } from '../lesson/lesson.dto';
 import PrismaService from 'src/lib/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
-import { CourseFilterDto } from './types/FilterType';
+import { CourseFilterDto, LessonFilterDto } from './types/FilterType';
 
 @Injectable()
 export class CourseService {
@@ -59,11 +59,34 @@ export class CourseService {
     });
   }
 
-  async getLessonsByCourseSlug(courseSlug: string): Promise<PublicLessonDto[]> {
+  async getLessonsByCourseSlug(
+    courseSlug: string,
+    filter: LessonFilterDto = {},
+  ): Promise<PublicLessonDto[]> {
+    const { search, status } = filter;
+    const where: Prisma.LessonWhereInput = {
+      ...(status && {
+        status,
+      }),
+      ...(search && {
+        OR: [
+          {
+            name: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+        ],
+      }),
+    };
+    const course = await this.prisma.course.findUnique({
+      where: { slug: courseSlug },
+    });
+    if (!course) throw new NotFoundException('Incorrect course slug');
     const lessons = await this.lessonService.getLessons({
+      ...where,
       course: { slug: courseSlug },
     });
-    if (!lessons.length) throw new NotFoundException("Incorrect course's slug");
     return lessons.map((lesson) => toDto(PublicLessonDto, lesson));
   }
 
