@@ -1,9 +1,9 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiPropertyOptional, PickType } from '@nestjs/swagger';
 import { Expose, Transform } from 'class-transformer';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
 import { EnglishLevels, PublishStatus } from '@prisma/client';
 
-export class FilterDto {
+export class CourseFilterDto {
   @ApiPropertyOptional()
   @Expose()
   @IsOptional()
@@ -25,3 +25,8 @@ export class FilterDto {
   )
   search?: string;
 }
+
+export class LessonFilterDto extends PickType(CourseFilterDto, [
+  'status',
+  'search',
+]) {}

@@ -19,7 +19,7 @@ import {
 import { CourseDto, CreateCourseDto, UpdateCourseDto } from './course.dto';
 import { AdminOnly } from 'src/domains/auth/decorators/auth.decorators';
 import { PublicLessonDto } from '../lesson/lesson.dto';
-import { FilterDto } from './types/FilterType';
+import { CourseFilterDto } from './types/FilterType';
 
 @Controller('course')
 export class CourseController {
@@ -31,7 +31,7 @@ export class CourseController {
   })
   @ApiOkResponse({ type: [CourseDto] })
   @Get('/')
-  async getCoursesList(@Query() filter?: FilterDto) {
+  async getCoursesList(@Query() filter?: CourseFilterDto) {
     const courses = await this.courseService.getCoursesList(filter);
     return { courses };
   }
