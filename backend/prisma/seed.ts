@@ -121,6 +121,7 @@ async function main() {
         name: courseData.name,
         slug: courseData.slug,
         description: courseData.description,
+        status: 'PUBLISHED',
       },
     });
 
@@ -134,6 +135,7 @@ async function main() {
           theory: generateTheory(),
           courseId: course.id,
           order: i,
+          status: 'PUBLISHED',
         },
       });
 

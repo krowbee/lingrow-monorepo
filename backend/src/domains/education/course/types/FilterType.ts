@@ -1,22 +1,22 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Expose, Transform } from 'class-transformer';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
 import { EnglishLevels, PublishStatus } from '@prisma/client';
 
 export class FilterDto {
-  @ApiProperty()
+  @ApiPropertyOptional()
   @Expose()
   @IsOptional()
   @IsEnum(PublishStatus)
   status?: PublishStatus;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @Expose()
   @IsOptional()
   @IsEnum(EnglishLevels)
   level?: EnglishLevels;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
   @Expose()
   @IsOptional()
   @IsString()

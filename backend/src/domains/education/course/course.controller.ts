@@ -15,7 +15,6 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiParam,
-  ApiQuery,
 } from '@nestjs/swagger';
 import { CourseDto, CreateCourseDto, UpdateCourseDto } from './course.dto';
 import { AdminOnly } from 'src/domains/auth/decorators/auth.decorators';
@@ -31,9 +30,8 @@ export class CourseController {
     description: 'Returns list of courses',
   })
   @ApiOkResponse({ type: [CourseDto] })
-  @ApiQuery({ type: FilterDto })
   @Get('/')
-  async getCoursesList(@Query() filter: FilterDto) {
+  async getCoursesList(@Query() filter?: FilterDto) {
     const courses = await this.courseService.getCoursesList(filter);
     return { courses };
   }

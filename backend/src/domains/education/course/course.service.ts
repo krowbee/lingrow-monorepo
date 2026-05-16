@@ -19,8 +19,41 @@ export class CourseService {
     private lessonService: LessonService,
   ) {}
 
-  async getCoursesList(filter?: FilterDto): Promise<CourseDto[]> {
-    const courses = await this.prisma.course.findMany({ where: filter });
+  async getCoursesList(filter: FilterDto = {}): Promise<CourseDto[]> {
+    const { status, search, level } = filter;
+
+    const where: Prisma.CourseWhereInput = {
+      ...(status && {
+        status,
+      }),
+      ...(level && {
+        level,
+      }),
+      ...(search && {
+        OR: [
+          {
+            name: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+          {
+            description: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+          {
+            slug: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+        ],
+      }),
+    };
+
+    const courses = await this.prisma.course.findMany({ where });
     return courses.map((course) => {
       return toDto(CourseDto, course);
     });
