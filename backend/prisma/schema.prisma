@@ -64,7 +64,7 @@ model UserSubscription{
   expireAt DateTime?
 }
 
-enum STATUS {
+enum PublishStatus {
   DRAFT
   PUBLISHED
   ARCHIVED
@@ -79,7 +79,7 @@ model Course{
   updatedAt DateTime @updatedAt
   allowedPlans Plan[]
   lessons Lesson[]
-  status STATUS @default(DRAFT)
+  status PublishStatus @default(DRAFT)
 }
 
 enum EnglishLevels {
@@ -100,7 +100,7 @@ model Lesson{
   order Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  status STATUS @default(DRAFT)
+  status PublishStatus @default(DRAFT)
   @@unique([courseId, order])
 }
 

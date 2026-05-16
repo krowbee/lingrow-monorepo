@@ -1,0 +1,8 @@
+-- CreateEnum
+CREATE TYPE "STATUS" AS ENUM ('DRAFT', 'PUBLISHED', 'ARCHIVED');
+
+-- AlterTable
+ALTER TABLE "Course" ADD COLUMN     "status" "STATUS" NOT NULL DEFAULT 'DRAFT';
+
+-- AlterTable
+ALTER TABLE "Lesson" ADD COLUMN     "status" "STATUS" NOT NULL DEFAULT 'DRAFT';

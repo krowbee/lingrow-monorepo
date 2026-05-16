@@ -1,6 +1,13 @@
 import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
+import { PublishStatus } from '@prisma/client';
 import { Expose } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CourseDto {
   @ApiProperty()
@@ -25,6 +32,12 @@ export class CourseDto {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @ApiProperty()
+  @Expose()
+  @IsOptional()
+  @IsEnum(PublishStatus)
+  status?: PublishStatus;
 }
 export class CreateCourseDto extends PickType(CourseDto, [
   'name',

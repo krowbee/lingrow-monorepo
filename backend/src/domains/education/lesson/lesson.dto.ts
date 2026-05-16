@@ -3,6 +3,7 @@ import { TaskDto } from '../task/task.dto';
 
 import {
   IsArray,
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsObject,
@@ -11,6 +12,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { ApiProperty, OmitType, PartialType, PickType } from '@nestjs/swagger';
+import { PublishStatus } from '@prisma/client';
 
 export class LessonDto {
   @ApiProperty()
@@ -55,6 +57,12 @@ export class LessonDto {
   @IsNumber()
   @IsNotEmpty()
   order: number;
+
+  @ApiProperty()
+  @Expose()
+  @IsEnum(PublishStatus)
+  @IsOptional()
+  status?: PublishStatus;
 }
 
 export class PublicLessonDto extends PickType(LessonDto, [
