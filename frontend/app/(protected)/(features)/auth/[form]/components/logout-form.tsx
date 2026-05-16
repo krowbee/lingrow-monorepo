@@ -2,22 +2,22 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
-import { logoutOnServer } from "@/lib/api/requests/auth.requests";
-import { useAuthStore } from "@/store/AuthStore";
+
 import { useRouter } from "next/navigation";
 import { COURSES_URL } from "@/urls/courses";
+import { useLogout } from "@/hooks/auth/useLogout";
 
 export function LogoutForm() {
-  const logout = useAuthStore((state) => state.logout);
+  const logoutMutation = useLogout();
   const router = useRouter();
   const onSubmit = async () => {
-    const result = await logoutOnServer();
-    if (result.ok) {
-      logout();
+    try {
+      await logoutMutation.mutateAsync();
       router.push("/");
       return;
+    } catch {
+      return;
     }
-    return;
   };
 
   return (

@@ -23,9 +23,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormData, LoginSchema } from "@/components/schemas/authSchemas";
 import { ErrorMessage } from "@/components/ui/error-message";
 import { AUTH_URLS } from "@/urls/auth";
-import { loginOnServer } from "@/lib/api/requests/auth.requests";
-import { useAuthStore } from "@/store/AuthStore";
 import { useRouter } from "next/navigation";
+import { useLogin } from "@/hooks/auth/useLogin";
+import { COURSES_URL } from "@/urls/courses";
+
 export function LoginForm({
   className,
   ...props
@@ -43,17 +44,18 @@ export function LoginForm({
     resolver: zodResolver(LoginSchema),
   });
   const router = useRouter();
+  const loginMutation = useLogin();
 
-  const login = useAuthStore((state) => state.login);
-
-  const onSubmit = async (data: LoginFormData) => {
-    const result = await loginOnServer(data);
-    if (!result.ok) {
-      setError("root", { message: result.error });
+  const onSubmit = async (formData: LoginFormData) => {
+    try {
+      await loginMutation.mutateAsync(formData);
+      router.push(COURSES_URL.courses_page);
+    } catch (error) {
+      setError("root", {
+        message: error instanceof Error ? error.message : "Помилка входу",
+      });
       return;
     }
-    login(result.data);
-    router.push("/courses");
   };
 
   return (
