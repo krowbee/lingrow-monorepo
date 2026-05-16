@@ -44,11 +44,11 @@ export function LoginForm({
     resolver: zodResolver(LoginSchema),
   });
   const router = useRouter();
-  const loginMutation = useLogin();
+  const { mutateAsync: login, isPending } = useLogin();
 
   const onSubmit = async (formData: LoginFormData) => {
     try {
-      await loginMutation.mutateAsync(formData);
+      login(formData);
       router.push(COURSES_URL.courses_page);
     } catch (error) {
       setError("root", {
@@ -136,8 +136,12 @@ export function LoginForm({
               )}
               {errors.root && <ErrorMessage message={errors.root.message} />}
               <Field>
-                <Button type="submit" className="cursor-pointer">
-                  Увійти
+                <Button
+                  type="submit"
+                  disabled={isPending}
+                  className="cursor-pointer"
+                >
+                  {isPending ? "Вхід..." : "Увійти"}
                 </Button>
                 <Button
                   variant="outline"

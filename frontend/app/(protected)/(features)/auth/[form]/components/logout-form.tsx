@@ -8,11 +8,11 @@ import { COURSES_URL } from "@/urls/courses";
 import { useLogout } from "@/hooks/auth/useLogout";
 
 export function LogoutForm() {
-  const logoutMutation = useLogout();
+  const { isPending, mutateAsync: logout } = useLogout();
   const router = useRouter();
   const onSubmit = async () => {
     try {
-      await logoutMutation.mutateAsync();
+      await logout();
       router.push("/");
       return;
     } catch {
@@ -34,11 +34,14 @@ export function LogoutForm() {
           <Button
             className="cursor-pointer bg-neutral-700"
             onClick={() => onSubmit()}
+            disabled={isPending}
           >
-            Так
+            {isPending ? "Вихід..." : "Так"}
           </Button>
           <Link href={COURSES_URL.courses_page}>
-            <Button className="cursor-pointer">Ні</Button>
+            <Button className="cursor-pointer" disabled={isPending}>
+              Ні
+            </Button>
           </Link>
         </div>
       </Card>
