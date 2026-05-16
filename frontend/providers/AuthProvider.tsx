@@ -1,14 +1,11 @@
 "use client";
 import { Spinner } from "@/components/ui/spinner";
 import { useAuthGuard } from "@/hooks/useAuthGuard";
-import { useAuthInit } from "@/hooks/useAuthInit";
-import { useAuthStore } from "@/store/AuthStore";
 import { ReactNode } from "react";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  useAuthInit();
-  useAuthGuard();
-  const isLoading = useAuthStore((state) => state.isLoading);
+  const { isLoading } = useAuthGuard();
+
   return (
     <>
       {!isLoading ? (

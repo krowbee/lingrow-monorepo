@@ -1,4 +1,5 @@
 import { AuthProvider } from "@/providers/AuthProvider";
+import { QueryProvider } from "@/providers/QueryProvider";
 import React from "react";
 
 export default function ProtectedLayout({
@@ -6,5 +7,9 @@ export default function ProtectedLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <AuthProvider>{children}</AuthProvider>;
+  return (
+    <QueryProvider>
+      <AuthProvider>{children}</AuthProvider>
+    </QueryProvider>
+  );
 }

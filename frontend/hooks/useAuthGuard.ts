@@ -1,22 +1,24 @@
-import { useAuthStore } from "@/store/AuthStore";
 import { matchPrefix } from "@/urlRules";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { rules } from "../urlRules";
 import { AUTH_URLS } from "@/urls/auth";
 import { COURSES_URL } from "@/urls/courses";
+import { useMe } from "./useMe";
+import { UseQueryResult } from "@tanstack/react-query";
+import { User } from "@/types/auth/user";
 
 export function useAuthGuard() {
-  const isAuth = useAuthStore((state) => state.isAuth);
-  const isLoading = useAuthStore((state) => state.isLoading);
   const router = useRouter();
   const pathname = usePathname();
-  const user = useAuthStore((state) => state.user);
+  const { data: user, isLoading }: UseQueryResult<User | null> = useMe();
   useEffect(() => {
     if (isLoading) return;
     const rule = rules.find((rule) => matchPrefix(pathname, rule.match));
 
     if (!rule) return;
+
+    const isAuth = Boolean(user);
 
     if (isAuth && rule.guestOnly) {
       router.replace(COURSES_URL.courses_page);
@@ -30,5 +32,7 @@ export function useAuthGuard() {
       router.replace("/");
       return;
     }
-  }, [user, pathname, router, isAuth, isLoading]);
+  }, [pathname, router, isLoading, user]);
+
+  return { user, isLoading, isAuth: Boolean(user) };
 }
