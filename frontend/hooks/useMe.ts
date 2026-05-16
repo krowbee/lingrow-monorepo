@@ -17,5 +17,6 @@ export function useMe() {
       return result.ok ? result.data : null;
     },
     retry: false,
+    staleTime: 5 * 60 * 1000,
   });
 }
