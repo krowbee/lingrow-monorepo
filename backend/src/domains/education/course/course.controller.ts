@@ -19,7 +19,7 @@ import {
 import { CourseDto, CreateCourseDto, UpdateCourseDto } from './course.dto';
 import { AdminOnly } from 'src/domains/auth/decorators/auth.decorators';
 import { PublicLessonDto } from '../lesson/lesson.dto';
-import { CourseFilterDto } from './types/FilterType';
+import { CourseFilterDto, LessonFilterDto } from './types/FilterType';
 
 @Controller('course')
 export class CourseController {
@@ -43,8 +43,14 @@ export class CourseController {
   @ApiOkResponse({ type: [PublicLessonDto] })
   @ApiParam({ name: 'courseSlug', type: String, description: "Course's slug" })
   @Get('/:courseSlug/lessons')
-  async getLesson(@Param('courseSlug') slug: string) {
-    const lessons = await this.courseService.getLessonsByCourseSlug(slug);
+  async getLesson(
+    @Param('courseSlug') slug: string,
+    @Query() filter: LessonFilterDto,
+  ) {
+    const lessons = await this.courseService.getLessonsByCourseSlug(
+      slug,
+      filter,
+    );
     return { lessons };
   }
 
