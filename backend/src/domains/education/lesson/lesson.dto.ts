@@ -77,6 +77,7 @@ export class CreateLessonDto extends PickType(LessonDto, [
   'slug',
   'courseId',
   'order',
+  'status',
 ]) {}
 
 export class UpdateLessonDto extends PartialType(

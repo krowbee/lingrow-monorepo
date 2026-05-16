@@ -43,6 +43,7 @@ export class CreateCourseDto extends PickType(CourseDto, [
   'name',
   'slug',
   'description',
+  'status',
 ]) {}
 
 export class UpdateCourseDto extends PartialType(CreateCourseDto) {}
