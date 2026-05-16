@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CourseService } from './course.service';
 import {
@@ -14,10 +15,12 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiParam,
+  ApiQuery,
 } from '@nestjs/swagger';
 import { CourseDto, CreateCourseDto, UpdateCourseDto } from './course.dto';
 import { AdminOnly } from 'src/domains/auth/decorators/auth.decorators';
 import { PublicLessonDto } from '../lesson/lesson.dto';
+import { FilterDto } from './types/FilterType';
 
 @Controller('course')
 export class CourseController {
@@ -28,9 +31,10 @@ export class CourseController {
     description: 'Returns list of courses',
   })
   @ApiOkResponse({ type: [CourseDto] })
+  @ApiQuery({ type: FilterDto })
   @Get('/')
-  async getCoursesList() {
-    const courses = await this.courseService.getCoursesList();
+  async getCoursesList(@Query() filter: FilterDto) {
+    const courses = await this.courseService.getCoursesList(filter);
     return { courses };
   }
 

@@ -10,6 +10,7 @@ import { CourseDto, CreateCourseDto, UpdateCourseDto } from './course.dto';
 import { PublicLessonDto } from '../lesson/lesson.dto';
 import PrismaService from 'src/lib/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
+import { FilterDto } from './types/FilterType';
 
 @Injectable()
 export class CourseService {
@@ -18,8 +19,8 @@ export class CourseService {
     private lessonService: LessonService,
   ) {}
 
-  async getCoursesList(): Promise<CourseDto[]> {
-    const courses = await this.prisma.course.findMany();
+  async getCoursesList(filter?: FilterDto): Promise<CourseDto[]> {
+    const courses = await this.prisma.course.findMany({ where: filter });
     return courses.map((course) => {
       return toDto(CourseDto, course);
     });
