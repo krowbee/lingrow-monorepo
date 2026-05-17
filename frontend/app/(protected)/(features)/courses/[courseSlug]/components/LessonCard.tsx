@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { LessonWithProgress } from "@/types/course/course";
 import { COURSES_URL } from "@/urls/courses";
 import { BookOpen, Brain, CircleCheckBig, RotateCcw } from "lucide-react";
@@ -48,6 +49,21 @@ export function LessonCard({
             )}
           </Button>
         </Link>
+      </CardFooter>
+    </Card>
+  );
+}
+
+export function LessonCardSkeleton() {
+  return (
+    <Card className="flex h-50 w-70 cursor-default flex-col justify-between pt-8 pb-4">
+      <CardHeader className="w-full">
+        <CardTitle>
+          <Skeleton className="h-4 w-[60%]" />
+        </CardTitle>
+      </CardHeader>
+      <CardFooter className="w-full justify-end">
+        <Skeleton className="h-9 w-40" />
       </CardFooter>
     </Card>
   );
