@@ -1,8 +1,10 @@
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 import { updateTaskProgress } from "@/lib/api/requests/courses.client.requests";
+import { useAdminStore } from "@/store/AdminStore";
 import { useLessonStore } from "@/store/LessonStore";
 import { TaskWithAnswers } from "@/types/course/course";
-import { useEffect, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 export type answerProgress = {
   id: number;
   answerId: number;
@@ -13,38 +15,51 @@ export function TaskBlock({ task }: { task: TaskWithAnswers }) {
   const [hasProgress, setHasProgress] = useState<boolean>(
     task.choosedAnswer !== null,
   );
-
-  const [isSaving, setIsSaving] = useState<boolean>(false);
-  const [submittedAnswer, setSubmittedAnswer] = useState<answerProgress | null>(
-    null,
-  );
+  const setErrorMessage = useAdminStore((state) => state.setErrorMessage);
   const setAnswer = useLessonStore((state) => state.setAnswer);
 
-  useEffect(() => {
-    setHasProgress(task.choosedAnswer !== null);
-    setSubmittedAnswer(null);
-  }, [task]);
-
-  const handleAnswerChange = async (answerId: number) => {
-    try {
-      if (isSaving) return;
-
-      setIsSaving(true);
-
+  const {
+    data: submittedAnswer,
+    isPending,
+    mutate: updateAnswer,
+  } = useMutation({
+    mutationFn: async (answerId: number) => {
       const result = await updateTaskProgress(task.id, answerId, hasProgress);
-
-      if (!result.ok) return;
-
+      if (!result.ok) {
+        throw new Error("Failed to update task progress");
+      }
+      return result.data[0];
+    },
+    onSuccess: (data, answerId) => {
       setAnswer(task.id, answerId);
-      const data = await result.data[0];
-
-      setSubmittedAnswer(data);
+      setCurrentAnswer(
+        data ?? {
+          answerId: data.choosedAnswer,
+          isCorrect: data.isCorrect,
+        },
+      );
       if (!hasProgress) {
         setHasProgress(true);
       }
-    } finally {
-      setIsSaving(false);
-    }
+    },
+    onError: (error: Error) => {
+      setErrorMessage(error.message);
+    },
+  });
+
+  const [currentAnswer, setCurrentAnswer] = useState<answerProgress | null>(
+    submittedAnswer ||
+      (task.choosedAnswer !== null
+        ? {
+            answerId: task.choosedAnswer,
+            isCorrect: task.isCorrect,
+          }
+        : null),
+  );
+
+  const handleAnswerChange = async (answerId: number) => {
+    if (isPending) return;
+    updateAnswer(answerId);
   };
 
   return (
@@ -60,8 +75,8 @@ export function TaskBlock({ task }: { task: TaskWithAnswers }) {
             task.answers.map((answer) => (
               <div
                 className={`bg-base-300 flex items-center gap-4 rounded-lg border ${
-                  submittedAnswer?.answerId === answer.id
-                    ? submittedAnswer.isCorrect
+                  currentAnswer?.answerId === answer.id
+                    ? currentAnswer.isCorrect
                       ? "border-green-600"
                       : "border-red-600"
                     : ""
@@ -74,10 +89,11 @@ export function TaskBlock({ task }: { task: TaskWithAnswers }) {
                 >
                   <input
                     type="radio"
-                    className={`h-5 w-5 cursor-pointer transition-colors ${submittedAnswer?.answerId === answer.id ? (submittedAnswer.isCorrect ? "accent-green-500" : "accent-red-500") : "accent-primary"}`}
+                    disabled={isPending}
+                    className={`h-5 w-5 cursor-pointer transition-colors ${currentAnswer?.answerId === answer.id ? (currentAnswer.isCorrect ? "accent-green-500" : "accent-red-500") : "accent-primary"}`}
                     value={`${answer.id}`}
                     id={`${answer.id}`}
-                    checked={task.choosedAnswer === answer.id}
+                    checked={currentAnswer?.answerId === answer.id}
                     onChange={() => handleAnswerChange(answer.id)}
                   />
 
