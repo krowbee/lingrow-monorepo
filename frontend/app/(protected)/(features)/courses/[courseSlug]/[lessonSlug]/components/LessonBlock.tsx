@@ -27,7 +27,6 @@ export function LessonBlock({
       if (!result.ok) {
         throw new Error("Failed to fetch lesson");
       }
-      console.log(result.data);
       return result.data;
     },
   });
