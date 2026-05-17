@@ -2,7 +2,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { TheoryBlock, TheoryBlockSkeleton } from "./TheoryBlock";
 import { getLessonWithProgress } from "@/lib/api/requests/courses.client.requests";
-import { Spinner } from "@/components/ui/spinner";
 import { TaskBlock } from "./TaskBlock";
 import { LessonNavigation } from "./LessonNavigation";
 import { useLessonStore } from "@/store/LessonStore";
