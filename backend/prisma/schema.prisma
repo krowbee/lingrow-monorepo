@@ -112,7 +112,6 @@ model Task{
   lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
   lessonId Int
   order Int
-  isCorrect Boolean
   progress UserProgress[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

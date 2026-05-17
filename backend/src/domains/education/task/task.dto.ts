@@ -42,12 +42,6 @@ export class TaskDto {
   @Expose()
   @IsNumber()
   order: number;
-
-  @ApiProperty()
-  @Expose()
-  @IsOptional()
-  @IsNumber()
-  choosedAnswer: number;
 }
 
 export class CreateTaskDto extends PickType(TaskDto, [
