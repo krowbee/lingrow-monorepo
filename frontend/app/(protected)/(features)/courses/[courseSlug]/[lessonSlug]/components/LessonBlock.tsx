@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { TheoryBlock } from "./TheoryBlock";
+import { TheoryBlock, TheoryBlockSkeleton } from "./TheoryBlock";
 import { getLessonWithProgress } from "@/lib/api/requests/courses.client.requests";
 import { Spinner } from "@/components/ui/spinner";
 import { TaskBlock } from "./TaskBlock";
@@ -40,28 +40,28 @@ export function LessonBlock({
     router.push(`${COURSES_URL.courses_page}/${courseSlug}`);
   };
 
-  if (!lesson || isLoading)
-    return (
-      <div className="flex h-full w-full items-center justify-center">
-        <Spinner></Spinner>
-      </div>
-    );
-
   return (
     <div className="lesson-container items-between flex h-full w-full flex-col justify-between gap-4 p-4">
-      {step === "theory" && (
-        <TheoryBlock lessonName={lesson.name} theory={lesson.theory} />
+      {isLoading ? (
+        <TheoryBlockSkeleton />
+      ) : (
+        lesson &&
+        step === "theory" && (
+          <TheoryBlock lessonName={lesson.name} theory={lesson.theory} />
+        )
       )}
-      {step === "task" && (
+      {lesson && step === "task" && (
         <TaskBlock task={lesson.tasks[taskIndex]}></TaskBlock>
       )}
-      <div className="footer">
-        <LessonNavigation
-          tasks={lesson.tasks}
-          finishLesson={finishLesson}
-          backToLessons={backToLessons}
-        />
-      </div>
+      {lesson && (
+        <div className="footer">
+          <LessonNavigation
+            tasks={lesson.tasks}
+            finishLesson={finishLesson}
+            backToLessons={backToLessons}
+          />
+        </div>
+      )}
     </div>
   );
 }
