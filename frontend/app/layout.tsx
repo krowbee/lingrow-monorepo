@@ -1,3 +1,4 @@
+import { GlobalErrorBlock } from "@/components/ui/global-error";
 import "./globals.css";
 export default function RootLayout({
   children,
@@ -6,7 +7,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-black/95">{children}</body>
+      <body className="bg-black/95">
+        {children}
+        <GlobalErrorBlock />
+      </body>
     </html>
   );
 }
