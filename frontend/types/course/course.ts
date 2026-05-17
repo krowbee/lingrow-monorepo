@@ -41,6 +41,7 @@ export type Task = {
   answers: Answer[];
   lessonId: number;
   order: number;
+  isCorrect: boolean;
 };
 
 export type Answer = {
