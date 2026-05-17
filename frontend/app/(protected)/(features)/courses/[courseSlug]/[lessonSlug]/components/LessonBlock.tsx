@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { TheoryBlock } from "./TheoryBlock";
 import { getLessonWithProgress } from "@/lib/api/requests/courses.client.requests";
 import { Spinner } from "@/components/ui/spinner";
@@ -17,30 +17,30 @@ export function LessonBlock({
   lessonSlug: string;
   courseSlug: string;
 }) {
-  const setLesson = useLessonStore((state) => state.setLesson);
-  const lesson = useLessonStore((state) => state.lesson);
   const step = useLessonStore((state) => state.step);
   const taskIndex = useLessonStore((state) => state.taskIndex);
   const router = useRouter();
+
+  const { data: lesson, isLoading } = useQuery({
+    queryKey: ["lesson", lessonSlug],
+    queryFn: async () => {
+      const result = await getLessonWithProgress(lessonSlug);
+      if (!result.ok) {
+        throw new Error("Failed to fetch lesson");
+      }
+      console.log(result.data);
+      return result.data;
+    },
+  });
+
   const finishLesson = () => {
     router.push(`${COURSES_URL.courses_page}/${courseSlug}`);
   };
   const backToLessons = () => {
     router.push(`${COURSES_URL.courses_page}/${courseSlug}`);
   };
-  useEffect(() => {
-    const getLesson = async () => {
-      const result = await getLessonWithProgress(lessonSlug);
-      if (!result.ok) {
-        return;
-      }
-      console.log(result.data);
-      setLesson(result.data);
-    };
-    getLesson();
-  }, [lessonSlug, setLesson]);
 
-  if (!lesson)
+  if (!lesson || isLoading)
     return (
       <div className="flex h-full w-full items-center justify-center">
         <Spinner></Spinner>
