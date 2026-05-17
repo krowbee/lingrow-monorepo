@@ -1,9 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { getLessonProgress } from "@/lib/api/requests/courses.client.requests";
-import { Lesson, LessonWithProgress } from "@/types/course/course";
-import { useEffect, useState } from "react";
-import { LessonCard } from "./LessonCard";
+import {
+  Lesson,
+  LessonProgress,
+  LessonWithProgress,
+} from "@/types/course/course";
+import { ApiResult } from "@/types/api/api-result.type";
+import { useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { LessonCard, LessonCardSkeleton } from "./LessonCard";
 import { ProgressBar } from "./ProgressBar";
 
 export function LessonsContainer({
@@ -13,35 +18,42 @@ export function LessonsContainer({
   initialLessons: Lesson[];
   courseSlug: string;
 }) {
-  const [updatedLessons, setUpdatedLessons] = useState<LessonWithProgress[]>(
-    initialLessons.map((l) => ({ ...l, isCompleted: false })),
-  );
+  const { data: progressResult, isPending } = useQuery<
+    ApiResult<LessonProgress[]>
+  >({
+    queryKey: ["lesson-progress", courseSlug],
+    queryFn: () => getLessonProgress(courseSlug),
+    enabled: Boolean(courseSlug),
+    staleTime: 5 * 60 * 1000,
+  });
 
-  useEffect(() => {
-    const updateLessons = async () => {
-      const result = await getLessonProgress(courseSlug);
-      if (!result.ok) {
-        return;
-      }
-      const lessonWithProgress = updatedLessons.map((lesson) => ({
+  const updatedLessons = useMemo<LessonWithProgress[]>(
+    () =>
+      initialLessons.map((lesson) => ({
         ...lesson,
-        isCompleted:
-          result.data.find((p) => p.lessonId === lesson.id)?.isCompleted ||
-          false,
-      }));
-      setUpdatedLessons(lessonWithProgress);
-    };
-
-    updateLessons();
-  }, []);
+        isCompleted: progressResult?.ok
+          ? (progressResult.data.find((p) => p.lessonId === lesson.id)
+              ?.isCompleted ?? false)
+          : false,
+      })),
+    [initialLessons, progressResult],
+  );
 
   return (
     <>
       <ProgressBar lessons={updatedLessons} />
       <div className="lessons-container flex w-full flex-row flex-wrap items-center justify-center gap-4 xl:justify-start">
-        {updatedLessons.map((lesson: LessonWithProgress) => (
-          <LessonCard key={lesson.id} lesson={lesson} courseSlug={courseSlug} />
-        ))}
+        {isPending
+          ? Array(6)
+              .fill(0)
+              .map((_, i) => <LessonCardSkeleton key={i} />)
+          : updatedLessons.map((lesson: LessonWithProgress) => (
+              <LessonCard
+                key={lesson.id}
+                lesson={lesson}
+                courseSlug={courseSlug}
+              />
+            ))}
       </div>
     </>
   );
