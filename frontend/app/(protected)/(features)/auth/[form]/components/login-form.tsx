@@ -96,6 +96,9 @@ export function LoginForm({
                       type="email"
                       placeholder="m@example.com"
                       required
+                      autoComplete="email"
+                      disabled={isPending}
+                      aria-busy={isPending}
                       className="font-body border-purple-500/15 text-white"
                       {...field}
                     />
@@ -125,6 +128,9 @@ export function LoginForm({
                       id="password"
                       type="password"
                       required
+                      autoComplete="current-password"
+                      disabled={isPending}
+                      aria-busy={isPending}
                       className="font-body border-purple-500/15 text-white"
                       {...field}
                     />

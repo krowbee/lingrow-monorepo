@@ -24,9 +24,9 @@ import {
 } from "@/components/schemas/authSchemas";
 import { ErrorMessage } from "@/components/ui/error-message";
 import { AUTH_URLS } from "@/urls/auth";
-import { registerOnServer } from "@/lib/api/requests/auth.requests";
-import { useAuthStore } from "@/store/AuthStore";
 import { useRouter } from "next/navigation";
+import { useSignup } from "@/hooks/auth/useSignup";
+import { COURSES_URL } from "@/urls/courses";
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const {
@@ -42,17 +42,19 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
     },
     resolver: zodResolver(RegisterSchema),
   });
-  const login = useAuthStore((state) => state.login);
   const router = useRouter();
+  const { mutateAsync: register, isPending } = useSignup();
 
   const onSubmit = async (data: RegisterFormData) => {
-    const result = await registerOnServer(data);
-    if (!result.ok) {
-      setError("root", { message: result.error });
+    try {
+      await register(data);
+      router.push(COURSES_URL.courses_page);
+    } catch (err) {
+      setError("root", {
+        message: err instanceof Error ? err.message : "Помилка реєстрації",
+      });
       return;
     }
-    login(result.data);
-    router.push("/courses");
   };
 
   return (
@@ -87,6 +89,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                     type="text"
                     placeholder="Валентин Дмитренко"
                     required
+                    autoComplete="name"
+                    disabled={isPending}
+                    aria-busy={isPending}
                     className="border-purple-500/15 text-white"
                     {...field}
                   />
@@ -113,6 +118,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                     type="email"
                     placeholder="m@example.com"
                     required
+                    autoComplete="email"
+                    disabled={isPending}
+                    aria-busy={isPending}
                     {...field}
                   />
                 )}
@@ -137,6 +145,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                     id="password"
                     type="password"
                     required
+                    autoComplete="new-password"
+                    disabled={isPending}
+                    aria-busy={isPending}
                     className="border-purple-500/15 text-white"
                     {...field}
                   />
@@ -154,12 +165,19 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 errors.root && <ErrorMessage message={errors.root.message} />
               )}
               <Field>
-                <Button type="submit" className="cursor-pointer">
-                  Створити обліковий запис
+                <Button
+                  type="submit"
+                  disabled={isPending}
+                  className="cursor-pointer"
+                >
+                  {isPending
+                    ? "Створюємо обліковий запис..."
+                    : "Створити обліковий запис"}
                 </Button>
                 <Button
                   variant="outline"
                   type="button"
+                  disabled={isPending}
                   className="cursor-pointer bg-neutral-900 text-white"
                 >
                   Зареєструватись з Google
