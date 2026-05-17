@@ -22,7 +22,7 @@ interface AdminStore {
 export const useAdminStore = create<AdminStore>()((set) => ({
   choosedEditCourse: null,
   choosedEditLesson: null,
-  errorMessage: null,
+  errorMessage: "error",
   openMenu: null,
   setErrorMessage: (message: string) => {
     try {

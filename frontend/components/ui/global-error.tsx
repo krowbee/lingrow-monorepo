@@ -27,7 +27,7 @@ export function GlobalErrorBlock() {
   return (
     <div
       role="alert"
-      className={`fixed top-2 right-2 z-50 w-sm ${isVisible ? "translate-y-0" : "-translate-y-[120%]"} rounded-xl border border-red-400 bg-red-400/20 p-4 transition-transform duration-300 ease-in-out`}
+      className={`fixed top-2 right-2 z-50 w-sm transition-all ${isVisible ? "translate-y-0 opacity-100" : "-translate-y-[110%] opacity-0"} rounded-xl border border-red-400 bg-red-400/20 p-4 duration-300 ease-in-out`}
     >
       <div className="relative flex h-full w-full flex-col justify-between">
         <h1 className="font-accent text-xl font-bold text-red-400">Помилка!</h1>
