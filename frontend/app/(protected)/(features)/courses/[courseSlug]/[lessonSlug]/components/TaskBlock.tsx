@@ -5,6 +5,7 @@ import { useLessonStore } from "@/store/LessonStore";
 import { TaskWithAnswers } from "@/types/course/course";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+
 export type answerProgress = {
   id: number;
   answerId: number;
@@ -12,11 +13,11 @@ export type answerProgress = {
   taskId: number;
 };
 export function TaskBlock({ task }: { task: TaskWithAnswers }) {
+  const setAnswer = useLessonStore((state) => state.setAnswer);
   const [hasProgress, setHasProgress] = useState<boolean>(
     task.choosedAnswer !== null,
   );
   const setErrorMessage = useAdminStore((state) => state.setErrorMessage);
-  const setAnswer = useLessonStore((state) => state.setAnswer);
 
   const {
     data: submittedAnswer,
@@ -31,7 +32,7 @@ export function TaskBlock({ task }: { task: TaskWithAnswers }) {
       return result.data[0];
     },
     onSuccess: (data, answerId) => {
-      setAnswer(task.id, answerId);
+      setAnswer(answerId, data.isCorrect);
       setCurrentAnswer(
         data ?? {
           answerId: data.choosedAnswer,
@@ -52,7 +53,7 @@ export function TaskBlock({ task }: { task: TaskWithAnswers }) {
       (task.choosedAnswer !== null
         ? {
             answerId: task.choosedAnswer,
-            isCorrect: task.isCorrect,
+            isCorrect: task.choosedAnswer,
           }
         : null),
   );

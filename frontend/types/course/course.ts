@@ -41,11 +41,11 @@ export type Task = {
   answers: Answer[];
   lessonId: number;
   order: number;
-  isCorrect: boolean;
 };
 
 export type Answer = {
   id: number;
   text: string;
   taskId: number;
+  isCorrect: boolean;
 };
