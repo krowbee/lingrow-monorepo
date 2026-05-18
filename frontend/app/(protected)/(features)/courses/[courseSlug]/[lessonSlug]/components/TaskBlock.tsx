@@ -5,7 +5,7 @@ import { updateTaskProgress } from "@/lib/api/requests/courses.client.requests";
 import { useAdminStore } from "@/store/AdminStore";
 import { useLessonStore } from "@/store/LessonStore";
 import { TaskProgress, TaskWithAnswers } from "@/types/course/course";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 export type AnswerProgress = {
@@ -15,9 +15,16 @@ export type AnswerProgress = {
   taskId: number;
 };
 
-export function TaskBlock({ task }: { task: TaskWithAnswers }) {
+export function TaskBlock({
+  task,
+  lessonSlug,
+}: {
+  task: TaskWithAnswers;
+  lessonSlug: string;
+}) {
   const setErrorMessage = useAdminStore((state) => state.setErrorMessage);
   const setAnswer = useLessonStore((state) => state.setAnswer);
+  const queryClient = useQueryClient();
 
   const [currentAnswer, setCurrentAnswer] = useState<AnswerProgress | null>(
     () => {
@@ -58,7 +65,8 @@ export function TaskBlock({ task }: { task: TaskWithAnswers }) {
         answerId: progress.answerId,
         isCorrect: progress.isCorrect,
       });
-
+      /* invalidate lesson query */
+      queryClient.invalidateQueries({ queryKey: ["lesson", lessonSlug] });
       setAnswer(task.id, answerId);
     },
 

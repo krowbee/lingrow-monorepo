@@ -52,6 +52,7 @@ export function LessonBlock({
         <TaskBlock
           key={lesson.tasks[taskIndex]?.id}
           task={lesson.tasks[taskIndex]}
+          lessonSlug={lessonSlug}
         ></TaskBlock>
       )}
       {lesson && (
