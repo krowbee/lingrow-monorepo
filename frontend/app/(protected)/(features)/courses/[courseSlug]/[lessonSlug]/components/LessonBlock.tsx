@@ -49,7 +49,10 @@ export function LessonBlock({
         )
       )}
       {lesson && step === "task" && (
-        <TaskBlock task={lesson.tasks[taskIndex]}></TaskBlock>
+        <TaskBlock
+          key={lesson.tasks[taskIndex]?.id}
+          task={lesson.tasks[taskIndex]}
+        ></TaskBlock>
       )}
       {lesson && (
         <div className="footer">

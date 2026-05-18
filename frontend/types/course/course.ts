@@ -32,8 +32,9 @@ export type LessonWithTasks = {
 
 export type TaskWithAnswers = Task & {
   choosedAnswer: number | null;
+  progressId: number | null;
+  isCorrect: boolean | null;
 };
-
 export type Task = {
   id: number;
   question: string;
@@ -41,6 +42,13 @@ export type Task = {
   answers: Answer[];
   lessonId: number;
   order: number;
+};
+
+export type TaskProgress = {
+  id: number;
+  taskId: number;
+  answerId: number;
+  isCorrect: boolean;
 };
 
 export type Answer = {
