@@ -24,9 +24,9 @@ export function SearchField() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="text-md flex h-min flex-row items-center gap-2 rounded-xl border border-white/10 bg-purple-500/10 p-2"
+      className="text-md font-body flex h-min flex-row items-center gap-2 rounded-xl border border-white/10 bg-purple-500/10 p-2"
     >
-      <Search className="size-6 rounded-l-xl" />
+      <Search className="size-6 rounded-l-xl text-purple-500" />
       <input
         type="text"
         placeholder="Пошук..."

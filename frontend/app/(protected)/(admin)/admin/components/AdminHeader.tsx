@@ -8,11 +8,11 @@ import { SearchField } from "./SearchField";
 
 export function AdminHeader(): ReactNode {
   return (
-    <header className="flex w-full flex-row items-center justify-between px-4 backdrop-blur-md">
+    <header className="flex w-full flex-col items-center justify-between border-b border-gray-700/50 px-4 py-4 backdrop-blur-md lg:flex-row">
       <div className="flex flex-row items-center gap-8">
         <Link
           href={ADMIN_URL.adminPage}
-          className="flex items-center gap-2 py-4"
+          className="hidden items-center gap-2 py-4 lg:flex"
         >
           <LogoTitle />
         </Link>
