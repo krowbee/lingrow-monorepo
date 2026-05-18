@@ -17,7 +17,6 @@ export async function getStaticLessonsList(
 ): Promise<ApiResult<Lesson[]>> {
   const res = await fetch(API_URL + `/course/${courseSlug}/lessons`, {
     credentials: "include",
-    next: { revalidate: 60 * 60 * 24 },
   });
   const json = await res.json();
   if (!res.ok) {

@@ -8,9 +8,15 @@ import {
   LessonWithTasks,
   TaskProgress,
 } from "@/types/course/course";
+import { StatusType, Status } from "@/types/filterType";
 
-export async function getCoursesList(): Promise<ApiResult<Course[]>> {
-  const res = await fetchToApi(API_URL + "/course", { cache: "no-store" });
+export async function getCoursesList(
+  courseStatus?: StatusType,
+): Promise<ApiResult<Course[]>> {
+  const res = await fetchToApi(
+    API_URL + `/course?status=${courseStatus || Status.PUBLISHED}`,
+    { cache: "no-store" },
+  );
   const json = await res.json();
   if (!res.ok) {
     return { ok: false, error: json.message };
