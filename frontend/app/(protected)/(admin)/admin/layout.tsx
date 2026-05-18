@@ -7,9 +7,9 @@ export default async function AdminLayout({
   children: ReactNode;
 }) {
   return (
-    <>
+    <div className="flex h-screen w-full flex-col bg-linear-to-b from-slate-800/20 to-purple-500/20 p-4">
       <AdminHeader></AdminHeader>
       {children}
-    </>
+    </div>
   );
 }

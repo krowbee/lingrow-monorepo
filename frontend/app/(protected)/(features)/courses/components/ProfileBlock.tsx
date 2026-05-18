@@ -4,11 +4,13 @@ import { AUTH_URLS } from "@/urls/auth";
 import { LogOut, User } from "lucide-react";
 import Link from "next/link";
 
-export function ProfileBlock() {
+export function ProfileBlock({ className }: { className?: string }) {
   const { data: user } = useMe();
 
   return (
-    <div className="text-md flex w-full flex-row gap-3 rounded-xl border border-white/8 px-4 py-2 font-bold">
+    <div
+      className={`text-md flex w-full flex-row gap-3 rounded-xl border border-white/8 px-4 py-2 font-bold ${className}`}
+    >
       <div className="flex items-center justify-center rounded-full border border-purple-500/25 p-3 text-center text-lg text-purple-500">
         <User />
       </div>
