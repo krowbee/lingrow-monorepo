@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { OpenMenuButton } from "./OpenMenuButton";
 import { useMenuStore } from "@/store/MenuStore";
-import { motion } from "motion/react";
 import { LogoTitle } from "./LogoTitle";
 
 export function Header() {
