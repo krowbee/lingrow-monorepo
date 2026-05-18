@@ -1,5 +1,5 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { TheoryBlock, TheoryBlockSkeleton } from "./TheoryBlock";
 import { getLessonWithProgress } from "@/lib/api/requests/courses.client.requests";
 import { TaskBlock } from "./TaskBlock";
@@ -19,7 +19,7 @@ export function LessonBlock({
   const step = useLessonStore((state) => state.step);
   const taskIndex = useLessonStore((state) => state.taskIndex);
   const router = useRouter();
-
+  const queryClient = useQueryClient();
   const { data: lesson, isLoading } = useQuery({
     queryKey: ["lesson", lessonSlug],
     queryFn: async () => {
@@ -32,6 +32,9 @@ export function LessonBlock({
   });
 
   const finishLesson = () => {
+    queryClient.invalidateQueries({
+      queryKey: ["lesson-progress", courseSlug],
+    });
     router.push(`${COURSES_URL.courses_page}/${courseSlug}`);
   };
   const backToLessons = () => {
