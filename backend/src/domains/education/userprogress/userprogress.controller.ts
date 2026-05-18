@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -87,7 +88,7 @@ export class UserProgressController {
   async updateUserProgress(
     @Body() body: UpdateProgressDto,
     @CurrentUser() user: TokenPayload,
-    @Param('taskId') taskId: number,
+    @Param('taskId', ParseIntPipe) taskId: number,
   ) {
     const data = { userId: user.id, taskId: taskId, ...body };
     return this.userProgressService.updateUserProgress(data);
@@ -101,7 +102,7 @@ export class UserProgressController {
   @HttpCode(200)
   @Delete('/lesson/:lessonId')
   async deleteLessonProgress(
-    @Param('lessonId') lessonId: number,
+    @Param('lessonId', ParseIntPipe) lessonId: number,
     @CurrentUser() user: TokenPayload,
   ) {
     const data = { userId: user.id, lessonId };
