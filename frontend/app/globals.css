@@ -1,11 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&family=Poppins:wght@400;600&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @theme {
-  --font-heading: "Montserrat", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-accent: "Poppins", sans-serif;
+  --font-heading: var(--font-montserrat), sans-serif;
+  --font-body: var(--font-inter), sans-serif;
+  --font-accent: var(--font-poppins), sans-serif;
 }
 
 @custom-variant dark (&:is(.dark *));
