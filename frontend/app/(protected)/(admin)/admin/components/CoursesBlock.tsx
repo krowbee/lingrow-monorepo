@@ -19,7 +19,7 @@ export function CoursesBlock({
           </div>
         </div>
       </div>
-      <CoursesTable />
+      <CoursesTable status={filter} search={search} />
     </section>
   );
 }

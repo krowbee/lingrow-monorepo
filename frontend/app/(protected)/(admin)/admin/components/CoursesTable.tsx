@@ -23,7 +23,10 @@ export function CoursesTable({
   } = useQuery<Course[]>({
     queryKey: ["courses", "admin", { status, search: search ?? undefined }],
     queryFn: async () => {
-      const result = await getCoursesList(status ?? undefined);
+      const result = await getCoursesList(
+        status ?? undefined,
+        search ?? undefined,
+      );
       if (!result.ok) {
         throw new Error(result.error || "Failed to fetch courses");
       }
@@ -58,10 +61,15 @@ export function CoursesTable({
             </th>
           </tr>
         </thead>
+
         {isLoading ? (
-          Array(5)
-            .fill(0)
-            .map((_, index) => <CourseTableBlockSkeleton key={index} />)
+          <tbody>
+            {Array(5)
+              .fill(0)
+              .map((_, index) => (
+                <CourseTableBlockSkeleton key={index} />
+              ))}
+          </tbody>
         ) : courses && courses.length > 0 ? (
           <tbody>
             {courses.map((course, index) => (

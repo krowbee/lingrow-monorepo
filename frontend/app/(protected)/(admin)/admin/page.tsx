@@ -1,11 +1,11 @@
 import { CoursesBlock } from "./components/CoursesBlock";
 
 export default async function AdminPage({
-  params,
+  searchParams,
 }: {
-  params: { search: string | null | undefined };
+  searchParams: Promise<{ search?: string | null | undefined }>;
 }) {
-  const { search } = await params;
+  const { search } = await searchParams;
   return (
     <div className="flex h-full w-full flex-col p-4">
       <CoursesBlock search={search} />

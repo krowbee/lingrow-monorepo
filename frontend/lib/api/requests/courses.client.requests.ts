@@ -8,15 +8,22 @@ import {
   LessonWithTasks,
   TaskProgress,
 } from "@/types/course/course";
-import { StatusType, Status } from "@/types/filterType";
+import { StatusType } from "@/types/filterType";
 
 export async function getCoursesList(
   courseStatus?: StatusType,
+  search?: string,
 ): Promise<ApiResult<Course[]>> {
-  const res = await fetchToApi(
-    API_URL + `/course?status=${courseStatus || Status.PUBLISHED}`,
-    { cache: "no-store" },
-  );
+  const params = new URLSearchParams();
+  if (courseStatus) {
+    params.append("status", courseStatus);
+  }
+  if (search) {
+    params.append("search", search);
+  }
+  const res = await fetchToApi(API_URL + `/course?${params.toString()}`, {
+    cache: "no-store",
+  });
   const json = await res.json();
   if (!res.ok) {
     return { ok: false, error: json.message };
