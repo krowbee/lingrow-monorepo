@@ -5,6 +5,7 @@ export type Course = {
   slug: string;
   name: string;
   description: string;
+  status: "DRAFT" | "PUBLISHED" | "ARCHIVED";
 };
 
 export type Lesson = {
