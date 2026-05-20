@@ -33,11 +33,10 @@ export function CourseTableBlock({ course }: { course: Course }) {
             </div>
           </div>
         </td>
-
+        {/* TODO: Replace with actual lesson count */}
         <td className="px-4 py-3 text-center">
           <span className="font-body text-lg">17</span>
         </td>
-
         <td className="px-4 py-3">
           <div className="flex w-min flex-row items-center gap-2 rounded-2xl border border-white/10 px-4 py-1">
             <div
@@ -46,7 +45,6 @@ export function CourseTableBlock({ course }: { course: Course }) {
             <span>{courseStatus[course.status].text}</span>
           </div>
         </td>
-
         <td className="px-4 py-3">
           <div className="flex justify-end gap-2">
             <button className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg bg-orange-400 p-2">
